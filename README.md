@@ -110,7 +110,7 @@ Project Link: [https://github.com/truham/Yelp-Clone](https://github.com/truham/Y
 [redux-url]: https://redux.js.org/
 [python.js]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
 [python-url]: https://www.python.org/
-[flask.js]:h ttps://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white
+[flask.js]: https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white
 [flask-url]: https://expressjs.com/
 [postgresql.js]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
 [postgresql-url]: https://www.postgresql.org/
