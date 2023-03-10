@@ -8,7 +8,7 @@ Plate-Pal is a web application inspired by Yelp. It allows users to search for b
 
 - [Feature List](https://github.com/truham/Plate-Pal/wiki/Feature-List)
 - [User Stories](https://github.com/truham/Plate-Pal/wiki/User-Stories)
-- [Database Schema] (https://github.com/truham/Plate-Pal/wiki/Database-schema)
+- [Database Schema](https://github.com/truham/Plate-Pal/wiki/Database-schema)
 - [API Routes](https://github.com/truham/Plate-Pal/wiki/API-Routes)
 - [Redux Store State Shape](https://github.com/truham/Plate-Pal/wiki/Store-Shape)
 
