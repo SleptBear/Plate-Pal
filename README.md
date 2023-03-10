@@ -1,16 +1,16 @@
-# About YelpClone
+# About Plate-Pal
 
-YelpClone is a web application inspired by Yelp. It allows users to search for businesses, view business pages, leave reviews and ratings. [Click here to visit YelpClone's live site](insert link here).
+Plate-Pal is a web application inspired by Yelp. It allows users to search for businesses, view business pages, leave reviews and ratings. [Click here to visit YelpClone's live site](insert link here).
 
 <br>
 
 # Wiki Links
 
-- [Feature List](https://github.com/truham/Yelp-Clone/wiki/Feature-List)
-- [User Stories](https://github.com/truham/Yelp-Clone/wiki/User-Stories)
-- [Database Schema]()
-- [API Routes]()
-- [Redux Store State Shape]()
+- [Feature List](https://github.com/truham/Plate-Pal/wiki/Feature-List)
+- [User Stories](https://github.com/truham/Plate-Pal/wiki/User-Stories)
+- [Database Schema] (https://github.com/truham/Plate-Pal/wiki/Database-schema)
+- [API Routes](https://github.com/truham/Plate-Pal/wiki/API-Routes)
+- [Redux Store State Shape](https://github.com/truham/Plate-Pal/wiki/Store-Shape)
 
 <br>
 
@@ -42,24 +42,24 @@ Example [modify later]:
 
 [demo-user-features]:
 
-## Create Spot as Logged-In User
+## Create Business as Logged-In User
 
-Logged-in users will be able to create a new spot.
-![create-spot-form]
+Logged-in users will be able to create a new business.
+![create-business-form]
 
-[create-spot-form]:
+[create-business-form]:
 
-## Spot Details Viewing Available For Anyone
+## Business Details Viewing Available For Anyone
 
-Spot details can be accessed by anyone with additional features for logged in users, such as writing a review for someone else's spot.
-![spot-details]
+Business details can be accessed by anyone with additional features for logged in users, such as writing a review for someone else's business.
+![business-details]
 
-[spot-details]:
+[business-details]:
 
 ## Roadmap [example, modify later]
 
 - <input type="checkbox" checked> User Authentication
-- <input type="checkbox" checked> Spots (CRUD)
+- <input type="checkbox" checked> Businesses (CRUD)
 - <input type="checkbox"> Reviews (CRUD)
   - <input type="checkbox" checked> Create user reviews
   - <input type="checkbox" checked> Read user reviews
