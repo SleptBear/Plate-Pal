@@ -19,7 +19,7 @@ def seed_businesses():
         lng=-111.927899,
         price=4,
         hours_of_operation="Monday: 5pm-10pm, Tuesday: 5pm-10pm, Wednesday: 5pm-10pm, Thursday: 5pm-10pm, Friday: 5pm-10pm, Saturday: 5pm-10pm, Sunday: Closed"
-    ),
+    )
 
     b2 = Business(
         name="Mama's Fish House",
@@ -182,7 +182,7 @@ def seed_businesses():
 
     b12 = Business(
         name="Blue Hill at Stone Barns",
-        owner_id=12,
+        owner_id=2,
         category="Farm-to-Table",
         address="630 Bedford Rd",
         city="Tarrytown",
@@ -198,7 +198,7 @@ def seed_businesses():
 
     b13 = Business(
         name="Bar La Grassa",
-        owner_id=13,
+        owner_id=3,
         category="Italian",
         address="800 N Washington Ave",
         city="Minneapolis",
@@ -214,7 +214,7 @@ def seed_businesses():
 
     b14 = Business(
         name="Coi",
-        owner_id=14,
+        owner_id=4,
         category="Californian",
         address="373 Broadway",
         city="San Francisco",
@@ -230,7 +230,7 @@ def seed_businesses():
 
     b15 = Business(
         name="Osteria Mozza",
-        owner_id=15,
+        owner_id=5,
         category="Italian",
         address="6602 Melrose Ave",
         city="Los Angeles",
@@ -243,24 +243,6 @@ def seed_businesses():
         price=3,
         hours_of_operation="Monday: 5pm-10pm, Tuesday: 5pm-10pm, Wednesday: 5pm-10pm, Thursday: 5pm-10pm, Friday: 5pm-10pm, Saturday: 5pm-10pm, Sunday: 5pm-10pm"
     )
-
-    b16 = Business(
-        name="Blue Hill at Stone Barns",
-        owner_id=12,
-        category="Farm-to-Table",
-        address="630 Bedford Rd",
-        city="Tarrytown",
-        state="NY",
-        zipcode=10591,
-        phone_number="(914) 366-9600",
-        website="https://www.bluehillfarm.com/food/blue-hill-stone-barns",
-        lat=41.097361,
-        lng=-73.833918,
-        price=4,
-        hours_of_operation="Monday: 5pm-9:30pm, Tuesday: 5pm-9:30pm, Wednesday: 5pm-9:30pm, Thursday: 5pm-9:30pm, Friday: 5pm-9:30pm, Saturday: 5pm-9:30pm, Sunday: 5pm-9:30pm"
-    )
-
-
 
     db.session.add(b1)
     db.session.add(b2)
@@ -277,7 +259,6 @@ def seed_businesses():
     db.session.add(b13)
     db.session.add(b14)
     db.session.add(b15)
-    db.session.add(b16)
     db.session.commit()
 
 
