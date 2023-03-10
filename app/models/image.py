@@ -11,7 +11,7 @@ class Image(db.Model):
     url = db.Column(db.String(255), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey("businesses.id"), nullable=False)
-    review_id = db.Column(db.Integer, db.ForeignKey("reviews.id"), nullable=False)
+    review_id = db.Column(db.Integer, db.ForeignKey("reviews.id"))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
