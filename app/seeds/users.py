@@ -28,14 +28,14 @@ def seed_users():
     demo3 = User(
         first_name='Demo3',
         last_name='User3',
-        email='demo2@user.io',
+        email='demo3@user.io',
         zipcode=78912,
         password='password'
     )
     demo4 = User(
         first_name='Demo4',
         last_name='User4',
-        email='demo2@user.io',
+        email='demo4@user.io',
         zipcode=34567,
         password='password'
     )

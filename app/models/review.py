@@ -16,7 +16,7 @@ class Review(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     owner = db.relationship("User", back_populates="reviews")
-    reviews = db.relationship("Review", back_populates = "review")
+    business = db.relationship("Business", back_populates = "reviews")
     images = db.relationship("Image", back_populates = "review")
 
     def to_dict(self):

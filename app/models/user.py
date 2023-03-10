@@ -12,8 +12,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     # Yelp does not use usernames - user will only log in with email
     # username = db.Column(db.String(40), nullable=False, unique=True)
-    first_name = db.Column(db.String(40), nullable=False, unique=True)
-    last_name = db.Column(db.String(40), nullable=False, unique=True)
+    first_name = db.Column(db.String(40), nullable=False)
+    last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     zipcode = db.Column(db.Integer, nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
