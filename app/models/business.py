@@ -19,7 +19,7 @@ class Business(db.Model):
     website = db.Column(db.String(255), nullable=False)
     lat = db.Column(db.Integer)
     lng = db.Column(db.Integer)
-    price = db.Column(db.integer)
+    price = db.Column(db.Integer)
     hours_of_operation = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

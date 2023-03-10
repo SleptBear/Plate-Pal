@@ -23,7 +23,6 @@ class Image(db.Model):
         return {
             "id" : self.id,
             "url" : self.url,
-            "stars" : self.stars,
             "owner_id" : self.owner_id,
             "business_id" : self.business_id,
             "review_id" : self.review_id,
