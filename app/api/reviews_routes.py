@@ -3,8 +3,10 @@ from flask_login import login_required
 from app.models import db, Business, Review, Image
 from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
+from app.forms.images_form import ImageForm
 
 review_routes = Blueprint('review', __name__)
+
 
 # GET ALL REVIEWS BY CURRENT USER
 @review_routes.route('/current')
@@ -16,6 +18,7 @@ def reviews_current():
         Review).filter(Review.owner_id == user_id)
     reviews = review_query.all()
     return {'reviews': [review.to_dict() for review in reviews]}
+
 
 # GET REVIEW DETAILS BY ID
 @review_routes.route('/<int:id>')
@@ -33,37 +36,33 @@ def get_review_details(id):
 
     return jsonify(review)
 
-# CREATE NEW IMAGE
-@business_routes.route('/<int:id>/images', methods=['POST'])
+
+# CREATE NEW IMAGE FOR A REVIEW
+@review_routes.route('/<int:id>/images', methods=['POST'])
 @login_required
-def create_new_review(id):
+def create_new_image(id):
+    review = Review.query.get(id)
+    if not review:
+        return "Review does not exist", 404
 
-    business = Business.query.get(id)
-    if not business:
-        return "Business does not exist", 404
+    if int(current_user.get_id()) != review.owner_id:
+        return "Image was unable to be added", 403
 
-    review_query = db.session.query(Review).filter(Review.business_id == id).filter(Review.owner_id == int(current_user.get_id()) )
-    user_business_reviews = review_query.all()
-    if len(user_business_reviews) > 0:
-        return "User already has a review for this spot", 403
-
-    form = ReviewForm()
+    form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     data = request.get_json()
     if form.validate_on_submit():
-        new_review = Review(
+        new_image = Image(
             owner_id=int(current_user.get_id()),
-            business_id = id,
-            review=data['review'],
-            stars=data['stars'],
+            business_id=review.business_id,
+            review_id=id,
+            url=data['url']
         )
-
-        db.session.add(new_review)
+        db.session.add(new_image)
         db.session.commit()
-        return new_review.to_dict()
+        return new_image.to_dict()
     if form.errors:
         return validation_errors_to_error_messages(form.errors)
-
 
 
 # UPDATE REVIEW
@@ -85,6 +84,7 @@ def update_review(id):
 
     else:
         return "Review was unable to be updated", 403
+
 
 # DELETE A REVIEW
 @review_routes.route('/<int:id>', methods=['DELETE'])
