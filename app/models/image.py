@@ -12,8 +12,8 @@ class Image(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey("businesses.id"), nullable=False)
     review_id = db.Column(db.Integer, db.ForeignKey("reviews.id"))
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
     owner = db.relationship("User", back_populates="images")
     review = db.relationship("Review", back_populates = "images")

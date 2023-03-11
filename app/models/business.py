@@ -21,12 +21,12 @@ class Business(db.Model):
     lng = db.Column(db.Integer)
     price = db.Column(db.Integer)
     hours_of_operation = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
     owner = db.relationship("User", back_populates="businesses")
-    reviews = db.relationship("Review", back_populates = "business")
-    images = db.relationship("Image", back_populates = "business")
+    reviews = db.relationship("Review", cascade="all, delete", back_populates = "business")
+    images = db.relationship("Image", cascade="all, delete", back_populates = "business")
 
     def to_dict(self):
         return {

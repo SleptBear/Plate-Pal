@@ -12,12 +12,12 @@ class Review(db.Model):
     stars = db.Column(db.Integer, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey("businesses.id"), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
     owner = db.relationship("User", back_populates="reviews")
     business = db.relationship("Business", back_populates = "reviews")
-    images = db.relationship("Image", back_populates = "review")
+    images = db.relationship("Image", cascade="all, delete", back_populates = "review")
 
     def to_dict(self):
         return {
