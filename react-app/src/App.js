@@ -5,7 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import ActivityIndex from "./components/Activity/ActivityIndex/ActivityIndex";
+import ActivityIndex from "./components/Activity/ActivityIndex";
+import BusinessDetail from "./components/Business/BusinessDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <ActivityIndex />
+          </Route>
+          <Route exact path="/businesses/:id">
+            <BusinessDetail />
           </Route>
           <Route path="/login">
             <LoginFormPage />
