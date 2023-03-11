@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
 from app.models import db, Business, Review, Image
 from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
@@ -17,7 +16,7 @@ def reviews_current():
     review_query = db.session.query(
         Review).filter(Review.owner_id == user_id)
     reviews = review_query.all()
-    return {'reviews': [review.to_dict() for review in reviews]}
+    return {'reviews': {review.id: review.to_dict() for review in reviews}}
 
 
 # GET REVIEW DETAILS BY ID
@@ -56,7 +55,8 @@ def create_new_image(id):
             owner_id=int(current_user.get_id()),
             business_id=review.business_id,
             review_id=id,
-            url=data['url']
+            url=data['url'],
+            caption=data['caption']
         )
         db.session.add(new_image)
         db.session.commit()

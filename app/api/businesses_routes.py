@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
 from app.models import db, Business, Review, Image
 from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
@@ -15,7 +14,7 @@ business_routes = Blueprint('business', __name__)
 @business_routes.route('/')
 def get_businesses():
     businesses = Business.query.all()
-    return {'businesses': [business.to_dict() for business in businesses]}
+    return {'businesses': {business.id: business.to_dict() for business in businesses}}
 
 
 # GET ALL BUSINESSES BY CURRENT USER
@@ -27,7 +26,7 @@ def get_businesses_current():
     business_query = db.session.query(
         Business).filter(Business.owner_id == user_id)
     businesses = business_query.all()
-    return {'businesses': [business.to_dict() for business in businesses]}
+    return {'businesses': {business.id: business.to_dict() for business in businesses}}
 
 
 # GET BUSINESS DETAILS BY ID
@@ -149,7 +148,8 @@ def create_new_image(id):
         new_image = Image(
             owner_id=int(current_user.get_id()),
             business_id=id,
-            url=data['url']
+            url=data['url'],
+            caption=data['caption']
         )
         db.session.add(new_image)
         db.session.commit()
