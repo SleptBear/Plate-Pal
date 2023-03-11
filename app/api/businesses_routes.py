@@ -5,6 +5,7 @@ from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
 from app.forms.businesses_form import BusinessForm
 from app.forms.reviews_form import ReviewForm
+from app.forms.images_form import ImageForm
 from datetime import datetime
 
 business_routes = Blueprint('business', __name__)
@@ -128,6 +129,37 @@ def create_new_review(id):
     if form.errors:
         return validation_errors_to_error_messages(form.errors)
 
+# CREATE NEW IMAGE
+@business_routes.route('/<int:id>/images', methods=['POST'])
+@login_required
+def create_new_review(id):
+
+    business = Business.query.get(id)
+    if not business:
+        return "Business does not exist", 404
+
+    review_query = db.session.query(Review).filter(Review.business_id == id).filter(Review.owner_id == int(current_user.get_id()) )
+    user_business_reviews = review_query.all()
+    if len(user_business_reviews) > 0:
+        return "User already has a review for this spot", 403
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = request.get_json()
+    if form.validate_on_submit():
+        new_review = Review(
+            owner_id=int(current_user.get_id()),
+            business_id = id,
+            review=data['review'],
+            stars=data['stars'],
+        )
+
+        db.session.add(new_review)
+        db.session.commit()
+        return new_review.to_dict()
+    if form.errors:
+        return validation_errors_to_error_messages(form.errors)
+
 
 # UPDATE BUSINESS
 @business_routes.route('/<int:id>', methods=['PUT'])
@@ -176,3 +208,30 @@ def delete_business(id):
         return "Item has been deleted"
     else:
         return "Business was unable to be deleted", 403
+
+
+# CREATE NEW IMAGE
+@business_routes.route('/<int:id>/images', methods=['POST'])
+@login_required
+def create_new_image(id):
+
+    business = Business.query.get(id)
+    if not business:
+        return "Business does not exist", 404
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = request.get_json()
+    if form.validate_on_submit():
+        new_review = Review(
+            owner_id=int(current_user.get_id()),
+            business_id = id,
+            review=data['review'],
+            stars=data['stars'],
+        )
+
+        db.session.add(new_review)
+        db.session.commit()
+        return new_review.to_dict()
+    if form.errors:
+        return validation_errors_to_error_messages(form.errors)
