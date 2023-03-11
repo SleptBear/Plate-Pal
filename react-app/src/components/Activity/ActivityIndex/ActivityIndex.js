@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import getActivitiesThunk from "../../../store/activity"
+import { getActivitiesThunk } from "../../../store/activity";
+import ReviewCard from "../ActivityCards/ReviewCard";
+import BusinessCard from "../ActivityCards/BusinessCard";
 
 import "./ActivityIndex.css";
 
-// import BusinessCard
-// import ReviewCard
-// if item from activity has stars, then render with <BusinessCard /> else render with <ReviewCard />
-
 const ActivityIndex = () => {
   const dispatch = useDispatch();
-  const activities = useSelector((state) => state.activities);
+  const activities = useSelector((state) => state.activities.activities);
   const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
@@ -18,17 +16,30 @@ const ActivityIndex = () => {
       await dispatch(getActivitiesThunk());
     };
     activityRestore();
-  }, []);
+  }, [dispatch]);
 
-  // activities.sort(
-  //   (a, b) => Date.parse(b.created_at) - Date.parse(a.created_at)
-  // );
+  if (!activities) return null;
 
-  // if (!activities[0]) return;
+  activities?.sort(
+    (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
+  );
 
   return (
     <>
-      <h1>Test Activities</h1>
+      <div>
+        {activities.map((item) => {
+          if (item.stars) {
+            return <ReviewCard item={item} key={item.id.toString()} />;
+          } else {
+            return (
+              <BusinessCard
+                item={item}
+                key={item.id.toString() + item.zipcode.toString()}
+              />
+            );
+          }
+        })}
+      </div>
     </>
   );
 };

@@ -1,5 +1,5 @@
 /* ----- CONSTANTS ----- */
-const GET_ACTIVITIES = "activity/GET_ACTIVITIES";
+const GET_ACTIVITIES = "activities/GET_ACTIVITIES";
 
 /* ----- ACTIONS ----- */
 const getActivitiesAction = (activities) => {
@@ -13,7 +13,7 @@ const getActivitiesAction = (activities) => {
 
 // Display all activities at root page
 export const getActivitiesThunk = () => async (dispatch) => {
-  const res = await fetch("/api/activities/");
+  const res = await fetch("/api/activity/");
   if (res.ok) {
     const activities = await res.json();
     dispatch(getActivitiesAction(activities));
@@ -21,15 +21,16 @@ export const getActivitiesThunk = () => async (dispatch) => {
 };
 
 /* ----- INITIAL STATE ----- */
-const initialState = {};
+const initialState = {
+};
 
 /* ----- REDUCER ----- */
 const activityReducer = (state = initialState, action) => {
   let newState = { ...state };
-    console.log(action)
+
   switch (action.type) {
     case GET_ACTIVITIES:
-      return { ...newState, activities: action.activities };
+      return { ...newState, ...action.activities };
     default:
       return state;
   }
