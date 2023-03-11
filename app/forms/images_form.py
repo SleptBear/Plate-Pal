@@ -12,3 +12,4 @@ from app.models import User
 
 class ImageForm(FlaskForm):
     url = StringField('email', validators=[DataRequired(), URL()])
+    caption = StringField('caption')

@@ -12,6 +12,7 @@ class Image(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey("businesses.id"), nullable=False)
     review_id = db.Column(db.Integer, db.ForeignKey("reviews.id"))
+    caption = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
@@ -23,6 +24,7 @@ class Image(db.Model):
         return {
             "id" : self.id,
             "url" : self.url,
+            "caption": self.caption,
             "owner_id" : self.owner_id,
             "business_id" : self.business_id,
             "review_id" : self.review_id,
