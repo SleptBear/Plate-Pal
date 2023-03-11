@@ -33,6 +33,7 @@ def images_delete(id):
     else:
         return "Image was unable to be deleted", 403
 
+# GET IMAGE BY CURRENT ID
 @image_routes.route('/<int:id>')
 def get_image_details(id):
     image = Image.query.get(id).to_dict()

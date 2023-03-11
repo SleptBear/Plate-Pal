@@ -5,6 +5,7 @@ from datetime import datetime
 
 activity_routes = Blueprint('activity', __name__)
 
+# GET ALL BUSINESS AND REVIEWS (ACTIVITY)
 @activity_routes.route('/')
 def get_activity():
     businesses = [business.to_dict() for business in  Business.query.all()]
