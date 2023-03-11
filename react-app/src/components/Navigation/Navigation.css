@@ -1,7 +1,79 @@
+/* ----------------  */
+/* PROFILEBUTTON.JS  */
+/* ----------------  */
+
+/* border and cushion for options that pop up */
 .profile-dropdown {
   position: absolute;
+  border: 1px solid black;
+  box-shadow: 1px 1px 3px black;
+  text-align: left;
+  padding: 10px 15px 10px 15px;
+  right: 20px;
+  margin-top: 5px;
+  background-color: white;
 }
 
+.profile-dropdown > hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* hide menu when not clicked on */
 .hidden {
   display: none;
+}
+
+/* styling menu buttons, rounded with spacing */
+.menu-button {
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.button-logout {
+  background-color: white;
+  color: #2d2e2f;
+  border: none;
+  cursor: pointer;
+}
+
+/* -------- */
+/* INDEX.JS */
+/* -------- */
+
+/* keep navbar outer parent fixed for scrolling */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  /* border-bottom: 2px solid grey; */
+  background-color: white;
+}
+
+/* ul parent containing the logo & menu button */
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+/* remove bulletpoint from ul (& its li children) */
+ul {
+  list-style-type: none;
+}
+
+/* position two items on  */
+.nav-right-loggedin-user {
+  display: flex;
+  align-items: center;
+}
+
+/* resize logo to be slightly smaller than full parent size */
+.logo-image {
+  height: 40px;
+  padding-left: 20px;
 }
