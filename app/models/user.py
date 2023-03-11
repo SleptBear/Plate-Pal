@@ -17,12 +17,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     zipcode = db.Column(db.Integer, nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
-    businesses = db.relationship("Business", back_populates="owner")
-    reviews = db.relationship("Review", back_populates = "owner")
-    images = db.relationship("Image", back_populates = "owner")
+    businesses = db.relationship("Business", cascade="all, delete", back_populates="owner")
+    reviews = db.relationship("Review", cascade="all, delete", back_populates = "owner")
+    images = db.relationship("Image", cascade="all, delete", back_populates = "owner")
 
     @property
     def password(self):
