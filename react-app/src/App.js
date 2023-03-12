@@ -11,11 +11,12 @@ import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
 import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
 import ManageImagesIndex from "./components/Images/ManageImagesIndex";
 import ImageDetail from "./components/Images/ImageDetails";
-import CreateNewReview from "./components/Review/CreateReview";
+import CreateNewReview from "./components/Review/ReviewCreate";
 import CreateNewBusiness from "./components/Business/BusinessCreate";
 import ReviewDelete from "./components/Review/ReviewDelete";
 import BusinessDelete from "./components/Business/BusinessDelete";
 import ImageDelete from "./components/Images/ImageDelete";
+import ReviewEdit from "./components/Review/ReviewEdit"
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,9 @@ function App() {
           </Route>
           <Route path="/reviews/current">
             <ManageReviewsIndex />
+          </Route>
+          <Route path="/reviews/:reviewId/edit">
+            <ReviewEdit />
           </Route>
           <Route path="/reviews/:reviewId/delete">
             <ReviewDelete />
