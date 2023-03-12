@@ -9,6 +9,8 @@ import ActivityIndex from "./components/Activity/ActivityIndex";
 import BusinessDetail from "./components/Business/BusinessDetails";
 import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
 import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
+import ManageImagesIndex from "./components/Images/ManageImagesIndex";
+import ImageDetail from "./components/Images/ImageDetails";
 import CreateNewReview from "./components/Review/CreateReview";
 
 function App() {
@@ -44,7 +46,12 @@ function App() {
           <Route path="/reviews/current">
             <ManageReviewsIndex />
           </Route>
-          <Route path="/images/current">null</Route>
+          <Route path="/images/current">
+            <ManageImagesIndex />
+          </Route>
+          <Route path="/images/:imageId">
+            <ImageDetail />
+          </Route>
         </Switch>
       )}
     </>
