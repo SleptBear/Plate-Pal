@@ -10,7 +10,7 @@ const BusinessCard = ({ business }) => {
       </Link>
       {/* new business open */}
       <span>New Business Open</span>
-      <img src={business.images[0].url}></img>
+      <img src={business.images[0]?.url}></img>
       {/* city, state */}
       <span>{`${business.city}, ${business.state}`}</span>
       {/* category */}
