@@ -18,7 +18,7 @@ function Navigation({ isLoaded }) {
             <img className="logo-image" src={logo} alt="logo"></img>
           </NavLink>
         </li>
-        <li>
+        <li className="nav-search-bar">
           <SearchBar />
         </li>
         {isLoaded && sessionUser ? (
