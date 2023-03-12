@@ -47,7 +47,6 @@ const initialState = {
 /* ----- REDUCER ----- */
 const businessReducer = (state = initialState, action) => {
   let newState = { ...state };
-  console.log(action)
   switch (action.type) {
     case GET_SINGLE_BUSINESS:
       newState.singleBusiness = action.business;

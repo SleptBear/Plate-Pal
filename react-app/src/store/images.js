@@ -46,7 +46,6 @@ const initialState = {
 /* ----- REDUCER ----- */
 const imagesReducer = (state = initialState, action) => {
     let newState = { ...state };
-    console.log(action)
     switch (action.type) {
         case GET_USER_IMAGES:
             newState.userImages = action.images.userImages;

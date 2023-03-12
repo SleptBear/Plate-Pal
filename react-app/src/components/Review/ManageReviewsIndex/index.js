@@ -17,7 +17,6 @@ const ManageReviewsIndex = () => {
         businessRestore();
     }, [dispatch]);
 
-    console.log(reviews)
     if (!reviews) return null;
 
     reviews = Object.values(reviews)

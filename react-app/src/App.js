@@ -12,6 +12,7 @@ import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
 import ManageImagesIndex from "./components/Images/ManageImagesIndex";
 import ImageDetail from "./components/Images/ImageDetails";
 import CreateNewReview from "./components/Review/CreateReview";
+import ReviewDelete from "./components/Review/ReviewDelete";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route path="/reviews/current">
             <ManageReviewsIndex />
+          </Route>
+          <Route path="/reviews/:reviewId/delete">
+            <ReviewDelete />
           </Route>
           <Route path="/images/current">
             <ManageImagesIndex />

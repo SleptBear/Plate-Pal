@@ -5,8 +5,8 @@ const ReviewCard = ({ review }) => {
   return (
     <>
       {/* review name */}
-      <Link to={`/reviews/${review.id}`}>
-        <span>{review.name}</span>
+      <Link to={`/reviews/${review.id}/delete`}>
+        <button>Delete Review</button>
       </Link>
       {/* new review open */}
       <img src={review.images[0]?.url}></img>
