@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import ActivityIndex from "./components/Activity/ActivityIndex";
 import BusinessDetail from "./components/Business/BusinessDetails";
 import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
+import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/reviews/current">
-            null
+            <ManageReviewsIndex />
           </Route>
           <Route path="/images/current">
             null
