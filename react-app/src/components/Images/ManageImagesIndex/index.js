@@ -17,8 +17,6 @@ const ManageImagesIndex = () => {
         imageRestore();
     }, [dispatch]);
 
-    console.log('HELOOOOOO', images)
-
     if (!images) return null;
 
     images = Object.values(images)

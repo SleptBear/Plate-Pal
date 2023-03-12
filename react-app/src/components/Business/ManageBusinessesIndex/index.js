@@ -17,7 +17,6 @@ const ManageBusinessesIndex = () => {
         businessRestore();
     }, [dispatch]);
 
-    console.log(businesses)
     if (!businesses) return null;
 
     businesses = Object.values(businesses)
