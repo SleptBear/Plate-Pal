@@ -34,7 +34,6 @@ export const getCurrentBusinessesThunk = () => async (dispatch) => {
     const res = await fetch(`/api/businesses/current`);
     if (res.ok) {
       const businesses = await res.json();
-      console.log('???????asdasd????????', businesses.businesses)
       dispatch(getCurrentBusinessesAction(businesses));
     }
   };
