@@ -1,6 +1,7 @@
 /* ----- CONSTANTS ----- */
 const GET_USER_IMAGES = "images/GET_USER_IMAGES";
 const GET_SINGLE_IMAGE = "images/GET_SINGLE_IMAGE"
+const DELETE_IMAGE = "reviews/DELETE_IMAGE";
 
 /* ----- ACTIONS ----- */
 
@@ -18,7 +19,25 @@ const getSingleImageAction = (image) => {
     };
 };
 
+const deleteImageAction = (id) => {
+    return {
+        type: DELETE_IMAGE,
+        id,
+    };
+  };
+
 /* ----- THUNKS ----- */
+
+
+// Delete image by image id for current user
+export const deleteImageThunk = (imageId) => async (dispatch) => {
+    const res = await fetch(`/api/images/${imageId}`, {
+        method: "DELETE"
+    });
+    if (res.ok) {
+        dispatch(deleteImageAction(imageId));
+    }
+  };
 
 // Display all user images at manage images page
 export const getUserImagesThunk = () => async (dispatch) => {
@@ -53,6 +72,11 @@ const imagesReducer = (state = initialState, action) => {
         case GET_SINGLE_IMAGE:
             newState.singleImage = action.image;
             return newState;
+        case DELETE_IMAGE:
+            if (newState.userImages) {
+                delete newState.userImages[action.id]
+            }
+            return newState
         default:
             return state;
     }

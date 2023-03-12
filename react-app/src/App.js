@@ -15,6 +15,7 @@ import CreateNewReview from "./components/Review/CreateReview";
 import CreateNewBusiness from "./components/Business/BusinessCreate";
 import ReviewDelete from "./components/Review/ReviewDelete";
 import BusinessDelete from "./components/Business/BusinessDelete";
+import ImageDelete from "./components/Images/ImageDelete";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,9 +62,13 @@ function App() {
           <Route path="/images/current">
             <ManageImagesIndex />
           </Route>
+          <Route path="/images/:imageId/delete">
+            <ImageDelete />
+          </Route>
           <Route path="/images/:imageId">
             <ImageDetail />
           </Route>
+
         </Switch>
       )}
     </>
