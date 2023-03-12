@@ -1,0 +1,13 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-container-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-container-input {
+  width: 300px;
+}
