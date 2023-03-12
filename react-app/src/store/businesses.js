@@ -2,6 +2,7 @@
 const GET_SINGLE_BUSINESS = "businesses/GET_SINGLE_BUSINESS";
 const GET_CURRENT_BUSINESSES = "businesses/GET_CURRENT_BUSINESSES";
 const POST_BUSINESS = "businesses/POST_BUSINESS";
+const DELETE_BUSINESS = "reviews/DELETE_BUSINESS";
 
 /* ----- ACTIONS ----- */
 const getSingleBusinessAction = (business) => {
@@ -25,7 +26,24 @@ const postBusinessAction = (business) => {
   };
 };
 
+const deleteBusinessAction = (id) => {
+  return {
+      type: DELETE_BUSINESS,
+      id,
+  };
+};
+
 /* ----- THUNKS ----- */
+
+// Delete business by business id for current user
+export const deleteBusinessThunk = (businessId) => async (dispatch) => {
+  const res = await fetch(`/api/businesses/${businessId}`, {
+      method: "DELETE"
+  });
+  if (res.ok) {
+      dispatch(deleteBusinessAction(businessId));
+  }
+};
 
 // Display single business details
 export const getSingleBusinessThunk = (id) => async (dispatch) => {
@@ -82,6 +100,11 @@ const businessReducer = (state = initialState, action) => {
       return newState;
     default:
       return state;
+    case DELETE_BUSINESS:
+        if (newState.businesses) {
+            delete newState.businesses[action.id]
+        }
+        return newState
   }
 };
 

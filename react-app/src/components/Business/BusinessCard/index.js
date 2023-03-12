@@ -8,6 +8,9 @@ const BusinessCard = ({ business }) => {
       <Link to={`/businesses/${business.id}`}>
         <span>{business.name}</span>
       </Link>
+      <Link to={`/businesses/${business.id}/delete`}>
+        <button>Delete Business</button>
+      </Link>
       {/* new business open */}
       <span>New Business Open</span>
       <img src={business.images[0]?.url}></img>

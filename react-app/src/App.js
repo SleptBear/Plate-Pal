@@ -14,6 +14,7 @@ import ImageDetail from "./components/Images/ImageDetails";
 import CreateNewReview from "./components/Review/CreateReview";
 import CreateNewBusiness from "./components/Business/BusinessCreate";
 import ReviewDelete from "./components/Review/ReviewDelete";
+import BusinessDelete from "./components/Business/BusinessDelete";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function App() {
           </Route>
           <Route exact path="/businesses/:businessId">
             <BusinessDetail />
+          </Route>
+          <Route exact path="/businesses/:businessId/delete">
+            <BusinessDelete />
           </Route>
           <Route path="/login">
             <LoginFormPage />
