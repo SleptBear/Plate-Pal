@@ -77,3 +77,9 @@ ul {
   height: 40px;
   padding-left: 20px;
 }
+
+.nav-right-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

@@ -9,7 +9,7 @@ const ReviewCard = ({ review }) => {
         <span>{review.name}</span>
       </Link>
       {/* new review open */}
-      <img src={review.images[0].url}></img>
+      <img src={review.images[0]?.url}></img>
       {/* category */}
       <span>{review.review}</span>
       {/* stars */}
