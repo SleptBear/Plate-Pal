@@ -10,6 +10,7 @@ import BusinessDetail from "./components/Business/BusinessDetails";
 import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
 import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
 import ManageImagesIndex from "./components/Images/ManageImagesIndex";
+import ImageDetail from "./components/Images/ImageDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route path="/images/current">
             <ManageImagesIndex />
+          </Route>
+          <Route path="/images/:imageId">
+            <ImageDetail />
           </Route>
         </Switch>
       )}
