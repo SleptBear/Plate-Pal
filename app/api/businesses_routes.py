@@ -67,7 +67,8 @@ def get_business_reviews(id):
         images = images_query.all()
         review['images'] = [image.to_dict() for image in images]
 
-    return jsonify(business_reviews)
+
+    return {"businessReviews": {review['id']: review for review in business_reviews}}
 
 
 # CREATE NEW BUSINESS
