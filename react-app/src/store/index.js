@@ -4,12 +4,13 @@ import session from "./session";
 import activities from "./activity";
 import businesses from "./businesses";
 import reviews from "./reviews";
-
+import images from "./images"
 const rootReducer = combineReducers({
   session,
   activities,
   businesses,
-  reviews
+  reviews,
+  images
 });
 
 let enhancer;
