@@ -48,7 +48,10 @@ def get_business_details(id):
     review_query = db.session.query(Review).filter(Review.business_id == id)
     business_reviews = review_query.all()
     stars = [review.stars for review in business_reviews]
-    avg_rating = sum(stars) / len(business_reviews)
+    if len(business_reviews) > 0:
+        avg_rating = sum(stars) / len(business_reviews)
+    else:
+        avg_rating = 0
     business['avg_rating'] = avg_rating
     business['number_of_reviews'] = len(business_reviews)
 
