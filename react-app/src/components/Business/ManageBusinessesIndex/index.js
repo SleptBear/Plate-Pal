@@ -3,44 +3,43 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCurrentBusinessesThunk } from "../../../store/businesses";
 import BusinessCard from "../BusinessCard";
 
-import "./ActivityIndex.css";
+import "./ManageBusinessesIndex.css";
 
 const ManageBusinessesIndex = () => {
-  const dispatch = useDispatch();
-  const activities = useSelector((state) => state.activities.activities);
-  const user = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
+    let businesses = useSelector((state) => state.businesses.businesses);
+    const user = useSelector((state) => state.session.user);
 
-  useEffect(() => {
-    const activityRestore = async () => {
-      await dispatch(getActivitiesThunk());
-    };
-    activityRestore();
-  }, [dispatch]);
+    useEffect(() => {
+        const businessRestore = async () => {
+            await dispatch(getCurrentBusinessesThunk());
+        };
+        businessRestore();
+    }, [dispatch]);
 
-  if (!activities) return null;
+    console.log(businesses)
+    if (!businesses) return null;
 
-  activities?.sort(
-    (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
-  );
+    businesses = Object.values(businesses)
 
-  return (
-    <>
-      <div>
-        {activities.map((item) => {
-          if (item.stars) {
-            return <ReviewCard item={item} key={item.id.toString()} />;
-          } else {
-            return (
-              <BusinessCard
-                item={item}
-                key={item.id.toString() + item.zipcode.toString()}
-              />
-            );
-          }
-        })}
-      </div>
-    </>
-  );
+    businesses?.sort(
+        (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
+    );
+
+    return (
+        <>
+            <div>
+                {businesses.map((business) => {
+                    return (
+                        <BusinessCard
+                            business={business}
+                            key={business.id}
+                        />
+                    );
+                })}
+            </div>
+        </>
+    );
 };
 
-export default ActivityIndex;
+export default ManageBusinessesIndex;

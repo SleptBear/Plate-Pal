@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 // import css
 
-const BusinessCard = ({ item }) => {
+const BusinessCard = ({ business }) => {
   return (
     <>
       {/* business name */}
-      <Link to={`/businesses/${item.id}`}>
-        <span>{item.name}</span>
+      <Link to={`/businesses/${business.id}`}>
+        <span>{business.name}</span>
       </Link>
       {/* new business open */}
       <span>New Business Open</span>
-      <img src={item.images[0].url}></img>
+      <img src={business.images[0].url}></img>
       {/* city, state */}
-      <span>{`${item.city}, ${item.state}`}</span>
+      <span>{`${business.city}, ${business.state}`}</span>
       {/* category */}
-      <span>{item.category}</span>
+      <span>{business.category}</span>
     </>
   );
 };

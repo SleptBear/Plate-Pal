@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import ActivityIndex from "./components/Activity/ActivityIndex";
 import BusinessDetail from "./components/Business/BusinessDetails";
+import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
           <Route exact path="/">
             <ActivityIndex />
           </Route>
+          <Route exact path="/businesses/current">
+           <ManageBusinessesIndex />
+          </Route>
           <Route exact path="/businesses/:businessId">
             <BusinessDetail />
           </Route>
@@ -31,9 +35,6 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route>
-          <Route path="/businesses/current">
-            null
           </Route>
           <Route path="/reviews/current">
             null
