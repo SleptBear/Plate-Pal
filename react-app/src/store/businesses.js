@@ -1,5 +1,6 @@
 /* ----- CONSTANTS ----- */
 const GET_SINGLE_BUSINESS = "businesses/GET_SINGLE_BUSINESS";
+const GET_CURRENT_BUSINESSES = "businesses/GET_CURRENT_BUSINESSES";
 
 /* ----- ACTIONS ----- */
 const getSingleBusincessAction = (business) => {
@@ -9,20 +10,38 @@ const getSingleBusincessAction = (business) => {
   };
 };
 
+const getCurrentBusinessesAction = (businesses) => {
+    return {
+      type: GET_CURRENT_BUSINESSES,
+      businesses
+    };
+  };
+
 /* ----- THUNKS ----- */
 
-// Display all businesses at root page
+// Display single business details
 export const getSingleBusinessThunk = (id) => async (dispatch) => {
   const res = await fetch(`/api/businesses/${id}`);
   if (res.ok) {
     const business = await res.json();
-    console.log('??????????????????/', business)
     dispatch(getSingleBusincessAction(business));
   }
 };
 
+// Display current user businesses
+
+export const getCurrentBusinessesThunk = () => async (dispatch) => {
+    const res = await fetch(`/api/businesses/current`);
+    if (res.ok) {
+      const businesses = await res.json();
+      console.log('???????asdasd????????', businesses.businesses)
+      dispatch(getCurrentBusinessesAction(businesses));
+    }
+  };
+
 /* ----- INITIAL STATE ----- */
 const initialState = {
+    businesses: null,
     singleBusiness: null
 };
 
@@ -34,6 +53,9 @@ const businessReducer = (state = initialState, action) => {
     case GET_SINGLE_BUSINESS:
       newState.singleBusiness = action.business;
       return newState;
+    case GET_CURRENT_BUSINESSES:
+      newState.businesses = action.businesses.businesses
+      return newState
     default:
       return state;
   }

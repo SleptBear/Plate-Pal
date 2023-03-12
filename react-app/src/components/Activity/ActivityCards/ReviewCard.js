@@ -2,12 +2,6 @@ import { Link } from "react-router-dom";
 import "./ReviewCard.css";
 
 const ReviewCard = ({ item }) => {
-  // console.log(item)
-  console.log(item.review.length);
-  console.log(
-    "The food was excellent and the service was great. The ambiance was also very"
-      .length
-  );
   return (
     <div className="review-card-container">
       <span>{`${item.owner_firstname} ${item.owner_lastname[0]}.`}</span>

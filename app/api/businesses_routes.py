@@ -25,8 +25,14 @@ def get_businesses_current():
     user_id = int(current_user.get_id())
     business_query = db.session.query(
         Business).filter(Business.owner_id == user_id)
-    businesses = business_query.all()
-    return {'businesses': {business.id: business.to_dict() for business in businesses}}
+    businesses = [business.to_dict() for business in business_query.all()]
+
+    for business in businesses:
+        images_query = db.session.query(Image).filter(Image.business_id == business["id"])
+        images = images_query.all()
+        business["images"] = [image.to_dict() for image in images]
+
+    return {'businesses': {business["id"]: business for business in businesses}}
 
 
 # GET BUSINESS DETAILS BY ID

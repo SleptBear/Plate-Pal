@@ -10,7 +10,6 @@ const BusinessDetail = () => {
     const { businessId } = useParams()
     const business = useSelector(state => state.businesses.singleBusiness)
     const reviews = useSelector(state => state.reviews.businessReviews)
-    // const reviews = useSelector(state => state.reviews.businessReviews)
 
     useEffect(() => {
         const businessRestore = async () => {
@@ -19,9 +18,7 @@ const BusinessDetail = () => {
         }
         businessRestore()
     }, [dispatch, businessId])
-
-    console.log('??????????????????/', business)
-    console.log('??????????????????/', reviews)
+    
     if (!business) {
         return null
     }
@@ -38,4 +35,4 @@ const BusinessDetail = () => {
     );
 }
 
-// export default BusinessDetail
+export default BusinessDetail
