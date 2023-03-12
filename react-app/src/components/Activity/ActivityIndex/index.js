@@ -25,8 +25,7 @@ const ActivityIndex = () => {
   );
 
   return (
-    <>
-      <div>
+    <div className="activities-container">
         {activities.map((item) => {
           if (item.stars) {
             return <ReviewCard item={item} key={item.id.toString()} />;
@@ -40,7 +39,6 @@ const ActivityIndex = () => {
           }
         })}
       </div>
-    </>
   );
 };
 

@@ -3,19 +3,26 @@ import "./ReviewCard.css";
 
 const ReviewCard = ({ item }) => {
   // console.log(item)
+  console.log(item.review.length);
+  console.log(
+    "The food was excellent and the service was great. The ambiance was also very"
+      .length
+  );
   return (
-    <>
-      <div>
-        <span>{`${item.owner_firstname} ${item.owner_lastname[0]}.`}</span>
-        <span>Wrote a review</span>
-        <img src={item.business_image}></img>
-        <Link to={`/businesses/${item.business_id}`}>
-          <span>{item.business_name}</span>
-        </Link>
-        <span>{item.stars}</span>
-        <span>{item.review}</span>
-      </div>
-    </>
+    <div className="review-card-container">
+      <span>{`${item.owner_firstname} ${item.owner_lastname[0]}.`}</span>
+      <span>Wrote a review</span>
+      <img className="review-card-image" src={item.business_image}></img>
+      <Link to={`/businesses/${item.business_id}`}>
+        <span>{item.business_name}</span>
+      </Link>
+      <span>{item.stars}</span>
+      <span className="review-card-text">
+        {item.review.length < 76
+          ? item.review
+          : `${item.review.slice(0, 76)}...`}
+      </span>
+    </div>
   );
 };
 
