@@ -8,7 +8,7 @@ const BusinessCard = ({ item }) => {
         <span>{item.name}</span>
       </Link>
       <span>New Business Open</span>
-      <img className="business-card-image" src={item.images[0].url}></img>
+      <img className="business-card-image" src={item.images[0]?.url}></img>
       <span>{`${item.city}, ${item.state}`}</span>
       <span>{item.category}</span>
     </div>
