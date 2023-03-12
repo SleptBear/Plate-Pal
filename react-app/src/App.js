@@ -12,6 +12,7 @@ import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
 import ManageImagesIndex from "./components/Images/ManageImagesIndex";
 import ImageDetail from "./components/Images/ImageDetails";
 import CreateNewReview from "./components/Review/CreateReview";
+import CreateNewBusiness from "./components/Business/BusinessCreate";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route exact path="/businesses/current">
             <ManageBusinessesIndex />
+          </Route>
+          <Route path="/businesses/new">
+            <CreateNewBusiness />
           </Route>
           <Route exact path="/businesses/:businessId">
             <BusinessDetail />
