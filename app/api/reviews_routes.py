@@ -11,12 +11,24 @@ review_routes = Blueprint('review', __name__)
 @review_routes.route('/current')
 @login_required
 def reviews_current():
+    # print("current user", current_user)
+    # user_id = int(current_user.get_id())
+    # review_query = db.session.query(
+    #     Review).filter(Review.owner_id == user_id)
+    # reviews = review_query.all()
+    # return {'reviews': {review.id: review.to_dict() for review in reviews}}
     print("current user", current_user)
     user_id = int(current_user.get_id())
     review_query = db.session.query(
         Review).filter(Review.owner_id == user_id)
-    reviews = review_query.all()
-    return {'reviews': {review.id: review.to_dict() for review in reviews}}
+    reviews = [review.to_dict() for review in review_query.all()]
+
+    for review in reviews:
+        images_query = db.session.query(Image).filter(Image.review_id == review["id"])
+        images = images_query.all()
+        review["images"] = [image.to_dict() for image in images]
+
+    return {'userReviews': {review["id"]: review for review in reviews}}
 
 
 # GET REVIEW DETAILS BY ID
