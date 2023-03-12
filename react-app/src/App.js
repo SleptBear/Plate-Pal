@@ -9,6 +9,7 @@ import ActivityIndex from "./components/Activity/ActivityIndex";
 import BusinessDetail from "./components/Business/BusinessDetails";
 import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
 import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
+import CreateNewReview from "./components/Review/CreateReview";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function App() {
             <ActivityIndex />
           </Route>
           <Route exact path="/businesses/current">
-           <ManageBusinessesIndex />
+            <ManageBusinessesIndex />
           </Route>
           <Route exact path="/businesses/:businessId">
             <BusinessDetail />
@@ -37,12 +38,13 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path="/businesses/:businessId/reviews/new">
+            <CreateNewReview />
+          </Route>
           <Route path="/reviews/current">
             <ManageReviewsIndex />
           </Route>
-          <Route path="/images/current">
-            null
-          </Route>
+          <Route path="/images/current">null</Route>
         </Switch>
       )}
     </>
