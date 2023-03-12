@@ -53,13 +53,13 @@ function ProfileButton({ user }) {
             {/* <li>{user.email}</li> */}
             <hr></hr>
             <li>
-              <NavLink to="/">Manage Businesses</NavLink>
+              <NavLink to="/businesses/current">Manage Businesses</NavLink>
             </li>
             <li>
-              <NavLink to="/">Manage Reviews</NavLink>
+              <NavLink to="/reviews/current">Manage Reviews</NavLink>
             </li>
             <li>
-              <NavLink to="/">Manage Photos</NavLink>
+              <NavLink to="/images/current">Manage Images</NavLink>
             </li>
             <hr></hr>
             <li>
