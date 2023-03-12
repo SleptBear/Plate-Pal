@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Image, Business, User
+from app.models import db, Image, Business, User, Review
 from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
 
@@ -14,7 +14,8 @@ def images_current():
     image_query = db.session.query(
         Image).filter(Image.owner_id == user_id)
     images = image_query.all()
-    return {'images': {image.id: image.to_dict() for image in images}}
+
+    return {'userImages': {image.id: image.to_dict() for image in images}}
 
 
 # DELETE IMAGES OWNED BY CURRENT USER
