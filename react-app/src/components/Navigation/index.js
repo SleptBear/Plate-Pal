@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
@@ -29,8 +29,8 @@ function Navigation({ isLoaded }) {
               </NavLink>
             </li>
             <li>
-              {/* path needs to be updated, 
-                  manual input of 1 
+              {/* path needs to be updated,
+                  manual input of 1
                   needs to go to page with suggested businesses for user to review
               */}
               <NavLink exact to="/businesses/1/reviews/new">
@@ -42,9 +42,19 @@ function Navigation({ isLoaded }) {
             </li>
           </div>
         ) : (
-          <li className="nav-right-login">
-            <ProfileButton className="profile-button" user={sessionUser} />
-          </li>
+          <>
+            <Link to="/login">
+              <button>
+                Log In
+              </button>
+            </Link>
+
+            <Link to="/signup">
+              <button>
+                Sign Up
+              </button>
+            </Link>
+          </>
         )}
       </ul>
     </nav>
