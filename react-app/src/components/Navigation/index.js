@@ -5,6 +5,8 @@ import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import logo from "../../assets/platepal.png";
 
+import SearchBar from "../SearchBar";
+
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -15,6 +17,9 @@ function Navigation({ isLoaded }) {
           <NavLink exact to="/">
             <img className="logo-image" src={logo} alt="logo"></img>
           </NavLink>
+        </li>
+        <li>
+          <SearchBar />
         </li>
         {isLoaded && sessionUser ? (
           <div className="nav-right-container">
