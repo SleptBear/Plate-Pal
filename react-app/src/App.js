@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/">
             <ActivityIndex />
           </Route>
-          <Route exact path="/businesses/:id">
+          <Route exact path="/businesses/:businessId">
             <BusinessDetail />
           </Route>
           <Route path="/login">
@@ -31,6 +31,15 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/businesses/current">
+            null
+          </Route>
+          <Route path="/reviews/current">
+            null
+          </Route>
+          <Route path="/images/current">
+            null
           </Route>
         </Switch>
       )}
