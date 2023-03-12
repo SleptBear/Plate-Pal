@@ -4,6 +4,8 @@ import { getActivitiesThunk } from "../../../store/activity";
 import ReviewCard from "../ActivityCards/ReviewCard";
 import BusinessCard from "../ActivityCards/BusinessCard";
 
+import banner from "../../../assets/bannerphoto.jpeg";
+
 import "./ActivityIndex.css";
 
 const ActivityIndex = () => {
@@ -25,7 +27,10 @@ const ActivityIndex = () => {
   );
 
   return (
-    <div className="activities-container">
+    <div className="root-activities-container">
+      <img className="banner-image" src={banner} alt="logo"></img>
+      <h2>Recent Activity</h2>
+      <div className="activities-container">
         {activities.map((item) => {
           if (item.stars) {
             return <ReviewCard item={item} key={item.id.toString()} />;
@@ -39,6 +44,7 @@ const ActivityIndex = () => {
           }
         })}
       </div>
+    </div>
   );
 };
 
