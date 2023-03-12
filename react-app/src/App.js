@@ -11,11 +11,12 @@ import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
 import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
 import ManageImagesIndex from "./components/Images/ManageImagesIndex";
 import ImageDetail from "./components/Images/ImageDetails";
-import CreateNewReview from "./components/Review/CreateReview";
-import CreateNewBusiness from "./components/Business/BusinessCreate";
+import ReviewCreate from "./components/Review/ReviewCreate";
+import BusinessCreate from "./components/Business/BusinessCreate";
 import ReviewDelete from "./components/Review/ReviewDelete";
 import BusinessDelete from "./components/Business/BusinessDelete";
 import ImageDelete from "./components/Images/ImageDelete";
+import ImageCreate from "./components/Images/ImageCreate";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function App() {
             <ManageBusinessesIndex />
           </Route>
           <Route path="/businesses/new">
-            <CreateNewBusiness />
+            <BusinessCreate />
           </Route>
           <Route exact path="/businesses/:businessId">
             <BusinessDetail />
@@ -51,7 +52,10 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/businesses/:businessId/reviews/new">
-            <CreateNewReview />
+            <ReviewCreate />
+          </Route>
+          <Route exact path="/businesses/:businessId/images/new">
+            <ImageCreate />
           </Route>
           <Route path="/reviews/current">
             <ManageReviewsIndex />

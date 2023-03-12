@@ -4,9 +4,9 @@ import { useHistory, useParams } from "react-router-dom";
 import { postReviewThunk } from "../../../store/reviews";
 import { getSingleBusinessThunk } from "../../../store/businesses";
 
-import "./CreateReview.css";
+import "./ReviewCreate.css";
 
-const CreateNewReview = () => {
+const ReviewCreate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [errors, setErrors] = useState([]);
@@ -74,4 +74,4 @@ const CreateNewReview = () => {
   );
 };
 
-export default CreateNewReview;
+export default ReviewCreate;

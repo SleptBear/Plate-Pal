@@ -153,8 +153,11 @@ def create_new_image(id):
 
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('!!!!!!!!!!!!!!', form['csrf_token'].data)
     data = request.get_json()
+    print('?????????', data)
     if form.validate_on_submit():
+        print('HIIIIIIII')
         new_image = Image(
             owner_id=int(current_user.get_id()),
             business_id=id,

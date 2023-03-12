@@ -1,6 +1,9 @@
+import { getSingleBusinessThunk } from "./businesses";
+
 /* ----- CONSTANTS ----- */
 const GET_USER_IMAGES = "images/GET_USER_IMAGES";
 const GET_SINGLE_IMAGE = "images/GET_SINGLE_IMAGE"
+const POST_IMAGE = "reviews/POST_IMAGE";
 const DELETE_IMAGE = "reviews/DELETE_IMAGE";
 
 /* ----- ACTIONS ----- */
@@ -19,6 +22,13 @@ const getSingleImageAction = (image) => {
     };
 };
 
+const postImageAction = (image) => {
+    return {
+        type: POST_IMAGE,
+        image,
+    };
+};
+
 const deleteImageAction = (id) => {
     return {
         type: DELETE_IMAGE,
@@ -28,6 +38,23 @@ const deleteImageAction = (id) => {
 
 /* ----- THUNKS ----- */
 
+// Post new image by business id for current user
+export const postImageThunk =
+    (newImage, businessId) => async (dispatch) => {
+        console.log(JSON.stringify(newImage))
+        const res = await fetch(`/api/businesses/${businessId}/images`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newImage),
+        });
+
+        if (res.ok) {
+            const createdImage = await res.json();
+            dispatch(postImageAction(createdImage));
+            dispatch(getSingleBusinessThunk(businessId));
+            return createdImage;
+        }
+    };
 
 // Delete image by image id for current user
 export const deleteImageThunk = (imageId) => async (dispatch) => {
@@ -77,6 +104,9 @@ const imagesReducer = (state = initialState, action) => {
                 delete newState.userImages[action.id]
             }
             return newState
+        case POST_IMAGE:
+            newState.singleImage = action.image;
+            return newState;
         default:
             return state;
     }
