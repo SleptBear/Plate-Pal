@@ -5,7 +5,7 @@ import { postBusinessThunk } from "../../../store/businesses";
 
 import "./BusinessCreate.css";
 
-const CreateNewBusiness = () => {
+const BusinessCreate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [errors, setErrors] = useState([]);
@@ -58,7 +58,7 @@ const CreateNewBusiness = () => {
         <ul>{/* map errors */}</ul>
         <h2>Hello! Let's begin adding your business</h2>
         <span>
-          We'll use this information toh elp you claim your Yelp page. Your
+          We'll use this information to help you claim your Yelp page. Your
           business will come up automatically if it is already listed.
         </span>
         <input
@@ -157,4 +157,4 @@ const CreateNewBusiness = () => {
   );
 };
 
-export default CreateNewBusiness;
+export default BusinessCreate;
