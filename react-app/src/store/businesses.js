@@ -4,6 +4,7 @@ const GET_CURRENT_BUSINESSES = "businesses/GET_CURRENT_BUSINESSES";
 const POST_BUSINESS = "businesses/POST_BUSINESS";
 const DELETE_BUSINESS = "businesses/DELETE_BUSINESS";
 const EDIT_BUSINESS = "businesses/EDIT_BUSINESS";
+const SEARCH_BUSINESSES = "businesses/SEARCH_BUSINESSES";
 
 /* ----- ACTIONS ----- */
 const getSingleBusinessAction = (business) => {
@@ -38,6 +39,13 @@ const editBusinessAction = (business) => {
   return {
     type: EDIT_BUSINESS,
     business,
+  };
+};
+
+const searchBusinessesAction = (businesses) => {
+  return {
+    type: SEARCH_BUSINESSES,
+    businesses,
   };
 };
 
@@ -103,6 +111,16 @@ export const editBusinessThunk =
       return editedBusiness;
     }
   };
+
+// Search businesses through search bar
+export const searchBusinessesThunk = (searchString) => async (dispatch) => {
+  const res = await fetch(`/api/businesses/${searchString}`);
+  if (res.ok) {
+    const searchResults = await res.json();
+    dispatch(searchBusinessesAction(searchResults));
+    return searchResults;
+  }
+};
 
 /* ----- INITIAL STATE ----- */
 const initialState = {

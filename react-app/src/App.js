@@ -20,6 +20,7 @@ import ImageCreate from "./components/Images/ImageCreate";
 import ReviewEdit from "./components/Review/ReviewEdit";
 import BusinessEdit from "./components/Business/BusinessEdit";
 import BusinessAll from "./components/Business/BusinessAll";
+import BusinessSearched from "./components/Business/BusinessSearched";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route exact path="/businesses/current">
             <ManageBusinessesIndex />
+          </Route>
+          <Route path="/businesses/search">
+            <BusinessSearched />
           </Route>
           <Route path="/businesses/new">
             <BusinessCreate />
