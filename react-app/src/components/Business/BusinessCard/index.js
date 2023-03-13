@@ -1,24 +1,24 @@
 import { Link } from "react-router-dom";
-// import css
+import "./BusinessCard.css";
 
 const BusinessCard = ({ business }) => {
   return (
-    <>
+    <div className="business-card">
       {/* business name */}
       <Link to={`/businesses/${business.id}`}>
-        <span>{business.name}</span>
+        <h2>{business.name}</h2>
       </Link>
       <Link to={`/businesses/${business.id}/delete`}>
         <button>Delete Business</button>
       </Link>
       {/* new business open */}
-      <span>New Business Open</span>
-      <img src={business.images[0]?.url}></img>
+      <p>New Business Open</p>
+      <img src={business.images[0]?.url} alt={business.name} />
       {/* city, state */}
-      <span>{`${business.city}, ${business.state}`}</span>
+      <p>{`${business.city}, ${business.state}`}</p>
       {/* category */}
-      <span>{business.category}</span>
-    </>
+      <p>{business.category}</p>
+    </div>
   );
 };
 
