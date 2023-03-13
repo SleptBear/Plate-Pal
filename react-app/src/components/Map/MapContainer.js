@@ -27,7 +27,7 @@ const MapContainer = ({google}) => {
 
           <Map
             google={google}
-            zoom={10}
+            zoom={3}
             initialCenter={{ lat: 37.7749, lng: -122.4194 }} // San Francisco coordinates
           >
             {businesses.map(business => (
