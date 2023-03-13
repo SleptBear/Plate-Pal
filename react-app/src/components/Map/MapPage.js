@@ -1,14 +1,16 @@
 import React from 'react';
-import { GoogleApiWrapper } from 'google-maps-react';
+import { GoogleApiWrapper } from 'google-maps-react-17';
 import MapContainer from './MapContainer';
 import os from 'os';
 
-const MapPage = (props) => {
+export const MapPage = (props) => {
+  console.log(props.searchString)
   return (
     <div>
       <MapContainer
         google={props.google}
         apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        searchString={props.searchString}
       />
     </div>
   );

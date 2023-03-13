@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchBusinessesThunk } from "../../../store/businesses";
 import BusinessSearchCard from "./BusinessSearchCard";
+import { MapPage } from "../../Map/MapPage";
 
 import "./BusinessSearched.css";
 
@@ -20,7 +21,7 @@ const BusinessSearched = () => {
       await dispatch(searchBusinessesThunk(searchString));
     };
     searchBusinesses();
-  }, [dispatch]);
+  }, [dispatch, searchString]);
 
   if (searchResult === null || searchResult.length === 0) return null;
 
@@ -37,11 +38,7 @@ const BusinessSearched = () => {
         })}
       </div>
       <div>
-        {/* placeholder until actual maps*/}
-        <img
-          style={{ height: "500px" }}
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Google_Maps_Logo_2020.svg/2275px-Google_Maps_Logo_2020.svg.png"
-        ></img>
+        <MapPage searchString={searchString} />
       </div>
     </div>
   );

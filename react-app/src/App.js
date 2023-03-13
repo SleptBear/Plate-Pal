@@ -89,9 +89,9 @@ function App() {
           <Route path="/images/:imageId">
             <ImageDetail />
           </Route>
-          <Route path="/map">
+          {/* <Route path="/map">
             <MapPage />
-          </Route>
+          </Route> */}
         </Switch>
       )}
     </>

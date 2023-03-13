@@ -12,10 +12,10 @@ import "./index.css";
 
 const store = configureStore();
 
-// if (process.env.NODE_ENV !== "production") {
-// 	window.store = store;
-// 	window.sessionActions = sessionActions;
-// }
+if (process.env.NODE_ENV !== "production") {
+	window.store = store;
+	window.sessionActions = sessionActions;
+}
 
 // Wrap the application with the Modal provider and render the Modal component
 // after the App component so that all the Modal content will be layered as
