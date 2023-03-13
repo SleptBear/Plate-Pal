@@ -2,6 +2,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchBusinessesThunk } from "../../../store/businesses";
+import BusinessSearchCard from "./BusinessSearchCard";
 
 import "./BusinessSearched.css";
 
@@ -30,8 +31,18 @@ const BusinessSearched = () => {
         <div>Price filter buttons</div>
         <div>Categories</div>
       </div>
-      <div>Results</div>
-      {searchResult.map((business) => business.name)}
+      <div>
+        {searchResult.map((business) => {
+          return <BusinessSearchCard business={business} key={business.id} />;
+        })}
+      </div>
+      <div>
+        {/* placeholder until actual maps*/}
+        <img
+          style={{ height: "500px" }}
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Google_Maps_Logo_2020.svg/2275px-Google_Maps_Logo_2020.svg.png"
+        ></img>
+      </div>
     </div>
   );
 };
