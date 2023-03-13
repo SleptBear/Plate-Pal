@@ -279,9 +279,21 @@ def search_businesses():
         businesses = [business.to_dict() for business in businesses_query.all()]
 
         for business in businesses:
+            print("???????", business)
             images_query = db.session.query(Image).filter(Image.business_id == business["id"])
             images = images_query.all()
             business["images"] = [image.to_dict() for image in images]
+
+            # Handle reviews
+            review_query = db.session.query(Review).filter(Review.business_id == business["id"])
+            business_reviews = review_query.all()
+            stars = [review.stars for review in business_reviews]
+            if len(business_reviews) > 0:
+                avg_rating = sum(stars) / len(business_reviews) 
+            else:
+                avg_rating = 0
+            business['avg_rating'] = avg_rating
+            business['number_of_reviews'] = len(business_reviews)
 
         return {'businesses': {business["id"]: business for business in businesses}}
 
