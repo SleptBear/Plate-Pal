@@ -15,7 +15,7 @@ def validation_errors_to_error_messages(validation_errors):
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
-    return errorMessages, 400
+    return errorMessages
 
 
 @auth_routes.route('/')
@@ -42,7 +42,15 @@ def login():
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
         return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    if "email : Email provided not found." in validation_errors_to_error_messages(form.errors) or "password : No such user exists." in validation_errors_to_error_messages(form.errors) or "password : Password was incorrect." in validation_errors_to_error_messages(form.errors):
+        return {
+            "message": "Invalid credentials",
+            "statusCode": 401,
+            'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {
+        "message": "Validation error",
+        "statusCode": 400,
+        'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @auth_routes.route('/logout')
@@ -74,7 +82,15 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    if "email : Email address is already in use." in validation_errors_to_error_messages(form.errors):
+        return {
+            "message": "Email already exists",
+            "statusCode": 403,
+            'errors': validation_errors_to_error_messages(form.errors)}, 403
+    return {
+        "message": "Validation error",
+        "statusCode": 400,
+        'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @auth_routes.route('/unauthorized')
@@ -82,4 +98,7 @@ def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
-    return {'errors': ['Unauthorized']}, 401
+    return {
+        "message": "Authentication required",
+        "status_code": 401
+    }, 401
