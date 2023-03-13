@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllBusinessesThunk } from '../../store/businesses';
+import os from 'os';
+
 
 // const businesses = useSelector((state) => state.businesses.businesses);
 
@@ -44,5 +46,5 @@ const MapContainer = ({google}) => {
 
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyA6ife8wuqn_mX_9ig0Nyh9ZjfyQoXPsgw'
+  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 })(MapContainer);
