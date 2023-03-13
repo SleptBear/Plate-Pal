@@ -21,6 +21,7 @@ import ReviewEdit from "./components/Review/ReviewEdit";
 import BusinessEdit from "./components/Business/BusinessEdit";
 import BusinessAll from "./components/Business/BusinessAll";
 import BusinessSearched from "./components/Business/BusinessSearched";
+import MapPage from "./components/Map/MapPage.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -87,6 +88,9 @@ function App() {
           </Route>
           <Route path="/images/:imageId">
             <ImageDetail />
+          </Route>
+          <Route path="/map">
+            <MapPage />
           </Route>
         </Switch>
       )}
