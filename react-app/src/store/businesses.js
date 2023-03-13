@@ -5,12 +5,20 @@ const POST_BUSINESS = "businesses/POST_BUSINESS";
 const DELETE_BUSINESS = "businesses/DELETE_BUSINESS";
 const EDIT_BUSINESS = "businesses/EDIT_BUSINESS";
 const SEARCH_BUSINESSES = "businesses/SEARCH_BUSINESSES";
+const GET_ALL_BUSINESSES = "businesses/GET_ALL_BUSINESSES";
 
 /* ----- ACTIONS ----- */
 const getSingleBusinessAction = (business) => {
   return {
     type: GET_SINGLE_BUSINESS,
     business,
+  };
+};
+
+const getAllBusinessesAction = (businesses) => {
+  return {
+    type: GET_ALL_BUSINESSES,
+    businesses,
   };
 };
 
@@ -68,6 +76,15 @@ export const getSingleBusinessThunk = (id) => async (dispatch) => {
     const business = await res.json();
     dispatch(getSingleBusinessAction(business));
     return business;
+  }
+};
+
+//get all businesses
+export const getAllBusinessesThunk = () => async (dispatch) => {
+  const res = await fetch(`/api/businesses`);
+  if (res.ok) {
+    const businesses = await res.json();
+    dispatch(getAllBusinessesAction(businesses));
   }
 };
 
@@ -152,6 +169,9 @@ const businessReducer = (state = initialState, action) => {
     case SEARCH_BUSINESSES:
       newState.businesses = action.businesses.businesses;
       return newState;
+    case GET_ALL_BUSINESSES:
+        newState.businesses = action.businesses.businesses;
+        return newState;
     default:
       return state;
   }
