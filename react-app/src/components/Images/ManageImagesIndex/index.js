@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserImagesThunk } from "../../../store/images";
-import ImageCard from "../ImagesCard";
+import ImageCard from "../ImageCard";
 
 import "./ManageImagesIndex.css";
 
