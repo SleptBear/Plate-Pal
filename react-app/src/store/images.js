@@ -3,8 +3,9 @@ import { getSingleBusinessThunk } from "./businesses";
 /* ----- CONSTANTS ----- */
 const GET_USER_IMAGES = "images/GET_USER_IMAGES";
 const GET_SINGLE_IMAGE = "images/GET_SINGLE_IMAGE"
-const POST_IMAGE = "reviews/POST_IMAGE";
-const DELETE_IMAGE = "reviews/DELETE_IMAGE";
+const POST_IMAGE = "images/POST_IMAGE";
+const DELETE_IMAGE = "images/DELETE_IMAGE";
+
 
 /* ----- ACTIONS ----- */
 
@@ -85,8 +86,9 @@ export const getSingleImageThunk = (id) => async (dispatch) => {
 
 /* ----- INITIAL STATE ----- */
 const initialState = {
+    revewImages: null,
     userImages: null,
-    singleImage: null
+    singleImage: null,
 };
 
 /* ----- REDUCER ----- */
