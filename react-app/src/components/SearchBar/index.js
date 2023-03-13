@@ -6,7 +6,8 @@ const SearchBar = () => {
   const history = useHistory();
   const [searchString, setSearchString] = useState("");
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     history.push(`/businesses/search/${searchString}`);
   };
 
