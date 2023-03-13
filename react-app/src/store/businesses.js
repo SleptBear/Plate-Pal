@@ -2,7 +2,8 @@
 const GET_SINGLE_BUSINESS = "businesses/GET_SINGLE_BUSINESS";
 const GET_CURRENT_BUSINESSES = "businesses/GET_CURRENT_BUSINESSES";
 const POST_BUSINESS = "businesses/POST_BUSINESS";
-const DELETE_BUSINESS = "reviews/DELETE_BUSINESS";
+const DELETE_BUSINESS = "businesses/DELETE_BUSINESS";
+const EDIT_BUSINESS = "businesses/EDIT_BUSINESS";
 
 /* ----- ACTIONS ----- */
 const getSingleBusinessAction = (business) => {
@@ -28,8 +29,15 @@ const postBusinessAction = (business) => {
 
 const deleteBusinessAction = (id) => {
   return {
-      type: DELETE_BUSINESS,
-      id,
+    type: DELETE_BUSINESS,
+    id,
+  };
+};
+
+const editBusinessAction = (business) => {
+  return {
+    type: EDIT_BUSINESS,
+    business,
   };
 };
 
@@ -38,10 +46,10 @@ const deleteBusinessAction = (id) => {
 // Delete business by business id for current user
 export const deleteBusinessThunk = (businessId) => async (dispatch) => {
   const res = await fetch(`/api/businesses/${businessId}`, {
-      method: "DELETE"
+    method: "DELETE",
   });
   if (res.ok) {
-      dispatch(deleteBusinessAction(businessId));
+    dispatch(deleteBusinessAction(businessId));
   }
 };
 
@@ -51,6 +59,7 @@ export const getSingleBusinessThunk = (id) => async (dispatch) => {
   if (res.ok) {
     const business = await res.json();
     dispatch(getSingleBusinessAction(business));
+    return business;
   }
 };
 
@@ -79,6 +88,22 @@ export const postBusinessThunk = (newBusiness) => async (dispatch) => {
   }
 };
 
+// Edit a business by id
+export const editBusinessThunk =
+  (businessContent, businessId) => async (dispatch) => {
+    const res = await fetch(`/api/businesses/${businessId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(businessContent),
+    });
+
+    if (res.ok) {
+      const editedBusiness = await res.json();
+      dispatch(editBusinessAction(editedBusiness));
+      return editedBusiness;
+    }
+  };
+
 /* ----- INITIAL STATE ----- */
 const initialState = {
   businesses: null,
@@ -98,13 +123,16 @@ const businessReducer = (state = initialState, action) => {
     case POST_BUSINESS:
       newState.singleBusiness = action.business;
       return newState;
+    case DELETE_BUSINESS:
+      if (newState.businesses) {
+        delete newState.businesses[action.id];
+      }
+      return newState;
+    case EDIT_BUSINESS:
+      newState.singleBusiness = action.business;
+      return newState;
     default:
       return state;
-    case DELETE_BUSINESS:
-        if (newState.businesses) {
-            delete newState.businesses[action.id]
-        }
-        return newState
   }
 };
 
