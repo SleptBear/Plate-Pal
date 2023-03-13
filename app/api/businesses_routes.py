@@ -265,7 +265,7 @@ def search_businesses():
     if request.args:
         search_query = request.args['query']
         if not search_query:
-            return {'businesses': []}
+            return {'businesses': {}}
 
         businesses_query = Business.query.filter(
             (Business.name.ilike(f'%{search_query}%')) |
@@ -285,7 +285,7 @@ def search_businesses():
 
         return {'businesses': {business["id"]: business for business in businesses}}
 
-    return {'businesses': []}
+    return {'businesses': {}}
 #     # Perform case-insensitive search on name, category, address, city, state, and zipcode fields of Business model
 
 

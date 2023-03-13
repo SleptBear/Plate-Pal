@@ -13,6 +13,7 @@ const ReviewEdit = () => {
   const { reviewId } = useParams();
 
   const currentUser = useSelector((state) => state.session.user);
+  const singleReview = useSelector((state) => state.reviews.singleReview);
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
@@ -29,10 +30,13 @@ const ReviewEdit = () => {
     const restoreReview = async () => {
       let restoreReview = await dispatch(getSingleReviewThunk(reviewId));
 
-      if (restoreReview.owner_id !== currentUser.id) history.push("/");
+      // redirect user to 404 custom page like Yelp's
+      // if (!restoreReview) return history.push("/");
+      // if (restoreReview?.owner_id !== currentUser.id) history.push("/");
 
-      setReview(restoreReview.review);
-      setStars(restoreReview.stars);
+      // if review was not found, then state for reviews.singleReview won't be updated, would return null
+      setReview(restoreReview?.review);
+      setStars(restoreReview?.stars);
     };
 
     restoreReview();
@@ -69,9 +73,11 @@ const ReviewEdit = () => {
     setErrors(valErrors);
   }, [review, stars]);
 
+  if (!singleReview) return "Review not found";
+  if (singleReview.owner_id !== currentUser.id) history.push("/");
+
   return (
     <div>
-      <h2>Edit Review</h2>
       <form onSubmit={onSubmit}>
         <ul>{/* map errors */}</ul>
         <div className="review-form-stars-container">
