@@ -43,7 +43,7 @@ function App() {
           <Route exact path="/businesses/current">
             <ManageBusinessesIndex />
           </Route>
-          <Route path="/businesses/search">
+          <Route exact path="/businesses/search/:searchString">
             <BusinessSearched />
           </Route>
           <Route path="/businesses/new">

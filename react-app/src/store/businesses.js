@@ -114,7 +114,7 @@ export const editBusinessThunk =
 
 // Search businesses through search bar
 export const searchBusinessesThunk = (searchString) => async (dispatch) => {
-  const res = await fetch(`/api/businesses/${searchString}`);
+  const res = await fetch(`/api/businesses/search?query=${searchString}`);
   if (res.ok) {
     const searchResults = await res.json();
     dispatch(searchBusinessesAction(searchResults));
@@ -148,6 +148,9 @@ const businessReducer = (state = initialState, action) => {
       return newState;
     case EDIT_BUSINESS:
       newState.singleBusiness = action.business;
+      return newState;
+    case SEARCH_BUSINESSES:
+      newState.businesses = action.businesses.businesses;
       return newState;
     default:
       return state;
