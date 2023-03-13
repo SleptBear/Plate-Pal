@@ -28,7 +28,8 @@ def get_businesses_current():
     businesses = [business.to_dict() for business in business_query.all()]
 
     for business in businesses:
-        images_query = db.session.query(Image).filter(Image.business_id == business["id"])
+        images_query = db.session.query(Image).filter(
+            Image.business_id == business["id"])
         images = images_query.all()
         business["images"] = [image.to_dict() for image in images]
 
@@ -42,7 +43,10 @@ def get_business_details(id):
     business = Business.query.get(id).to_dict()
 
     if not business:
-        return "Business does not exist", 404
+        return {
+            "message": "Business couldn't be found",
+            "status_code": 404
+        }, 404
 
     # Handle reviews
     review_query = db.session.query(Review).filter(Review.business_id == id)
@@ -76,7 +80,6 @@ def get_business_reviews(id):
         images = images_query.all()
         review['images'] = [image.to_dict() for image in images]
 
-
     return {"businessReviews": {review['id']: review for review in business_reviews}}
 
 
@@ -107,7 +110,10 @@ def create_new_business():
         db.session.commit()
         return new_business.to_dict()
     if form.errors:
-        return validation_errors_to_error_messages(form.errors)
+        return {
+            "message": "Validation error",
+            "statusCode": 400,
+            'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 # CREATE NEW REVIEW
@@ -117,13 +123,25 @@ def create_new_review(id):
 
     business = Business.query.get(id)
     if not business:
-        return "Business does not exist", 404
+        return {
+            "message": "Business couldn't be found",
+            "status_code": 404
+        }, 404
+
+    if business.id == int(current_user.get_id()).id:
+        return {
+            "message": "Forbidden",
+            "status_code": 403
+        }, 403
 
     review_query = db.session.query(Review).filter(Review.business_id == id).filter(
         Review.owner_id == int(current_user.get_id()))
     user_business_reviews = review_query.all()
     if len(user_business_reviews) > 0:
-        return "User already has a review for this spot", 403
+        return {
+            "message": "User already has a review for this business",
+            "status_code": 403
+        }, 403
 
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -140,7 +158,10 @@ def create_new_review(id):
         db.session.commit()
         return new_review.to_dict()
     if form.errors:
-        return validation_errors_to_error_messages(form.errors)
+        return {
+            "message": "Validation error",
+            "statusCode": 400,
+            'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 # CREATE NEW IMAGE FOR A BUSINESS
@@ -149,13 +170,14 @@ def create_new_review(id):
 def create_new_image(id):
     business = Business.query.get(id)
     if not business:
-        return "Business does not exist", 404
+        return {
+            "message": "Business couldn't be found",
+            "status_code": 404
+        }, 404
 
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('!!!!!!!!!!!!!!', form['csrf_token'].data)
     data = request.get_json()
-    print('?????????', data)
     if form.validate_on_submit():
         print('HIIIIIIII')
         new_image = Image(
@@ -168,7 +190,10 @@ def create_new_image(id):
         db.session.commit()
         return new_image.to_dict()
     if form.errors:
-        return validation_errors_to_error_messages(form.errors)
+        return {
+            "message": "Validation error",
+            "statusCode": 400,
+            'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 # UPDATE BUSINESS
@@ -178,7 +203,10 @@ def update_business(id):
 
     business = Business.query.get(id)
     if not business:
-        return "Business does not exist", 404
+        return {
+            "message": "Business couldn't be found",
+            "status_code": 404
+        }, 404
 
     data = request.get_json()
     if int(current_user.get_id()) == business.owner_id:
@@ -200,7 +228,10 @@ def update_business(id):
         return business.to_dict()
 
     else:
-        "Business was unable to be updated", 403
+        {
+            "message": "Forbidden",
+            "status_code": 403
+        }, 403
 
 
 # DELETE A BUSINESS
@@ -209,14 +240,23 @@ def delete_business(id):
     business = Business.query.get(id)
 
     if not business:
-        return "Business does not exist", 404
+        return {
+            "message": "Business couldn't be found",
+            "status_code": 404
+        }, 404
 
     if int(current_user.get_id()) == business.owner_id:
         db.session.delete(business)
         db.session.commit()
-        return "Item has been deleted"
+        return {
+            "message": "Successfully deleted",
+            "status_code": 200
+        }
     else:
-        return "Business was unable to be deleted", 403
+        return {
+            "message": "Forbidden",
+            "status_code": 403
+        }, 403
 
 # ## SEARCH
 # @business_routes.route('/search')
