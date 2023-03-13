@@ -4,6 +4,8 @@ import "./BusinessSearchCard.css";
 import starCalculator from "./StarCalculator.js";
 
 const BusinessSearchCard = ({ business }) => {
+  if (!business) return null;
+  
   return (
     <div className="business-search-card-container">
       <div className="business-search-img">
