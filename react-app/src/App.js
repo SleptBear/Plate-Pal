@@ -17,7 +17,8 @@ import ReviewDelete from "./components/Review/ReviewDelete";
 import BusinessDelete from "./components/Business/BusinessDelete";
 import ImageDelete from "./components/Images/ImageDelete";
 import ImageCreate from "./components/Images/ImageCreate";
-import ReviewEdit from "./components/Review/ReviewEdit"
+import ReviewEdit from "./components/Review/ReviewEdit";
+import BusinessEdit from "./components/Business/BusinessEdit";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,9 @@ function App() {
           <Route exact path="/businesses/:businessId/images/new">
             <ImageCreate />
           </Route>
+          <Route path="/businesses/:businessId/edit">
+            <BusinessEdit />
+          </Route>
           <Route path="/reviews/current">
             <ManageReviewsIndex />
           </Route>
@@ -76,7 +80,6 @@ function App() {
           <Route path="/images/:imageId">
             <ImageDetail />
           </Route>
-
         </Switch>
       )}
     </>
