@@ -19,6 +19,7 @@ import ImageDelete from "./components/Images/ImageDelete";
 import ImageCreate from "./components/Images/ImageCreate";
 import ReviewEdit from "./components/Review/ReviewEdit";
 import BusinessEdit from "./components/Business/BusinessEdit";
+import BusinessAll from "./components/Business/BusinessAll";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <ActivityIndex />
+          </Route>
+          <Route exact path="/businesses/all">
+            <BusinessAll />
           </Route>
           <Route exact path="/businesses/current">
             <ManageBusinessesIndex />

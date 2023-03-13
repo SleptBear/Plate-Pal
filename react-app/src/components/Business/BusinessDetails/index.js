@@ -4,6 +4,7 @@ import { useParams,Link } from "react-router-dom";
 import { getSingleBusinessThunk } from "../../../store/businesses";
 import { getBusinessReviewsThunk } from "../../../store/reviews";
 // import css
+import "./BusinessDetail.css";
 
 const BusinessDetail = () => {
   const dispatch = useDispatch();
@@ -24,16 +25,19 @@ const BusinessDetail = () => {
   }
   return (
     <>
-      {/* business name */}
-      <span>{business.name}</span>
-      {/* new business open */}
-      <span>New Business Open</span>
-      <img src={business.images[0]?.url}></img>
-      {/* city, state */}
-      <span>{`${business.city}, ${business.state}`}</span>
-      <Link to={`/businesses/${business.id}/images/new`}>
-        <button>Add Photo</button>
-      </Link>
+  <div className="business-detail">
+  {/* business name */}
+  <span>{business.name}</span>
+  {/* new business open */}
+  <span>New Business Open</span>
+  <img src={business.images[0]?.url} />
+  {/* city, state */}
+  <span>{`${business.city}, ${business.state}`}</span>
+  <Link to={`/businesses/${business.id}/images/new`}>
+    <button>Add Photo</button>
+  </Link>
+</div>
+
     </>
   );
 };

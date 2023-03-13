@@ -10,7 +10,7 @@ const ReviewCard = ({ item }) => {
       <Link to={`/businesses/${item.business_id}`}>
         <span>{item.business_name}</span>
       </Link>
-      <span>{item.stars}</span>
+      <span>{item.stars} ⭐</span>
       <span className="review-card-text">
         {item.review.length < 76
           ? item.review
