@@ -258,22 +258,36 @@ def delete_business(id):
             "status_code": 403
         }, 403
 
-# ## SEARCH
-# @business_routes.route('/search')
-# def search_businesses():
-#     search_query = request.args.get('q')
-#     if not search_query:
-#         return {'businesses': []}
+# SEARCH FOR BUSINESSES
 
+@business_routes.route('/search')
+def search_businesses():
+    if request.args:
+        search_query = request.args['query']
+        if not search_query:
+            return {'businesses': []}
+
+        businesses_query = Business.query.filter(
+            (Business.name.ilike(f'%{search_query}%')) |
+            (Business.category.ilike(f'%{search_query}%')) |
+            (Business.address.ilike(f'%{search_query}%')) |
+            (Business.city.ilike(f'%{search_query}%')) |
+            (Business.state.ilike(f'%{search_query}%')) |
+            (Business.zipcode.ilike(f'%{search_query}%'))
+        )
+
+        businesses = [business.to_dict() for business in businesses_query.all()]
+
+        for business in businesses:
+            images_query = db.session.query(Image).filter(Image.business_id == business["id"])
+            images = images_query.all()
+            business["images"] = [image.to_dict() for image in images]
+
+        return {'businesses': {business["id"]: business for business in businesses}}
+
+    return {'businesses': []}
 #     # Perform case-insensitive search on name, category, address, city, state, and zipcode fields of Business model
-#     businesses_query = Business.query.filter(
-#         (Business.name.ilike(f'%{search_query}%')) |
-#         (Business.category.ilike(f'%{search_query}%')) |
-#         (Business.address.ilike(f'%{search_query}%')) |
-#         (Business.city.ilike(f'%{search_query}%')) |
-#         (Business.state.ilike(f'%{search_query}%')) |
-#         (Business.zipcode.ilike(f'%{search_query}%'))
-#     )
+
 
 #     # Join Review model to Business model and perform search on review field
 #     businesses_query = businesses_query.join(Review).filter(
