@@ -18,28 +18,40 @@ def images_current():
     return {'userImages': {image.id: image.to_dict() for image in images}}
 
 
-# DELETE IMAGES OWNED BY CURRENT USER
+# DELETE A IMAGE
 @image_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def images_delete(id):
     image = Image.query.get(id)
-
     if not image:
-        return "Image does not exist", 404
+        return {
+            "message": "Image couldn't be found",
+            "status_code": 404
+        }, 404
 
     if int(current_user.get_id()) == image.owner_id:
         db.session.delete(image)
         db.session.commit()
-        return "Item has been deleted"
+        return {
+            "message": "Successfully deleted",
+            "status_code": 200
+        }
     else:
-        return "Image was unable to be deleted", 403
+        return {
+            "message": "Forbidden",
+            "status_code": 403
+        }, 403
 
 # GET IMAGE BY CURRENT ID
+
 @image_routes.route('/<int:id>')
 def get_image_details(id):
     image = Image.query.get(id).to_dict()
     if not image:
-        return "Image does not exist", 404
+        return {
+            "message": "Image couldn't be found",
+            "status_code": 404
+        }, 404
 
     user = User.query.get(image["owner_id"])
     business = Business.query.get(image["business_id"])
