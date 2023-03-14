@@ -1,0 +1,10 @@
+.manage-images-index-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.manage-images-index-container img{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 200px;
+}

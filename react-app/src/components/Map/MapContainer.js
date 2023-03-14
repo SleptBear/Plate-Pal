@@ -20,9 +20,8 @@ const MapContainer = ({ google, searchString }) => {
     dispatch(searchBusinessesThunk(searchString));
   }, [dispatch]);
 
-
-  const handleMapMouseMove = (e) => {
-    setCursorPosition({ x: e.clientX, y: e.clientY });
+  const handleMarkerClick = (businessId) => {
+    history.push(`/businesses/${businessId}`);
   };
 
 
