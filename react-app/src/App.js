@@ -21,7 +21,7 @@ import ReviewEdit from "./components/Review/ReviewEdit";
 import BusinessEdit from "./components/Business/BusinessEdit";
 import BusinessAll from "./components/Business/BusinessAll";
 import BusinessSearched from "./components/Business/BusinessSearched";
-import MapPage from "./components/Map/MapPage.js";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,7 +48,9 @@ function App() {
             <BusinessSearched />
           </Route>
           <Route path="/businesses/new">
-            <BusinessCreate />
+            <ProtectedRoute>
+              <BusinessCreate />
+            </ProtectedRoute>
           </Route>
           <Route exact path="/businesses/:businessId">
             <BusinessDetail />
@@ -63,7 +65,9 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/businesses/:businessId/reviews/new">
-            <ReviewCreate />
+            <ProtectedRoute>
+              <ReviewCreate />
+            </ProtectedRoute>
           </Route>
           <Route exact path="/businesses/:businessId/images/new">
             <ImageCreate />

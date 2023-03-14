@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserImagesThunk } from "../../../store/images";
+import { getImagesThunk } from "../../../store/images";
 import ImageCard from "../ImageCard";
 
 import "./ManageImagesIndex.css";
 
 const ManageImagesIndex = () => {
     const dispatch = useDispatch();
-    let images = useSelector((state) => state.images.userImages);
+    let images = useSelector((state) => state.images.images);
     const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
         const imageRestore = async () => {
-            await dispatch(getUserImagesThunk());
+            await dispatch(getImagesThunk());
         };
         imageRestore();
     }, [dispatch]);
