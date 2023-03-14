@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react-17";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { searchBusinessesThunk } from "../../store/businesses";
-import './mapcontainer.css'
+import "./mapcontainer.css";
 
 // const businesses = useSelector((state) => state.businesses.businesses);
 
@@ -21,18 +21,15 @@ const MapContainer = ({ google, searchString }) => {
   };
 
   // const { google } = this.props;
-  console.log("BUSINESSES");
 
   if (!businesses) {
     return null;
   }
 
   businesses = Object.values(businesses);
-  console.log(businesses);
 
   return (
     <>
-
       <Map
         google={google}
         zoom={3}

@@ -15,13 +15,18 @@ const BusinessSearched = () => {
 
   // frontend filtering
   const [userFiltered, setUserFiltered] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState("");
 
   // price hover
   const [priceFilter, setPriceFilter] = useState(0);
   const [hover, setHover] = useState(0);
 
+  // get business state initial render
   let searchResult = useSelector((state) => state.businesses.businesses);
   if (searchResult !== null) searchResult = Object.values(searchResult);
+
+  // use filtered businesses after user selects filter options
+  const [filteredRestaurants, setfilteredRestaurants] = useState([]);
 
   useEffect(() => {
     const searchBusinesses = async () => {
@@ -30,19 +35,23 @@ const BusinessSearched = () => {
     searchBusinesses();
   }, [dispatch, searchString]);
 
+  if (searchResult === null || searchResult.length === 0) return null;
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     setUserFiltered(true);
 
-    // perform frontend filtering of business state with user's input
-    // conditionally render with filter if "userFiltered" is true
-    // eg setFilteredBusinsesses
-    // in jsx setFilteredBusinesses.map(business => ...)
-    
+    const filterApplied = searchResult.filter((restaurant) => {
+      if (priceFilter > 0 && restaurant.price === priceFilter) {
+        return restaurant;
+      }
+    });
+    console.log("FILTER APPLIED", filterApplied);
+    setfilteredRestaurants(filterApplied);
   };
 
-  if (searchResult === null || searchResult.length === 0) return null;
+  console.log("FILTERED RESTAURANT", filteredRestaurants);
 
   return (
     <div className="business-search-container">
@@ -71,60 +80,19 @@ const BusinessSearched = () => {
           <hr></hr>
           <br></br>
           <h4>Categories</h4>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              American
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              Californian
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              Farm-to-Table
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              Molecular Gastronomy
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              French
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              Italian
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              Seafood
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              Southern
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox"></input>
-              Steakhouse
-            </label>
-          </div>
+          {/* convert to fitleredBUsinesses */}
+          {searchResult.map((business) => (
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  value={categoryFilter}
+                  onClick={(e) => setCategoryFilter(e.target.value)}
+                ></input>
+                {business.category}
+              </label>
+            </div>
+          ))}
           <br></br>
           <hr></hr>
           <br></br>
@@ -133,9 +101,15 @@ const BusinessSearched = () => {
       </div>
 
       <div className="business-search-results">
-        {searchResult.map((business) => {
-          return <BusinessSearchCard business={business} key={business.id} />;
-        })}
+        {userFiltered
+          ? filteredRestaurants.map((business) => {
+              <BusinessSearchCard business={business} key={business.id} />;
+            })
+          : searchResult.map((business) => {
+              return (
+                <BusinessSearchCard business={business} key={business.id} />
+              );
+            })}
       </div>
       <div className="business-search-map">
         <MapPage searchString={searchString} />
