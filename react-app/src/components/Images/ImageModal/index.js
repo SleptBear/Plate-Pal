@@ -12,27 +12,27 @@ function ImageModal({ imageId, index }) {
     const image = useSelector(state => state.images.singleImage)
     let images = useSelector(state => state.images.images)
     const [relatedIndex, setRelatedIndex] = useState(index)
-
     const { closeModal } = useModal();
 
     useEffect(() => {
-
         const imageRestore = async () => {
             let storeImage =  await dispatch(getSingleImageThunk(modalImageId))
             let copiedStoreImage = {...storeImage}
             const imagesIds = Object.values(images).map((image)=> {
                 return image.id
             })
-            const index = imagesIds.indexOf(copiedStoreImage.id)
+            const mappedIndex = imagesIds.indexOf(copiedStoreImage.id)
             const imageElements = document.getElementsByClassName("image-modal-information-related-image")
             for (let i = imageElements.length - 1; i >= 0; i--) {
                 imageElements[i].setAttribute('class', "image-modal-information-related-image image-modal-information-related-image-inactive")
-                if (i === index) {
+                if (i === mappedIndex) {
                     imageElements[i].setAttribute('class', "image-modal-information-related-image image-modal-information-related-image-active")
                 }
             }
         }
         imageRestore()
+
+
     }, [dispatch, modalImageId])
 
     if (!image || !images) {
@@ -40,7 +40,8 @@ function ImageModal({ imageId, index }) {
     }
 
     const handleClick = async (id, mappedIndex) => {
-        setModalImageId(id)
+        await dispatch(getSingleImageThunk(id))
+        setRelatedIndex(mappedIndex + 1)
     }
 
     images = Object.values(images)
@@ -84,7 +85,7 @@ function ImageModal({ imageId, index }) {
                 <div className="image-modal-information-related-images-container">
                     <div className="image-modal-information-related-images-grid">
                         {images.map((relatedImage) => {
-                            return <img key={relatedImage.id} className={"image-modal-information-related-image image-modal-information-related-image-inactive"} src={relatedImage.url} onClick={() => { handleClick(relatedImage.id) }} />;
+                            return <img key={relatedImage.id} className={"image-modal-information-related-image image-modal-information-related-image-inactive"} src={relatedImage.url} onClick={() => { handleClick(relatedImage.id, images.indexOf(relatedImage)) }} />;
                         })}
                     </div>
                 </div>
