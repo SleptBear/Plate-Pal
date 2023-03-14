@@ -51,6 +51,7 @@
   width: 100%;
   /* border-bottom: 2px solid grey; */
   background-color: white;
+  z-index: 1;
 }
 
 /* ul parent containing the logo & menu button */

@@ -2,3 +2,32 @@
   display: flex;
   flex-direction: row;
 }
+
+.business-search-filters {
+}
+
+.business-search-results {
+}
+
+.business-search-map {
+}
+
+/* Price filter styling */
+.business-search-price-filter > button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.on {
+  color: #000;
+}
+
+.off {
+  color: #ccc;
+}
+
+.price-rating {
+  font-size: 16px;
+}
