@@ -10,6 +10,14 @@
     width: 30%;
     background-color: white;
     border-radius: 0px 10px 10px 0px;
+    padding: 24px 24px 24px;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 .image-modal-image-container {
@@ -24,4 +32,35 @@
 .image-modal-image-singleImage {
     max-height:80%;
     max-width:80%;
+}
+
+.image-modal-image-container h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    line-height: 28px;
+    color: rgb(45, 46, 47);
+}
+
+.image-modal-information-related-images-container {
+    height: 50%;
+    overflow-y: scroll;
+}
+
+.image-modal-information-related-images-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 0 auto;
+}
+
+.image-modal-information-related-images-grid img {
+    height: 50px;
+}
+
+.image-modal-information-related-image-inactive{
+    filter: brightness(0%);
+}
+
+.image-modal-information-related-image-active{
+    filter: brightness(100%);
 }
