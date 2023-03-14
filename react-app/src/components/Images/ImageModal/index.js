@@ -24,13 +24,14 @@ function ImageModal({ imageId }) {
     }
 
     return (
-        <>
-            {/*
-      <Link to={`/images/${image.id}/delete`}>
-        <button>Delete Image</button>
-      </Link> */}
-            <img src={image.url}/>
-        </>
+        <div className="image-modal-container">
+            <div className="image-modal-image-container">
+                <img className="image-modal-image-singleImage" src={image.url} />
+            </div>
+            <div className="image-modal-information-container">
+        
+            </div>
+        </div>
 
     );
 }

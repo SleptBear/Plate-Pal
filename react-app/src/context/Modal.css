@@ -1,17 +1,17 @@
 #modal {
   position: fixed;
-  top: 0;
+  top: 70px;
   right: 0;
   left: 0;
   bottom: 0;
   display: flex;
+  margin: 40px;
   justify-content: center;
-  align-items: center;
 }
 
 #modal-background {
   position: fixed;
-  top: 0;
+  top: 70px;
   right: 0;
   left: 0;
   bottom: 0;
@@ -19,6 +19,12 @@
 }
 
 #modal-content {
+  height: 100%;
+  width: 100%;
+  max-width: 1300px;
+  min-width: 960px;
   position: absolute;
   background-color:white;
+  justify-self: center;
+  border-radius: 10px;
 }
