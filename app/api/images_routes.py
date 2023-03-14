@@ -15,7 +15,7 @@ def images_current():
         Image).filter(Image.owner_id == user_id)
     images = image_query.all()
 
-    return {'userImages': {image.id: image.to_dict() for image in images}}
+    return {'images': {image.id: image.to_dict() for image in images}}
 
 
 # DELETE A IMAGE
