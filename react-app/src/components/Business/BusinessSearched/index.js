@@ -25,8 +25,10 @@ const BusinessSearched = () => {
   let searchResult = useSelector((state) => state.businesses.businesses);
   if (searchResult !== null) searchResult = Object.values(searchResult);
 
+  console.log("SEARCH RESULTS", searchResult);
+
   // use filtered businesses after user selects filter options
-  const [filteredRestaurants, setfilteredRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   useEffect(() => {
     const searchBusinesses = async () => {
@@ -35,29 +37,49 @@ const BusinessSearched = () => {
     searchBusinesses();
   }, [dispatch, searchString]);
 
+  // guard against empty render - no businesses found
   if (searchResult === null || searchResult.length === 0) return null;
 
+  // handle user submitting filter options
   const onSubmit = async (e) => {
     e.preventDefault();
 
     setUserFiltered(true);
 
-    const filterApplied = searchResult.filter((restaurant) => {
+    // price filtering
+    let filterApplied = searchResult.filter((restaurant) => {
       if (priceFilter > 0 && restaurant.price === priceFilter) {
         return restaurant;
       }
     });
-    console.log("FILTER APPLIED", filterApplied);
-    setfilteredRestaurants(filterApplied);
+    setFilteredRestaurants(filterApplied);
   };
 
-  console.log("FILTERED RESTAURANT", filteredRestaurants);
+  // clear filter
+  const clearFilter = (e) => {
+    e.preventDefault();
+    setUserFiltered(false);
+    setPriceFilter(0);
+    setHover(0);
+    setCategoryFilter("");
+  };
 
   return (
     <div className="business-search-container">
       <div className="business-search-filters">
         <form onSubmit={onSubmit}>
           <h4>Filters</h4>
+          {userFiltered ? (
+            <span
+              className="business-search-clear-filter"
+              onClick={clearFilter}
+            >
+              Clear all
+              <br></br>
+            </span>
+          ) : (
+            ""
+          )}
           <br></br>
           <div className="business-search-price-filter">
             {[...Array(5)].map((x, index) => {
@@ -101,15 +123,17 @@ const BusinessSearched = () => {
       </div>
 
       <div className="business-search-results">
-        {userFiltered
-          ? filteredRestaurants.map((business) => {
-              <BusinessSearchCard business={business} key={business.id} />;
-            })
-          : searchResult.map((business) => {
-              return (
-                <BusinessSearchCard business={business} key={business.id} />
-              );
-            })}
+        {userFiltered ? (
+          filteredRestaurants.map((business) => {
+            return <BusinessSearchCard business={business} key={business.id} />;
+          })
+        ) : userFiltered && filteredRestaurants.length > 0 ? (
+          <p>No results for {searchString}</p>
+        ) : (
+          searchResult.map((business) => {
+            return <BusinessSearchCard business={business} key={business.id} />;
+          })
+        )}
       </div>
       <div className="business-search-map">
         <MapPage searchString={searchString} />
@@ -119,5 +143,3 @@ const BusinessSearched = () => {
 };
 
 export default BusinessSearched;
-
-// filter column // result restaurants // map //
