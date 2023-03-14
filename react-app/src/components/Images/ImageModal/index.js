@@ -12,42 +12,25 @@ function ImageModal({ imageId, index }) {
     const image = useSelector(state => state.images.singleImage)
     let images = useSelector(state => state.images.images)
     const [relatedIndex, setRelatedIndex] = useState(index)
-
     const { closeModal } = useModal();
-
     useEffect(() => {
 
         const imageRestore = async () => {
             let storeImage =  await dispatch(getSingleImageThunk(modalImageId))
             let copiedStoreImage = {...storeImage}
-            console.log(storeImage)
-            delete copiedStoreImage.user_first_name
-            delete copiedStoreImage.user_last_name
-            delete copiedStoreImage.business_name
-            console.log(copiedStoreImage)
-            console.log('hi', Object.values(images))
             const imagesIds = Object.values(images).map((image)=> {
                 return image.id
             })
-            console.log(imagesIds)
-
             const mappedIndex = imagesIds.indexOf(copiedStoreImage.id)
-            console.log(mappedIndex)
-
             const imageElements = document.getElementsByClassName("image-modal-information-related-image")
-            console.log('imageElements', imageElements)
-            console.log('mappedIndex', mappedIndex)
             for (let i = imageElements.length - 1; i >= 0; i--) {
                 imageElements[i].setAttribute('class', "image-modal-information-related-image image-modal-information-related-image-inactive")
                 if (i === mappedIndex) {
                     imageElements[i].setAttribute('class', "image-modal-information-related-image image-modal-information-related-image-active")
                 }
-                console.log('image', images[i])
             }
         }
         imageRestore()
-        // // if (image) {
-
 
     }, [dispatch, modalImageId])
 
@@ -61,19 +44,6 @@ function ImageModal({ imageId, index }) {
     }
 
     images = Object.values(images)
-
-    // let index = 0
-    // const indexFinder = () => {
-    //     for (let i = 0; i < images.length; i++) {
-    //         if (image.id = images[i].id) {
-    //             return index
-    //         }
-    //         index++
-    //     }
-    // }
-    // indexFinder()
-
-    console.log(typeof image.created_at)
     let date
     let formattedDate
     let options = {
@@ -88,7 +58,6 @@ function ImageModal({ imageId, index }) {
     date = new Date(image.created_at)
     formattedDate = new Intl.DateTimeFormat("en-US", options).format(date)
 
-    let mappedIndex = 0
     return (
         <div className="image-modal-container">
             <div className="image-modal-image-container">
