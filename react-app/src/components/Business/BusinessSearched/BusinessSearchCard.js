@@ -23,7 +23,7 @@ const BusinessSearchCard = ({ business }) => {
             <span>New</span>
           )}
         </div>
-        <span>Category</span>
+        <span>{business.category}</span>
         <span>Hours</span>
         <span>Snippet of review</span>
       </div>
