@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react-17";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { searchBusinessesThunk } from "../../store/businesses";
-import os from "os";
+import './mapcontainer.css'
 
 // const businesses = useSelector((state) => state.businesses.businesses);
 
 const MapContainer = ({ google, searchString }) => {
   let businesses = useSelector((state) => state.businesses.businesses);
   const dispatch = useDispatch();
-  const [redirectId, setRedirectId] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(searchBusinessesThunk(searchString));
   }, [dispatch]);
 
   const handleMarkerClick = (businessId) => {
-        setRedirectId(businessId);
-      };
+    history.push(`/businesses/${businessId}`);
+  };
 
   // const { google } = this.props;
   console.log("BUSINESSES");
@@ -32,10 +32,11 @@ const MapContainer = ({ google, searchString }) => {
 
   return (
     <>
+
       <Map
         google={google}
         zoom={3}
-        initialCenter={{ lat: 37.7749, lng: -122.4194 }} // San Francisco coordinates
+        initialCenter={{ lat: businesses[0].lat, lng: businesses[0].lng }} // San Francisco coordinates
       >
         {businesses.map((business) => (
           <Marker
@@ -47,7 +48,6 @@ const MapContainer = ({ google, searchString }) => {
           />
         ))}
       </Map>
-      {redirectId && <Redirect to={`/businesses/${redirectId}`} />}
     </>
   );
 };
@@ -57,4 +57,3 @@ export default GoogleApiWrapper({
 })(MapContainer);
 
 export { MapContainer };
-
