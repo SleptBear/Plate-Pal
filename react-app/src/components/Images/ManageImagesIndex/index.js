@@ -25,15 +25,19 @@ const ManageImagesIndex = () => {
         (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
     );
 
+    let index = 0
+
     return (
         <>
             <div className="manage-images-index-container">
                 {
                 images.map((image) => {
+                    index++
                     return (
                         <ImageCard
                             image={image}
                             key={image.id}
+                            index={index}
                         />
                     );
                 })}

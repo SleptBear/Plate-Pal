@@ -5,8 +5,6 @@ import BusinessDetail from "../BusinessDetails";
 
 const BusinessAll = () => {
   const businesses = useSelector((state) => state.businesses.businesses);
-  console.log(businesses)
-
 
   return (
     <div>

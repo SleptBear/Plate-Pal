@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react-17";
+import {
+  Map,
+  GoogleApiWrapper,
+  Marker,
+  InfoWindow,
+} from "google-maps-react-17";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { searchBusinessesThunk } from "../../store/businesses";
@@ -10,11 +15,10 @@ const blueIcon = {
 };
 
 const MapContainer = ({ google, searchString }) => {
-  let businesses = useSelector((state) => state.businesses.businesses);
+  let businesses = useSelector((state) => state.businesses.filteredBusinesses);
   const dispatch = useDispatch();
   const history = useHistory();
   const [selected, setSelected] = useState(null);
-  const [cursorPosition, setCursorPosition] = useState(null);
 
   useEffect(() => {
     dispatch(searchBusinessesThunk(searchString));
@@ -25,9 +29,8 @@ const MapContainer = ({ google, searchString }) => {
   };
 
 
-  if (!businesses) {
-    return null;
-  }
+  // if (!businesses || Object.values(businesses).length < 1) return null
+  if (!businesses) return null;
 
   businesses = Object.values(businesses);
 
@@ -37,8 +40,10 @@ const MapContainer = ({ google, searchString }) => {
       <Map
         google={google}
         zoom={3}
-        initialCenter={{ lat: businesses[0].lat, lng: businesses[0].lng }}
-        width="800" height="800"
+        initialCenter={{
+          lat: businesses[0]?.lat | 0,
+          lng: businesses[0]?.lng | 0,
+        }} // San Francisco coordinates
       >
         {businesses.map((business) => (
           <Marker
