@@ -4,6 +4,9 @@ import { useParams, Link } from "react-router-dom";
 import { getSingleBusinessThunk } from "../../../store/businesses";
 import { getBusinessReviewsThunk } from "../../../store/reviews";
 import ReviewCard from "../../Review/ReviewCard";
+import OpenModalButton from "../../OpenModalButton";
+import ImageModal from "../../Images/ImageModal";
+import { getImagesAction } from "../../../store/images";
 // import css
 import "./BusinessDetail.css";
 
@@ -21,6 +24,14 @@ const BusinessDetail = () => {
     businessRestore();
   }, [dispatch, businessId]);
 
+  const handleButtonClick = async (e) => {
+    const images = {}
+    business.images.forEach(business => {
+        images[business.id] = business;
+    });
+    await dispatch(getImagesAction({"images": images}))
+  }
+
   if (!business || !reviews) {
     return null;
   }
@@ -37,6 +48,13 @@ const BusinessDetail = () => {
         <Link to={`/businesses/${business.id}/images/new`}>
           <button>Add Photo</button>
         </Link>
+        <OpenModalButton
+          buttonText={`See all ${business.images.length} photos`}
+          modalComponent={<ImageModal imageId={business.images[0]?.id} />}
+          onButtonClick={() => { handleButtonClick() }}
+        >
+
+        </OpenModalButton>
       </div>
 
       <div>
