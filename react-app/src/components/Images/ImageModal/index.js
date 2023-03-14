@@ -13,8 +13,8 @@ function ImageModal({ imageId, index }) {
     let images = useSelector(state => state.images.images)
     const [relatedIndex, setRelatedIndex] = useState(index)
     const { closeModal } = useModal();
-
     useEffect(() => {
+
         const imageRestore = async () => {
             let storeImage =  await dispatch(getSingleImageThunk(modalImageId))
             let copiedStoreImage = {...storeImage}
@@ -32,7 +32,6 @@ function ImageModal({ imageId, index }) {
         }
         imageRestore()
 
-
     }, [dispatch, modalImageId])
 
     if (!image || !images) {
@@ -40,12 +39,11 @@ function ImageModal({ imageId, index }) {
     }
 
     const handleClick = async (id, mappedIndex) => {
-        await dispatch(getSingleImageThunk(id))
+        setModalImageId(id)
         setRelatedIndex(mappedIndex + 1)
     }
 
     images = Object.values(images)
-
     let date
     let formattedDate
     let options = {
@@ -60,7 +58,6 @@ function ImageModal({ imageId, index }) {
     date = new Date(image.created_at)
     formattedDate = new Intl.DateTimeFormat("en-US", options).format(date)
 
-    let mappedIndex = 0
     return (
         <div className="image-modal-container">
             <div className="image-modal-image-container">
