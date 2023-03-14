@@ -73,6 +73,19 @@ ul {
   align-items: center;
 }
 
+.nav-right-add-business {
+  color: black;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.nav-right-add-business:hover {
+  color: white;
+  background-color: lightslategray;
+  border-radius: 5px;
+  /* padding: 5px; */
+}
+
 /* resize logo to be slightly smaller than full parent size */
 .logo-image {
   height: 40px;

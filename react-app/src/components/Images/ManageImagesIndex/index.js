@@ -27,8 +27,9 @@ const ManageImagesIndex = () => {
 
     return (
         <>
-            <div>
-                {images.map((image) => {
+            <div className="manage-images-index-container">
+                {
+                images.map((image) => {
                     return (
                         <ImageCard
                             image={image}

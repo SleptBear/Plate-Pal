@@ -6,6 +6,7 @@ const DELETE_BUSINESS = "businesses/DELETE_BUSINESS";
 const EDIT_BUSINESS = "businesses/EDIT_BUSINESS";
 const SEARCH_BUSINESSES = "businesses/SEARCH_BUSINESSES";
 const GET_ALL_BUSINESSES = "businesses/GET_ALL_BUSINESSES";
+const FILTERED_BUSINESSES = "businesses/FILTERED_BUSINESSES";
 
 /* ----- ACTIONS ----- */
 const getSingleBusinessAction = (business) => {
@@ -53,6 +54,13 @@ const editBusinessAction = (business) => {
 const searchBusinessesAction = (businesses) => {
   return {
     type: SEARCH_BUSINESSES,
+    businesses,
+  };
+};
+
+export const filteredBusinessAction = (businesses) => {
+  return {
+    type: FILTERED_BUSINESSES,
     businesses,
   };
 };
@@ -143,6 +151,7 @@ export const searchBusinessesThunk = (searchString) => async (dispatch) => {
 const initialState = {
   businesses: null,
   singleBusiness: null,
+  filteredBusinesses: null,
 };
 
 /* ----- REDUCER ----- */
@@ -168,10 +177,14 @@ const businessReducer = (state = initialState, action) => {
       return newState;
     case SEARCH_BUSINESSES:
       newState.businesses = action.businesses.businesses;
+      newState.filteredBusinesses = Object.values(action.businesses.businesses);
       return newState;
     case GET_ALL_BUSINESSES:
-        newState.businesses = action.businesses.businesses;
-        return newState;
+      newState.businesses = action.businesses.businesses;
+      return newState;
+    case FILTERED_BUSINESSES:
+      newState.filteredBusinesses = action.businesses;
+      return newState;
     default:
       return state;
   }

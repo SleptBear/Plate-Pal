@@ -12,6 +12,12 @@
 .business-search-map {
 }
 
+.business-search-clear-filter {
+  font-size: 14px;
+  color: rgba(2,122,151,1);
+  cursor: pointer;
+}
+
 /* Price filter styling */
 .business-search-price-filter > button {
   background-color: transparent;
