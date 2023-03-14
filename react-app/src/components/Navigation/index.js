@@ -24,17 +24,12 @@ function Navigation({ isLoaded }) {
         {isLoaded && sessionUser ? (
           <div className="nav-right-container">
             <li>
-              <NavLink exact to="/businesses/new">
+              <NavLink
+                className="nav-right-add-business"
+                exact
+                to="/businesses/new"
+              >
                 Add a Business
-              </NavLink>
-            </li>
-            <li>
-              {/* path needs to be updated,
-                  manual input of 1
-                  needs to go to page with suggested businesses for user to review
-              */}
-              <NavLink exact to="/businesses/1/reviews/new">
-                Write a Review
               </NavLink>
             </li>
             <li className="nav-right-login">
@@ -44,15 +39,11 @@ function Navigation({ isLoaded }) {
         ) : (
           <>
             <Link to="/login">
-              <button>
-                Log In
-              </button>
+              <button>Log In</button>
             </Link>
 
             <Link to="/signup">
-              <button>
-                Sign Up
-              </button>
+              <button>Sign Up</button>
             </Link>
           </>
         )}

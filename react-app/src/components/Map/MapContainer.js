@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react-17";
+import {
+  Map,
+  GoogleApiWrapper,
+  Marker,
+  InfoWindow,
+} from "google-maps-react-17";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { searchBusinessesThunk } from "../../store/businesses";
@@ -8,11 +13,10 @@ import "./mapcontainer.css";
 // const businesses = useSelector((state) => state.businesses.businesses);
 
 const MapContainer = ({ google, searchString }) => {
-  let businesses = useSelector((state) => state.businesses.businesses);
+  let businesses = useSelector((state) => state.businesses.filteredBusinesses);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [selected, setSelected] = useState(null)
-
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     dispatch(searchBusinessesThunk(searchString));
@@ -24,20 +28,20 @@ const MapContainer = ({ google, searchString }) => {
 
   // const { google } = this.props;
 
-  if (!businesses) {
-    return null;
-  }
+  // if (!businesses || Object.values(businesses).length < 1) return null
+  if (!businesses) return null;
 
   businesses = Object.values(businesses);
-
-
 
   return (
     <>
       <Map
         google={google}
         zoom={3}
-        initialCenter={{ lat: businesses[0].lat, lng: businesses[0].lng }} // San Francisco coordinates
+        initialCenter={{
+          lat: businesses[0]?.lat | 0,
+          lng: businesses[0]?.lng | 0,
+        }} // San Francisco coordinates
       >
         {businesses.map((business) => (
           <Marker
@@ -45,7 +49,9 @@ const MapContainer = ({ google, searchString }) => {
             title={business.name}
             name={business.name}
             position={{ lat: business.lat, lng: business.lng }}
-            onMouseover={() => { setSelected(business) }}
+            onMouseover={() => {
+              setSelected(business);
+            }}
           />
         ))}
         {console.log(selected)}
