@@ -16,7 +16,7 @@ const MapContainer = ({ google, searchString }) => {
 
   useEffect(() => {
     dispatch(searchBusinessesThunk(searchString));
-  }, [dispatch]);
+  }, [dispatch, selected]);
 
   const handleMarkerClick = (businessId) => {
     history.push(`/businesses/${businessId}`);
@@ -45,17 +45,21 @@ const MapContainer = ({ google, searchString }) => {
             title={business.name}
             name={business.name}
             position={{ lat: business.lat, lng: business.lng }}
-            onMouseover={() => {setSelected(business)}}
+            onMouseover={() => { setSelected(business) }}
           />
         ))}
         {console.log(selected)}
-        {selected ? (<InfoWindow position={{lat: selected.lat, lng:selected.lng}} visible={true} onCloseClick={() =>{
-          setSelected(null)
-        }}
-        onMouseover={false}>
-          <div onClick={history.push(`/businesses/${businessId}`)}>
+        {selected ? (<InfoWindow
+          position={{ lat: selected.lat, lng: selected.lng}}
+          visible={true}
+          onMouseover={false}
+          mapCenter={{ lat: selected.lat, lng: selected.lng }}
+          onCloseClick = {() => {
+            setSelected(null)
+          }}
+          >
+          <div >
             <h2>{selected.name}</h2>
-           {/* <button onClick={ history.push(`/businesses/${selected.id}`)}>CLICK</button> */}
             <h4>{selected.category}</h4>
             <br></br>
             <h3>{selected.avg_rating.toFixed(2)} ⭐</h3>
@@ -65,7 +69,7 @@ const MapContainer = ({ google, searchString }) => {
             <br></br>
 
           </div>
-          </InfoWindow>) : console.log('nothing selected')}
+        </InfoWindow>) : console.log('nothing selected')}
       </Map>
     </>
   );

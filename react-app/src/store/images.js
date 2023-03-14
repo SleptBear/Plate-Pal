@@ -81,6 +81,7 @@ export const getSingleImageThunk = (id) => async (dispatch) => {
     if (res.ok) {
         const image = await res.json();
         dispatch(getSingleImageAction(image));
+        return image
     }
 };
 
