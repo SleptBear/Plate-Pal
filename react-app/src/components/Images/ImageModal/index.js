@@ -6,7 +6,6 @@ import "./ImageModal.css";
 import { getSingleImageThunk } from "../../../store/images";
 
 function ImageModal({ imageId }) {
-    console.log(imageId)
     const dispatch = useDispatch();
     const image = useSelector(state => state.images.singleImage)
 

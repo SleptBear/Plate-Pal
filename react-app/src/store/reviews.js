@@ -110,13 +110,11 @@ export const getSingleReviewThunk = (reviewId) => async (dispatch) => {
 // Edit review by review id via current user
 export const editReviewThunk =
   (reviewId, reviewContent) => async (dispatch) => {
-    console.log("THUNK REVIEW CONTENT", reviewContent)
     const res = await fetch(`/api/reviews/${reviewId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reviewContent),
     });
-    console.log("RESOK??????", res.ok)
     if (res.ok) {
       const editedReview = await res.json();
       dispatch(editReviewAction(editedReview));

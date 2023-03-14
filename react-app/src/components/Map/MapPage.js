@@ -6,7 +6,6 @@ import './mapcontainer.css'
 
 
 export const MapPage = (props) => {
-  console.log(props.searchString)
   return (
     <div className='asdf'>
       <MapContainer className='asdfg'
