@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-// import postNewImageThunk? may need in onSubmit after editedReview returned
 import { getSingleReviewThunk, editReviewThunk } from "../../../store/reviews";
-import { getSingleBusinessThunk } from "../../../store/businesses";
 
 import "./ReviewEdit.css";
 
 const ReviewEdit = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const { reviewId } = useParams();
 
   const currentUser = useSelector((state) => state.session.user);
   const singleReview = useSelector((state) => state.reviews.singleReview);
 
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
   const [review, setReview] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   // star rating hover
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
-
-  // const business = useSelector((state) => state.businesses.singleBusiness);
-  // console.log(business);
 
   // repopulating input fields
   useEffect(() => {
@@ -34,7 +28,7 @@ const ReviewEdit = () => {
     const restoreReview = async () => {
       let restoreReview = await dispatch(getSingleReviewThunk(reviewId));
 
-      // redirect user to 404 custom page like Yelp's
+      // redirect user to 404 custom page like Yelp's?
       // if (!restoreReview) return history.push("/");
       // if (restoreReview?.owner_id !== currentUser.id) history.push("/");
 
@@ -52,27 +46,29 @@ const ReviewEdit = () => {
 
     setHasSubmitted(true);
 
-    if (Object.values(errors).length > 0) return;
+    if (errors.length) return;
 
     const reviewContent = {
       review,
       stars,
     };
 
-    let editedReview = await dispatch(editReviewThunk(reviewId, reviewContent));
+    let response = await dispatch(editReviewThunk(reviewId, reviewContent));
 
-    if (editedReview) {
-      history.push(`/businesses/${editedReview.business_id}`);
+    if (Array.isArray(response)) setErrors(response);
+
+    if (!Array.isArray(response)) {
+      history.push(`/businesses/${singleReview.business_id}`);
     }
   };
 
-  // handle frontend error validations
+  // handle error validations frontend
   useEffect(() => {
-    const valErrors = {};
+    let valErrors = [];
 
-    if (review?.length < 1) valErrors.review = "Review description is required";
+    if (review?.length < 1) valErrors.push("Review description is required");
     if (stars < 1 || stars > 5)
-      valErrors.stars = "Star ratings must be between 1-5";
+      valErrors.push("Star ratings must be between 1-5");
 
     setErrors(valErrors);
   }, [review, stars]);
@@ -84,9 +80,16 @@ const ReviewEdit = () => {
     <div>
       <form className="edit-review-container" onSubmit={onSubmit}>
         <br></br>
-        <h3>Business Name</h3>
+        <h3>{singleReview.business_name}</h3>
         <br></br>
-        <ul>{/* map errors */}</ul>
+        <ul>
+          {hasSubmitted &&
+            errors.map((error, idx) => (
+              <li style={{ color: "red" }} key={idx}>
+                {error}
+              </li>
+            ))}
+        </ul>
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
@@ -106,7 +109,6 @@ const ReviewEdit = () => {
               </button>
             );
           })}
-          <span style={{ color: "red" }}>{hasSubmitted && errors.stars}</span>
         </div>
         <br></br>
         <div>
@@ -118,12 +120,6 @@ const ReviewEdit = () => {
             onChange={(e) => setReview(e.target.value)}
           ></textarea>
         </div>
-        <span style={{ color: "red" }}>{hasSubmitted && errors.review}</span>
-
-        <span>Attach Photos</span>
-        <span>URL - Need update - functionality</span>
-        <input></input>
-
         <br></br>
         <button className="update-review-post-button">Update Review</button>
       </form>

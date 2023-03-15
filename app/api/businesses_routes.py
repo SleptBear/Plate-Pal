@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Business, Review, Image
+from app.models import db, Business, Review, Image, User
 from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
 from app.forms.businesses_form import BusinessForm
@@ -44,7 +44,7 @@ def get_business_details(id):
 
     if not business:
         return {
-            "message": "Business couldn't be found",
+            "errors": "Business couldn't be found",
             "status_code": 404
         }, 404
 
@@ -75,10 +75,17 @@ def get_business_reviews(id):
     business_reviews = [review.to_dict() for review in review_query.all()]
 
     for review in business_reviews:
+        owner = User.query.get(review["owner_id"])
+        images_count=len(owner.images)
+        owner=owner.to_dict()
         images_query = db.session.query(Image).filter(
             Image.review_id == review['id'])
         images = images_query.all()
+        review["images_length"] = len(images)
         review['images'] = [image.to_dict() for image in images]
+        review['owner_first_name'] = owner["first_name"]
+        review['owner_last_name'] = owner["last_name"]
+        review["owner_images_count"] = images_count
 
     return {"businessReviews": {review['id']: review for review in business_reviews}}
 
@@ -120,17 +127,15 @@ def create_new_business():
 @business_routes.route('/<int:id>/reviews', methods=['POST'])
 @login_required
 def create_new_review(id):
-
     business = Business.query.get(id)
     if not business:
         return {
-            "message": "Business couldn't be found",
+            "errors": ["Business couldn't be found"],
             "status_code": 404
         }, 404
-
-    if business.id == int(current_user.get_id()).id:
+    if business.to_dict()["owner_id"] == int(current_user.get_id()):
         return {
-            "message": "Forbidden",
+            "errors": ["Unable to write a review for your own business"],
             "status_code": 403
         }, 403
 
@@ -139,7 +144,7 @@ def create_new_review(id):
     user_business_reviews = review_query.all()
     if len(user_business_reviews) > 0:
         return {
-            "message": "User already has a review for this business",
+            "errors": ["User already has a review for this business"],
             "status_code": 403
         }, 403
 
@@ -171,7 +176,7 @@ def create_new_image(id):
     business = Business.query.get(id)
     if not business:
         return {
-            "message": "Business couldn't be found",
+            "errors": "Business couldn't be found",
             "status_code": 404
         }, 404
 
@@ -204,7 +209,7 @@ def update_business(id):
     business = Business.query.get(id)
     if not business:
         return {
-            "message": "Business couldn't be found",
+            "errors": "Business couldn't be found",
             "status_code": 404
         }, 404
 
@@ -229,7 +234,7 @@ def update_business(id):
 
     else:
         {
-            "message": "Forbidden",
+            "errors": "Forbidden",
             "status_code": 403
         }, 403
 
@@ -241,7 +246,7 @@ def delete_business(id):
 
     if not business:
         return {
-            "message": "Business couldn't be found",
+            "errors": "Business couldn't be found",
             "status_code": 404
         }, 404
 
@@ -249,12 +254,12 @@ def delete_business(id):
         db.session.delete(business)
         db.session.commit()
         return {
-            "message": "Successfully deleted",
+            "errors": "Successfully deleted",
             "status_code": 200
         }
     else:
         return {
-            "message": "Forbidden",
+            "errors": "Forbidden",
             "status_code": 403
         }, 403
 
@@ -289,7 +294,7 @@ def search_businesses():
             business_reviews = review_query.all()
             stars = [review.stars for review in business_reviews]
             if len(business_reviews) > 0:
-                avg_rating = sum(stars) / len(business_reviews) 
+                avg_rating = sum(stars) / len(business_reviews)
             else:
                 avg_rating = 0
             business['avg_rating'] = avg_rating
@@ -298,19 +303,3 @@ def search_businesses():
         return {'businesses': {business["id"]: business for business in businesses}}
 
     return {'businesses': {}}
-#     # Perform case-insensitive search on name, category, address, city, state, and zipcode fields of Business model
-
-
-#     # Join Review model to Business model and perform search on review field
-#     businesses_query = businesses_query.join(Review).filter(
-#         Review.review.ilike(f'%{search_query}%')
-#     )
-
-#     businesses = [business.to_dict() for business in businesses_query.all()]
-
-#     for business in businesses:
-#         images_query = db.session.query(Image).filter(Image.business_id == business["id"])
-#         images = images_query.all()
-#         business["images"] = [image.to_dict() for image in images]
-
-#     return {'businesses': {business["id"]: business for business in businesses}}

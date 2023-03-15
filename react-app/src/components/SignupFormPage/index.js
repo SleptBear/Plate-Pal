@@ -33,6 +33,8 @@ function SignupFormPage() {
     }
   };
 
+  console.log(errors)
+
   return (
     <>
       <form className="sign-up-page-container" onSubmit={handleSubmit}>
@@ -61,7 +63,7 @@ function SignupFormPage() {
           />
         </div>
         <input
-          type="text"
+          type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

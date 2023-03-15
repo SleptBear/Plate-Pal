@@ -28,15 +28,13 @@ const MapContainer = ({ google, searchString }) => {
     history.push(`/businesses/${businessId}`);
   };
 
-
   // if (!businesses || Object.values(businesses).length < 1) return null
   if (!businesses) return null;
 
   businesses = Object.values(businesses);
 
   return (
-    <>
-    <div></div>
+    <div className="maps-container">
       <Map
         google={google}
         zoom={3}
@@ -57,7 +55,6 @@ const MapContainer = ({ google, searchString }) => {
             }}
           />
         ))}
-        {console.log(selected)}
         {/* {selected && (
           <InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}
@@ -88,37 +85,37 @@ const MapContainer = ({ google, searchString }) => {
             </div>
           </InfoWindow>
         )} */}
-       {selected && (
-  <div
-    style={{
-      position: "fixed",
-      color: "black",
-      top: "17%",
-      left: "30%",
-      zIndex: 2,
-      backgroundColor: "white",
-      padding: "10px",
-      borderRadius: "5px",
-      boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
-      cursor: "pointer",
-    }}
-    onClick={() => {
-      history.push(`/businesses/${selected.id}`);
-    }}
-  >
-    <h2>{selected.name}</h2>
+        {selected && (
+          <div
+            style={{
+              position: "fixed",
+              color: "black",
+              top: "17%",
+              left: "30%",
+              zIndex: 2,
+              backgroundColor: "white",
+              padding: "10px",
+              borderRadius: "5px",
+              boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              history.push(`/businesses/${selected.id}`);
+            }}
+          >
+            <h2>{selected.name}</h2>
 
-              <h4>{selected.category}</h4>
-              <br />
-              <h3>{selected.avg_rating.toFixed(2)} ⭐</h3>
-              <br />
-              <img src={selected.images[0].url} width="120" height="100" />
-              <br />
-              <br />
-  </div>
-)}
+            <h4>{selected.category}</h4>
+            <br />
+            <h3>{selected.avg_rating.toFixed(2)} ⭐</h3>
+            <br />
+            <img src={selected.images[0].url} width="120" height="100" />
+            <br />
+            <br />
+          </div>
+        )}
       </Map>
-    </>
+    </div>
   );
 };
 

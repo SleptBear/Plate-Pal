@@ -96,6 +96,7 @@
   /* border-bottom: 2px solid grey; */
   background-color: white;
   z-index: 1;
+  border-bottom: solid 1px rgba(128, 128, 128, 0.171);
 }
 
 /* ul parent containing the logo & menu button */

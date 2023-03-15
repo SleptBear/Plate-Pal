@@ -112,12 +112,15 @@ export const postBusinessThunk = (newBusiness) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newBusiness),
   });
-
   if (res.ok) {
     const createdBusiness = await res.json();
     dispatch(postBusinessAction(createdBusiness));
-
     return createdBusiness;
+  } else if (res.status < 500) {
+    const data = await res.json();
+    return data;
+  } else {
+    return {"errors": "A server error occurred. Please try again."};
   }
 };
 
@@ -134,6 +137,13 @@ export const editBusinessThunk =
       const editedBusiness = await res.json();
       dispatch(editBusinessAction(editedBusiness));
       return editedBusiness;
+    } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+        return data;
+      }
+    } else {
+      return {"errors": "A server error occurred. Please try again."};
     }
   };
 

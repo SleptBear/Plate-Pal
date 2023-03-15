@@ -106,7 +106,7 @@
   margin-bottom: 1rem;
   }
 
-  .business-form-price-container button {
+  /* .business-form-price-container button {
   font-size: 1.5rem;
   margin-right: 0.5rem;
   background-color: #fff;
@@ -137,7 +137,7 @@
 
   .business-form-price-container button.off {
   opacity: 0.6;
-  }
+  } */
 
   .places-autocomplete-container {
   width: 100%;

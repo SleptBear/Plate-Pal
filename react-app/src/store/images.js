@@ -35,14 +35,13 @@ const deleteImageAction = (id) => {
         type: DELETE_IMAGE,
         id,
     };
-  };
+};
 
 /* ----- THUNKS ----- */
 
 // Post new image by business id for current user
 export const postImageThunk =
     (newImage, businessId) => async (dispatch) => {
-        console.log(JSON.stringify(newImage))
         const res = await fetch(`/api/businesses/${businessId}/images`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -51,9 +50,16 @@ export const postImageThunk =
 
         if (res.ok) {
             const createdImage = await res.json();
+            console.log(createdImage)
             dispatch(postImageAction(createdImage));
             dispatch(getSingleBusinessThunk(businessId));
             return createdImage;
+        } else if (res.status < 500) {
+            const data = await res.json();
+            console.log(data)
+            return data
+        } else {
+            return {"errors": "A server error occurred. Please try again."};
         }
     };
 
@@ -65,7 +71,7 @@ export const deleteImageThunk = (imageId) => async (dispatch) => {
     if (res.ok) {
         dispatch(deleteImageAction(imageId));
     }
-  };
+};
 
 // Display all user images at manage images page
 export const getImagesThunk = () => async (dispatch) => {

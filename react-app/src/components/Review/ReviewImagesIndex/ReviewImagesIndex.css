@@ -1,4 +1,4 @@
-.manage-images-index-container {
+.review-images-index-container {
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -6,17 +6,17 @@
     margin: auto;
 }
 
-.manage-images-index-grid {
+.review-images-index-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 10px;
     width: 100%;
 }
 
-.manage-images-index-title {
+.review-images-index-title {
     align-self: flex-start;
 }
-.manage-images-index-grid img {
+.review-images-index-grid img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -26,7 +26,7 @@
     transition-property: filter;
 }
 
-.manage-images-index-grid img:hover {
+.review-images-index-grid img:hover {
     filter: opacity(100%);
     box-shadow: 2px 2px 2px gray;
 }

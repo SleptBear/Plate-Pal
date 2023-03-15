@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./ReviewCard.css";
-import starCalculator from "../../Business/BusinessSearched/StarCalculator";
+import StarCalculator from "../../Business/BusinessSearched/StarCalculator";
 
 const ReviewCard = ({ item }) => {
   return (
