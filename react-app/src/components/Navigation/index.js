@@ -39,13 +39,9 @@ function Navigation({ isLoaded }) {
           </div>
         ) : (
           <div className="login-signup-css">
-            <Link to="/login">
-              <button className="login-button">Log In</button>
-            </Link>
+              <button className="login-button" onClick={()=>{history.push('/login')}}>Log In</button>
 
-            <Link to="/signup">
-              <button className="signup-button">Sign Up</button>
-            </Link>
+              <button className="signup-button" onClick={()=>{history.push('/signup')}}>Sign Up</button>
           </div>
         )}
       </ul>
