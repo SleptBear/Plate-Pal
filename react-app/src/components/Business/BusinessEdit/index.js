@@ -116,12 +116,12 @@ const BusinessEdit = () => {
       hours_of_operation: hours_of_operation,
     };
 
-    let editedBusiness = await dispatch(
+    let response = await dispatch(
       editBusinessThunk(businessContent, businessId)
     );
 
-    if (editedBusiness) {
-      history.push(`/businesses/${editedBusiness.id}`);
+    if (!response.errors) {
+      history.push(`/businesses/${response.id}`);
     }
   };
 
