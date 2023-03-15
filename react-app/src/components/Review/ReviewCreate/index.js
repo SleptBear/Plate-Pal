@@ -21,7 +21,6 @@ const ReviewCreate = () => {
   }, [dispatch]);
 
   const [review, setReview] = useState("");
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [imageURL, setImageURL] = useState("");
   const [imageCaption, setImageCaption] = useState("");
 
@@ -29,28 +28,8 @@ const ReviewCreate = () => {
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
 
-  useEffect(() => {
-    // const valErrors = {};
-    // if (stars < 1 || stars > 5) valErrors.stars = "Stars rating is required";
-    // if (review.length < 1) valErrors.reviewMissing = "Review text is required";
-    // if (review.length > 1000)
-    //   valErrors.reviewLength = "Maximum characters for review is 1000";
-    // const checkImageURL = (imageURL) => {
-    //   return (
-    //     !imageURL.endsWith(".png") &&
-    //     !imageURL.endsWith(".jpg") &&
-    //     !imageURL.endsWith(".jpeg")
-    //   );
-    // };
-    // if (imageURL && checkImageURL(imageURL))
-    //   valErrors.imageURL = "Image URL must end in .png, .jpg, or .jpeg";
-    // setErrors(valErrors);
-  }, [stars, review, imageURL]);
-
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    setHasSubmitted(true);
 
     const newReview = {
       review,

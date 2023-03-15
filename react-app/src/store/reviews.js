@@ -133,14 +133,15 @@ export const editReviewThunk =
         if (res.ok) {
             const editedReview = await res.json();
             dispatch(editReviewAction(editedReview));
-            return null;
+            dispatch(getSingleBusinessThunk(editedReview.business_id))
+            return editedReview;
         } else if (res.status < 500) {
             const data = await res.json();
             if (data.errors) {
                 return data.errors;
             }
         } else {
-            return {"errors": "A server error occurred. Please try again."};
+            return {"errors": ["A server error occurred. Please try again."]};
         }
     };
 
