@@ -45,41 +45,44 @@ function ProfileButton({ user }) {
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
+          <div className="user-drop-down-menu">
             {/* <li>{user.username}</li> */}
-            <li>
+            <li className="user-drop-down-name">
               {user.first_name} {`${user.last_name[0]}.`}
             </li>
             {/* <li>{user.email}</li> */}
             <hr></hr>
+            <br></br>
             <li>
-              <NavLink to="/businesses/current">Manage Businesses</NavLink>
+              <NavLink className="manage-user-items" to="/businesses/current">
+                Manage Businesses
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/reviews/current">Manage Reviews</NavLink>
+              <NavLink className="manage-user-items" to="/reviews/current">
+                Manage Reviews
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/images/current">Manage Images</NavLink>
+              <NavLink className="manage-user-items" to="/images/current">
+                Manage Images
+              </NavLink>
             </li>
+            <br></br>
             <hr></hr>
-            <li>
-              <button className="button-logout" onClick={handleLogout}>
-                Log Out
-              </button>
-            </li>
-          </>
+            <br></br>
+            <button className="button-logout" onClick={handleLogout}>
+              Log Out
+            </button>
+          </div>
         ) : (
           <>
             <Link to="/login">
-              <button>
-                Log In
-              </button>
+              <button>Log In</button>
             </Link>
 
             <Link to="/signup">
-              <button>
-                Sign Up
-              </button>
+              <button>Sign Up</button>
             </Link>
           </>
         )}

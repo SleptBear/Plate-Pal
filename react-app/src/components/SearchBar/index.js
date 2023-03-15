@@ -25,11 +25,13 @@ const SearchBar = () => {
         <input
           className="search-container-input"
           type="text"
-          placeholder="American, dinner, price"
+          placeholder="American, dinner, cafe"
           value={searchString}
           onChange={(e) => setSearchString(e.target.value)}
         ></input>
-        <button type="submit">&#x1F50D;</button>
+        <button className="magnifying-css" type="submit">
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
       </form>
     </div>
   );

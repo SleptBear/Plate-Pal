@@ -29,7 +29,11 @@ const ActivityIndex = () => {
   return (
     <div className="root-activities-container">
       <img className="banner-image" src={banner} alt="logo"></img>
+      <br></br>
+      <br></br>
       <h2>Recent Activity</h2>
+      <br></br>
+      <br></br>
       <div className="activities-container">
         {activities.map((item) => {
           if (item.stars) {

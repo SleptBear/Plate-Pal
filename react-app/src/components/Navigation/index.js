@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
           </NavLink>
         </li>
         <li className="nav-search-bar">
-          <SearchBar />
+          <SearchBar className="search-bar-css" />
         </li>
         {isLoaded && sessionUser ? (
           <div className="nav-right-container">
@@ -38,17 +38,15 @@ function Navigation({ isLoaded }) {
             </li>
           </div>
         ) : (
-          <>
-
+          <div className="login-signup-css">
             <Link to="/login">
-            <button>Log in</button>
+              <button className="login-button">Log In</button>
             </Link>
-
 
             <Link to="/signup">
-              <button>Sign Up</button>
+              <button className="signup-button">Sign Up</button>
             </Link>
-          </>
+          </div>
         )}
       </ul>
     </nav>
