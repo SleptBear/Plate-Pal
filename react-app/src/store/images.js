@@ -42,7 +42,6 @@ const deleteImageAction = (id) => {
 // Post new image by business id for current user
 export const postImageThunk =
     (newImage, businessId) => async (dispatch) => {
-        console.log(JSON.stringify(newImage))
         const res = await fetch(`/api/businesses/${businessId}/images`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -51,14 +50,14 @@ export const postImageThunk =
 
         if (res.ok) {
             const createdImage = await res.json();
+            console.log(createdImage)
             dispatch(postImageAction(createdImage));
             dispatch(getSingleBusinessThunk(businessId));
             return createdImage;
         } else if (res.status < 500) {
             const data = await res.json();
-            if (data.errors) {
-                return data;
-            }
+            console.log(data)
+            return data
         } else {
             return ["An error occurred. Please try again."];
         }

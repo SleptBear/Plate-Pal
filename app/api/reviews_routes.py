@@ -31,7 +31,7 @@ def get_review_details(id):
     review = Review.query.get(id).to_dict()
     if not review:
         return {
-            "message": "Review couldn't be found",
+            "errors": "Review couldn't be found",
             "status_code": 404
         }, 404
 
@@ -49,12 +49,15 @@ def create_new_image(id):
     review = Review.query.get(id)
     if not review:
         return {
-            "message": "Review couldn't be found",
+            "errors": "Review couldn't be found",
             "status_code": 404
         }, 404
 
     if int(current_user.get_id()) != review.owner_id:
-        return "Image was unable to be added", 403
+        return {
+            "errors": "Forbidden",
+            "status_code": 403
+        }, 403
 
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -85,7 +88,7 @@ def update_review(id):
     review = Review.query.get(id)
     if not review:
         return {
-            "message": "Review couldn't be found",
+            "errors": "Review couldn't be found",
             "status_code": 404
         }, 404
 
@@ -99,7 +102,7 @@ def update_review(id):
 
     else:
         return {
-            "message": "Forbidden",
+            "errors": "Forbidden",
             "status_code": 403
         }, 403
 
@@ -111,13 +114,13 @@ def delete_review(id):
     review = Review.query.get(id)
     if not review:
         return {
-            "message": "Review couldn't be found",
+            "errors": "Review couldn't be found",
             "status_code": 404
         }, 404
 
     if int(current_user.get_id()) != review.owner_id:
         return {
-            "message": "Forbidden",
+            "errors": "Forbidden",
             "status_code": 403
         }, 403
 
