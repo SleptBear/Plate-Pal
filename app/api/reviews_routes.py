@@ -93,7 +93,7 @@ def update_review(id):
     review = Review.query.get(id)
     if not review:
         return {
-            "errors": "Review couldn't be found",
+            "errors": ["Review couldn't be found"],
             "status_code": 404
         }, 404
 
@@ -107,7 +107,7 @@ def update_review(id):
 
     else:
         return {
-            "errors": "Forbidden",
+            "errors": ["You are not allowed to edit this review"],
             "status_code": 403
         }, 403
 

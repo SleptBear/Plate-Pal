@@ -51,6 +51,9 @@ const BusinessDetail = () => {
         <Link to={`/businesses/${business.id}/images`} >
         <button>{`See all ${business.images.length} photos`}</button>
         </Link>
+        <Link to={`/businesses/${business.id}/reviews/new`}>
+        <button>Write a Review</button>
+        </Link>
       </div>
 
       <div>

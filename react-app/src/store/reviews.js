@@ -7,6 +7,7 @@ const POST_REVIEW = "reviews/POST_REVIEW";
 const DELETE_REVIEW = "reviews/DELETE_REVIEW";
 const GET_SINGLE_REVIEW = "reviews/GET_SINGLE_REVIEW";
 const EDIT_REVIEW = "reviews/EDIT_REVIEW";
+const POST_REVIEW_IMAGE = "reviews/POST_REVIEW_IMAGE"
 
 /* ----- ACTIONS ----- */
 const getBusinessReviewsAction = (reviews) => {
@@ -51,6 +52,13 @@ const editReviewAction = (review) => {
     };
 };
 
+const postReviewImageAction = (reviewImage) => {
+    return {
+        type: POST_REVIEW_IMAGE,
+        reviewImage
+    }
+}
+
 /* ----- THUNKS ----- */
 
 // Display all business reviews at business detail page
@@ -93,14 +101,14 @@ export const postReviewThunk = (newReview, businessId) => async (dispatch) => {
         const createdReview = await res.json();
         dispatch(postReviewAction(createdReview));
         dispatch(getSingleBusinessThunk(businessId));
-        return null;
+        return createdReview;
     } else if (res.status < 500) {
         const data = await res.json();
         if (data.errors) {
             return data.errors;
         }
     } else {
-        return {"errors": "A server error occurred. Please try again."};
+        return {"errors": ["A server error occurred. Please try again."]};
     }
 };
 
@@ -125,16 +133,26 @@ export const editReviewThunk =
         if (res.ok) {
             const editedReview = await res.json();
             dispatch(editReviewAction(editedReview));
-            return null;
+            dispatch(getSingleBusinessThunk(editedReview.business_id))
+            return editedReview;
         } else if (res.status < 500) {
             const data = await res.json();
             if (data.errors) {
                 return data.errors;
             }
         } else {
-            return {"errors": "A server error occurred. Please try again."};
+            return {"errors": ["A server error occurred. Please try again."]};
         }
     };
+
+export const postReviewImageThunk = (imageContent, reviewId) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${reviewId}/images`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(imageContent)
+    })
+    // no need for res.ok, image is associated to image backend, state will update after user creates review + adds image to it
+}
 
 /* ----- INITIAL STATE ----- */
 const initialState = {
