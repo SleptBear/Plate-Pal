@@ -33,11 +33,11 @@ const ReviewCreate = () => {
       stars,
     };
 
-    let createdReview = await dispatch(
+    let errors = await dispatch(
       postReviewThunk(newReview, businessId, user)
     );
 
-    if (createdReview) {
+    if (!errors) {
       history.push(`/businesses/${businessId}`);
     }
   };

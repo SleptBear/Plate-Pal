@@ -35,7 +35,7 @@ const deleteImageAction = (id) => {
         type: DELETE_IMAGE,
         id,
     };
-  };
+};
 
 /* ----- THUNKS ----- */
 
@@ -54,6 +54,13 @@ export const postImageThunk =
             dispatch(postImageAction(createdImage));
             dispatch(getSingleBusinessThunk(businessId));
             return createdImage;
+        } else if (res.status < 500) {
+            const data = await res.json();
+            if (data.errors) {
+                return data;
+            }
+        } else {
+            return ["An error occurred. Please try again."];
         }
     };
 
@@ -65,7 +72,7 @@ export const deleteImageThunk = (imageId) => async (dispatch) => {
     if (res.ok) {
         dispatch(deleteImageAction(imageId));
     }
-  };
+};
 
 // Display all user images at manage images page
 export const getImagesThunk = () => async (dispatch) => {

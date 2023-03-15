@@ -59,10 +59,10 @@ const ReviewEdit = () => {
       stars,
     };
 
-    let editedReview = await dispatch(editReviewThunk(reviewId, reviewContent));
+    let errors = await dispatch(editReviewThunk(reviewId, reviewContent));
 
-    if (editedReview) {
-      history.push(`/businesses/${editedReview.business_id}`);
+    if (!errors) {
+      history.push(`/businesses/${singleReview.business_id}`);
     }
   };
 

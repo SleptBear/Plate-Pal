@@ -120,15 +120,16 @@ def create_new_business():
 @business_routes.route('/<int:id>/reviews', methods=['POST'])
 @login_required
 def create_new_review(id):
-
+    print('??????', id)
     business = Business.query.get(id)
+    print("BUSINESS", business.to_dict())
     if not business:
         return {
             "message": "Business couldn't be found",
             "status_code": 404
         }, 404
-
-    if business.id == int(current_user.get_id()).id:
+    print("USERID", current_user.get_id())
+    if business.to_dict()["owner_id"] == int(current_user.get_id()):
         return {
             "message": "Forbidden",
             "status_code": 403
@@ -289,7 +290,7 @@ def search_businesses():
             business_reviews = review_query.all()
             stars = [review.stars for review in business_reviews]
             if len(business_reviews) > 0:
-                avg_rating = sum(stars) / len(business_reviews) 
+                avg_rating = sum(stars) / len(business_reviews)
             else:
                 avg_rating = 0
             business['avg_rating'] = avg_rating

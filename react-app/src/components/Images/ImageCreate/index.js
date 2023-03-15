@@ -24,10 +24,10 @@ const ImageCreate = () => {
             caption,
         };
 
-        let createdImage = await dispatch(postImageThunk(newImage, businessId));
+        let response = await dispatch(postImageThunk(newImage, businessId));
 
-        if (createdImage) {
-            history.push(`/images/${createdImage.id}`);
+        if (!response.errors) {
+            history.push(`/businesses/${response.business_id}/photos`);
         }
     };
 
