@@ -81,16 +81,16 @@ function ImageModal({ imageId, index }) {
     }
 
     const leftIndexChecker = () => {
-        if (relatedIndex === 1){
+        if (relatedIndex === 1) {
             return (
                 <div className="image-modal-image-container-arrow-placeholder">
                 </div>
             )
         }
-        else{
+        else {
             return (
                 <div className="image-modal-image-container-arrow-left"
-                onClick={handleLeftArrowClick}></div>
+                    onClick={handleLeftArrowClick}></div>
             )
         }
     }
@@ -116,26 +116,28 @@ function ImageModal({ imageId, index }) {
     }
 
     const rightIndexChecker = () => {
-        if (relatedIndex === images.length){
+        if (relatedIndex === images.length) {
             return (
                 <div className="image-modal-image-container-arrow-placeholder">
                 </div>
             )
         }
-        else{
+        else {
             return (
                 <div className="image-modal-image-container-arrow-right"
-                onClick={handleRightArrowClick}></div>
+                    onClick={handleRightArrowClick}></div>
             )
         }
     }
 
     return (
         <div className="image-modal-container">
-            <div className="image-modal-image-container">
-                {leftIndexChecker()}
-                <img className="image-modal-image-singleImage" src={image.url} />
-                {rightIndexChecker()}
+            <div className="image-modal-image-wrapper">
+                <div className="image-modal-image-container" style={{"background-image": `url(${image.url})` }}>
+                    {leftIndexChecker()}
+                    <div className="image-modal-image-singleImage" ></div>
+                    {rightIndexChecker()}
+                </div>
             </div>
             <div className="image-modal-information-container">
                 <h2>{`Photos for ${image.business_name}`}</h2>
