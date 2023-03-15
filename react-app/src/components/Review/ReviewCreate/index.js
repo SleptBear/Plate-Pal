@@ -13,7 +13,11 @@ const ReviewCreate = () => {
   const { businessId } = useParams();
 
   const user = useSelector((state) => state.session.user);
-  const business = useSelector((state) => state.business);
+  const business = useSelector((state) => state.businesses.singleBusiness);
+
+  useEffect(() => {
+    dispatch(getSingleBusinessThunk(businessId));
+  }, [dispatch]);
 
   const [review, setReview] = useState("");
 
@@ -38,13 +42,19 @@ const ReviewCreate = () => {
     }
   };
 
+  if (!business) return null;
+
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form className="create-review-container" onSubmit={onSubmit}>
+        <br></br>
+        <h3>{business.name}</h3>
+        <br></br>
         <ul>{/* map errors */}</ul>
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
+          <span>{`Select your rating: `}</span>
           {[...Array(5)].map((star, index) => {
             index += 1;
             return (
@@ -60,15 +70,19 @@ const ReviewCreate = () => {
               </button>
             );
           })}
-          <span>{` Select your rating`}</span>
         </div>
+        <br></br>
         <div>
-          <textarea placeholder="Leave a review here"></textarea>
+          <textarea
+            className="create-review-textarea"
+            placeholder="Leave a review here"
+          ></textarea>
         </div>
-        <div>
-          <span>Attach Photos</span>
-        </div>
-        <button>Post Review</button>
+        <span>Attach Photos</span>
+        <span>URL - needs functionality</span>
+        <input></input>
+        <br></br>
+        <button className="create-review-post-button">Post Review</button>
       </form>
     </div>
   );

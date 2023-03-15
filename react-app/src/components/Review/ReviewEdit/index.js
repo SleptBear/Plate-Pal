@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 // import postNewImageThunk? may need in onSubmit after editedReview returned
 import { getSingleReviewThunk, editReviewThunk } from "../../../store/reviews";
+import { getSingleBusinessThunk } from "../../../store/businesses";
 
 import "./ReviewEdit.css";
 
@@ -22,6 +23,9 @@ const ReviewEdit = () => {
   // star rating hover
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
+
+  // const business = useSelector((state) => state.businesses.singleBusiness);
+  // console.log(business);
 
   // repopulating input fields
   useEffect(() => {
@@ -78,11 +82,15 @@ const ReviewEdit = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form className="edit-review-container" onSubmit={onSubmit}>
+        <br></br>
+        <h3>Business Name</h3>
+        <br></br>
         <ul>{/* map errors */}</ul>
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
+          <span>{` Select your rating: `}</span>
           {[...Array(5)].map((star, index) => {
             index += 1;
             return (
@@ -98,22 +106,26 @@ const ReviewEdit = () => {
               </button>
             );
           })}
-          <span>{` Select your rating`}</span>
           <span style={{ color: "red" }}>{hasSubmitted && errors.stars}</span>
         </div>
+        <br></br>
         <div>
           <textarea
             placeholder="Leave a review here"
+            className="edit-review-textarea"
             type="textarea"
             value={review}
             onChange={(e) => setReview(e.target.value)}
           ></textarea>
         </div>
         <span style={{ color: "red" }}>{hasSubmitted && errors.review}</span>
-        <div>
-          <span>Attach Photos</span>
-        </div>
-        <button>Update Review</button>
+
+        <span>Attach Photos</span>
+        <span>URL - Need update - functionality</span>
+        <input></input>
+
+        <br></br>
+        <button className="update-review-post-button">Update Review</button>
       </form>
     </div>
   );
