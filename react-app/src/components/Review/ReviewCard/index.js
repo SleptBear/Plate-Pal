@@ -11,9 +11,9 @@ const ReviewCard = ({ review }) => {
   const handleImageClick = async (e) => {
     const images = {}
     review.images.forEach(review => {
-        images[review.id] = review;
+      images[review.id] = review;
     });
-    await dispatch(getImagesAction({"images": images}))
+    await dispatch(getImagesAction({ "images": images }))
   }
 
   return (
@@ -24,30 +24,18 @@ const ReviewCard = ({ review }) => {
       </Link>
       {/* new review open */}
       <div>
-        <OpenModalImage
-          imageUrl={review.images[0]?.url}
-          modalComponent={<ImageModal imageId={review.images[0]?.id} />}
-          onImageClick={() => {handleImageClick()}}
-        >
-        </OpenModalImage>
-        <OpenModalImage
-          imageUrl={review.images[1]?.url}
-          modalComponent={<ImageModal imageId={review.images[1]?.id} />}
-          onImageClick={() => {handleImageClick()}}
-        >
-        </OpenModalImage>
-        <OpenModalImage
-          imageUrl={review.images[2]?.url}
-          modalComponent={<ImageModal imageId={review.images[2]?.id} />}
-          onImageClick={() => {handleImageClick()}}
-        >
-        </OpenModalImage>
-        <OpenModalImage
-          imageUrl={review.images[3]?.url}
-          modalComponent={<ImageModal imageId={review.images[3]?.id} />}
-          onImageClick={() => {handleImageClick()}}
-        >
-        </OpenModalImage>
+        <Link to={`/reviews/${review.id}/images`}>
+          <img src={review.images[0]?.url}></img>
+        </Link>
+        <Link to={`/reviews/${review.id}/images`}>
+          <img src={review.images[1]?.url}></img>
+        </Link>
+        <Link to={`/reviews/${review.id}/images`}>
+          <img src={review.images[2]?.url}></img>
+        </Link>
+        <Link to={`/reviews/${review.id}/images`}>
+          <img src={review.images[3]?.url}></img>
+        </Link>
       </div>
 
       {/* category */}

@@ -22,6 +22,7 @@ import BusinessAll from "./components/Business/BusinessAll";
 import BusinessSearched from "./components/Business/BusinessSearched";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import BusinessImagesIndex from "./components/Business/BusinessImagesIndex";
+import ReviewImagesIndex from "./components/Review/ReviewImagesIndex";
 
 function App() {
   const dispatch = useDispatch();
@@ -77,7 +78,9 @@ function App() {
             <BusinessImagesIndex />
           </Route>
           <Route exact path="/businesses/:businessId/images/new">
-            <ImageCreate />
+            <ProtectedRoute>
+              <ImageCreate />
+            </ProtectedRoute>
           </Route>
           <Route path="/businesses/:businessId/edit">
             <ProtectedRoute>
@@ -94,11 +97,15 @@ function App() {
               <ReviewEdit />
             </ProtectedRoute>
           </Route>
+          <Route path='/reviews/:reviewId/images'>
+            <ReviewImagesIndex />
+          </Route>
           <Route path="/reviews/:reviewId/delete">
             <ProtectedRoute>
               <ReviewDelete />
             </ProtectedRoute>
           </Route>
+
           <Route path="/images/current">
             <ProtectedRoute>
               <ManageImagesIndex />

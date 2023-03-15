@@ -100,7 +100,7 @@ export const postReviewThunk = (newReview, businessId) => async (dispatch) => {
             return data.errors;
         }
     } else {
-        return ["An error occurred. Please try again."];
+        return {"errors": "A server error occurred. Please try again."};
     }
 };
 
@@ -132,7 +132,7 @@ export const editReviewThunk =
                 return data.errors;
             }
         } else {
-            return ["An error occurred. Please try again."];
+            return {"errors": "A server error occurred. Please try again."};
         }
     };
 

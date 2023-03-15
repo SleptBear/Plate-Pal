@@ -59,7 +59,7 @@ export const postImageThunk =
             console.log(data)
             return data
         } else {
-            return ["An error occurred. Please try again."];
+            return {"errors": "A server error occurred. Please try again."};
         }
     };
 
