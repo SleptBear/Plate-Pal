@@ -1,4 +1,4 @@
-.manage-images-index-container {
+.business-images-index-container {
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -6,17 +6,17 @@
     margin: auto;
 }
 
-.manage-images-index-grid {
+.business-images-index-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 1%;
+    gap: 10px;
     width: 100%;
 }
 
-.manage-images-index-title {
+.business-images-index-title {
     align-self: flex-start;
 }
-.manage-images-index-grid img {
+.business-images-index-grid img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.manage-images-index-grid img:hover {
+.business-images-index-grid img:hover {
     filter: opacity(100%);
     box-shadow: 2px 2px 2px gray;
 }

@@ -7,8 +7,10 @@ import { getSingleImageThunk } from "../../../store/images";
 import ColoredLine from "../../ColoredLine";
 import { Link, NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import * as trash from "./trash.png"
 
 function ImageModal({ imageId, index }) {
+    console.log(trash)
     const history = useHistory()
     const dispatch = useDispatch();
     const [modalImageId, setModalImageId] = useState(imageId)
@@ -150,7 +152,10 @@ function ImageModal({ imageId, index }) {
             return (
                 <>
                     <br></br>
-                    <div><span className={"image-modal-delete-button"} onClick={handleRedirect}>Delete Photo</span></div>
+                    <div className="image-modal-delete-button-container">
+                        <img src={trash.default}></img>
+                        <div><span className={"image-modal-delete-button"} onClick={handleRedirect}> Delete Photo</span></div>
+                    </div>
                     <br></br>
                 </>
             )
@@ -168,11 +173,17 @@ function ImageModal({ imageId, index }) {
     return (
         <div className="image-modal-container">
             <div className="image-modal-image-wrapper">
-                <div className="image-modal-image-container" style={{ "background-image": `url(${image.url})` }}>
+
+                <div className="image-modal-image-container" >
+
                     {leftIndexChecker()}
-                    <div className="image-modal-image-singleImage" ></div>
+
+                    <img src={`${image.url}`} className="image-modal-image-singleImage" ></img>
+
                     {rightIndexChecker()}
+
                 </div>
+
             </div>
             <div className="image-modal-information-container">
                 <div className="image-modal-information-title-container">

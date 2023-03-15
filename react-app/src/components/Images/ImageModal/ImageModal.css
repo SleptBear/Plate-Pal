@@ -20,15 +20,6 @@
   hyphens: auto;
 }
 
-.image-modal-image-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 70%;
-  background-size: cover;
-}
-
 .image-modal-information-title-container {
   display: flex;
   width: 100%;
@@ -71,10 +62,22 @@
   align-items: center;
 }
 
+.image-modal-image-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 70%;
+    background-size:cover;
+    position: relative;
+  }
+
 .image-modal-image-container-arrow-left {
   background-color: rgba(255, 255, 255, 0.801);
   height: 30px;
   width: 30px;
+  position: absolute;
+  left: 5%;
   border-radius: 50%;
   background-image: url("left-arrow.png");
   background-size: cover;
@@ -85,6 +88,8 @@
   background-color: rgba(255, 255, 255, 0.801);
   height: 30px;
   width: 30px;
+  position: absolute;
+  right: 5%;
   border-radius: 50%;
   background-image: url("right-arrow.png");
   background-size: cover;
@@ -96,10 +101,11 @@
   height: 30px;
   width: 30px;
   border-radius: 50%;
+  position: absolute;
 }
 
 .image-modal-image-singleImage {
-  width: 70%;
+  width: 100%;
 }
 
 .image-modal-image-container h2 {
@@ -117,7 +123,7 @@
 
 .image-modal-information-related-image-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100px;
 
@@ -154,4 +160,16 @@
     color: rgba(2,122,151,1);
     cursor: pointer;
     width: auto;
+}
+
+.image-modal-delete-button-container{
+    display: flex;
+    align-items: center;
+}
+
+.image-modal-delete-button-container img{
+    height: 20px;
+    position: relative;
+    right: 4px;
+    filter: brightness(80%);
 }
