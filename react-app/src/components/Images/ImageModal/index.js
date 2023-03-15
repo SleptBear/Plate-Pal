@@ -7,8 +7,10 @@ import { getSingleImageThunk } from "../../../store/images";
 import ColoredLine from "../../ColoredLine";
 import { Link, NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import * as trash from "./trash.png"
 
 function ImageModal({ imageId, index }) {
+    console.log(trash)
     const history = useHistory()
     const dispatch = useDispatch();
     const [modalImageId, setModalImageId] = useState(imageId)
@@ -150,7 +152,10 @@ function ImageModal({ imageId, index }) {
             return (
                 <>
                     <br></br>
-                    <div><span className={"image-modal-delete-button"} onClick={handleRedirect}>Delete Photo</span></div>
+                    <div className="image-modal-delete-button-container">
+                        <img src={trash.default}></img>
+                        <div><span className={"image-modal-delete-button"} onClick={handleRedirect}> Delete Photo</span></div>
+                    </div>
                     <br></br>
                 </>
             )
