@@ -9,7 +9,7 @@
 .manage-images-index-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 1%;
+    gap: 10px;
     width: 100%;
 }
 

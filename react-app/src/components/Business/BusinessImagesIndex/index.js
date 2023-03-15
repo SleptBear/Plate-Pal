@@ -44,13 +44,13 @@ const BusinessImagesIndex = () => {
     return (
         <>
 
-            <div className="manage-images-index-container">
+            <div className="business-images-index-container">
                 <br></br>
-                <h2 className="manage-images-index-title">{`Photos for ${business.name}`}</h2>
+                <h2 className="business-images-index-title">{`Photos for ${business.name}`}</h2>
                 <br></br>
                 <ColoredLine />
                 <br></br>
-                <div className="manage-images-index-grid">
+                <div className="business-images-index-grid">
                     {
                         images.map((image) => {
                             index++
