@@ -29,13 +29,11 @@ const ReviewCreate = () => {
     e.preventDefault();
 
     const newReview = {
-      review: "test review text",
+      review,
       stars,
     };
 
-    let errors = await dispatch(
-      postReviewThunk(newReview, businessId, user)
-    );
+    let errors = await dispatch(postReviewThunk(newReview, businessId, user));
 
     if (!errors) {
       history.push(`/businesses/${businessId}`);
@@ -50,7 +48,10 @@ const ReviewCreate = () => {
         <br></br>
         <h3>{business.name}</h3>
         <br></br>
-        <ul>{/* map errors */}</ul>
+        <ul>map errors</ul>
+        {errors.map(error => (
+          <li>error</li>
+        ))}
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
@@ -74,6 +75,8 @@ const ReviewCreate = () => {
         <br></br>
         <div>
           <textarea
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
             className="create-review-textarea"
             placeholder="Leave a review here"
           ></textarea>
