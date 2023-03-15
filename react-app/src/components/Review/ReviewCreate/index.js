@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { postReviewThunk } from "../../../store/reviews";
 import { getSingleBusinessThunk } from "../../../store/businesses";
+import { postReviewImageThunk } from "../../../store/reviews";
 
 import "./ReviewCreate.css";
 
@@ -20,24 +21,53 @@ const ReviewCreate = () => {
   }, [dispatch]);
 
   const [review, setReview] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [imageURL, setImageURL] = useState("");
+  const [imageCaption, setImageCaption] = useState("");
 
   // star rating hover
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
 
+  useEffect(() => {
+    // const valErrors = {};
+    // if (stars < 1 || stars > 5) valErrors.stars = "Stars rating is required";
+    // if (review.length < 1) valErrors.reviewMissing = "Review text is required";
+    // if (review.length > 1000)
+    //   valErrors.reviewLength = "Maximum characters for review is 1000";
+    // const checkImageURL = (imageURL) => {
+    //   return (
+    //     !imageURL.endsWith(".png") &&
+    //     !imageURL.endsWith(".jpg") &&
+    //     !imageURL.endsWith(".jpeg")
+    //   );
+    // };
+    // if (imageURL && checkImageURL(imageURL))
+    //   valErrors.imageURL = "Image URL must end in .png, .jpg, or .jpeg";
+    // setErrors(valErrors);
+  }, [stars, review, imageURL]);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    setHasSubmitted(true);
+
     const newReview = {
-      review: "test review text",
+      review,
       stars,
     };
 
-    let errors = await dispatch(
-      postReviewThunk(newReview, businessId, user)
-    );
+    let response = await dispatch(postReviewThunk(newReview, businessId, user));
 
-    if (!errors) {
+    // all error responses for this backend route return as arrays
+    if (Array.isArray(response)) setErrors(response);
+
+    // handle image add after business has been created
+    const imageContent = { url: imageURL, caption: imageCaption };
+    if (!Array.isArray(response) && imageURL)
+      await dispatch(postReviewImageThunk(imageContent, response.id));
+
+    if (!Array.isArray(response)) {
       history.push(`/businesses/${businessId}`);
     }
   };
@@ -49,8 +79,15 @@ const ReviewCreate = () => {
       <form className="create-review-container" onSubmit={onSubmit}>
         <br></br>
         <h3>{business.name}</h3>
+        <ul>
+          {errors.map((error, idx) => (
+            <li style={{ color: "red" }} key={idx}>
+              {error}
+            </li>
+          ))}
+        </ul>
+        <span style={{ color: "red" }}></span>
         <br></br>
-        <ul>{/* map errors */}</ul>
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
@@ -74,13 +111,30 @@ const ReviewCreate = () => {
         <br></br>
         <div>
           <textarea
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
             className="create-review-textarea"
             placeholder="Leave a review here"
           ></textarea>
         </div>
-        <span>Attach Photos</span>
-        <span>URL - needs functionality</span>
-        <input></input>
+        <span style={{ color: "red" }}></span>
+        <br></br>
+        <h4>Attach Photos</h4>
+        <input
+          type="text"
+          className="create-review-image-url"
+          value={imageURL}
+          onChange={(e) => setImageURL(e.target.value)}
+          placeholder="Image URL (Optional)"
+        ></input>
+
+        <textarea
+          type="textarea"
+          className="create-review-textarea-caption"
+          value={imageCaption}
+          onChange={(e) => setImageCaption(e.target.value)}
+          placeholder="Caption (Optional)"
+        ></textarea>
         <br></br>
         <button className="create-review-post-button">Post Review</button>
       </form>
