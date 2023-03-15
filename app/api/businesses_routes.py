@@ -123,12 +123,12 @@ def create_new_review(id):
     business = Business.query.get(id)
     if not business:
         return {
-            "errors": "Business couldn't be found",
+            "errors": ["Business couldn't be found"],
             "status_code": 404
         }, 404
     if business.to_dict()["owner_id"] == int(current_user.get_id()):
         return {
-            "errors": "Forbidden",
+            "errors": ["Unable to write a review for your own business"],
             "status_code": 403
         }, 403
 
@@ -137,7 +137,7 @@ def create_new_review(id):
     user_business_reviews = review_query.all()
     if len(user_business_reviews) > 0:
         return {
-            "errors": "User already has a review for this business",
+            "errors": ["User already has a review for this business"],
             "status_code": 403
         }, 403
 
