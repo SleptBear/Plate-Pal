@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import "./BusinessSearchCard.css";
-import starCalculator from "./StarCalculator.js";
+import StarCalculator from "./StarCalculator.js";
 
 const BusinessSearchCard = ({ business }) => {
   if (!business) return null;
-  
+
   return (
     <div className="business-search-card-container">
       <div className="business-search-img">
@@ -15,7 +15,7 @@ const BusinessSearchCard = ({ business }) => {
           <span>{business.name}</span>
           {business.number_of_reviews ? (
             <span>
-              {starCalculator(business.avg_rating)}
+              {StarCalculator(business.avg_rating)}
               {` ${business.number_of_reviews} reviews`}
             </span>
           ) : (

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Business, Review, Image
+from app.models import db, Business, Review, Image, User
 from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
 from app.forms.businesses_form import BusinessForm
@@ -75,10 +75,17 @@ def get_business_reviews(id):
     business_reviews = [review.to_dict() for review in review_query.all()]
 
     for review in business_reviews:
+        owner = User.query.get(review["owner_id"])
+        images_count=len(owner.images)
+        owner=owner.to_dict()
         images_query = db.session.query(Image).filter(
             Image.review_id == review['id'])
         images = images_query.all()
+        review["images_length"] = len(images)
         review['images'] = [image.to_dict() for image in images]
+        review['owner_first_name'] = owner["first_name"]
+        review['owner_last_name'] = owner["last_name"]
+        review["owner_images_count"] = images_count
 
     return {"businessReviews": {review['id']: review for review in business_reviews}}
 
