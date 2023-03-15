@@ -1,0 +1,69 @@
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getImagesAction } from "../../../store/images";
+import ColoredLine from "../../ColoredLine";
+import { useParams } from "react-router-dom";
+import { getSingleReviewThunk } from "../../../store/reviews";
+import ImageCard from "../../Images/ImageCard";
+import "./ReviewImagesIndex.css";
+
+const ReviewImagesIndex = () => {
+    const { reviewId } = useParams()
+    const dispatch = useDispatch();
+    let images = useSelector((state) => state.images.images);
+    const user = useSelector((state) => state.session.user);
+    const review = useSelector((state) => state.reviews.singleReview)
+
+    useEffect(() => {
+        const imageRestore = async () => {
+            const review = await dispatch(getSingleReviewThunk(reviewId))
+            if(review){
+                let images = {}
+                for (let i = 0; i < review.images.length; i++){
+                    images[review.images[i].id] = review.images[i]
+                }
+                await dispatch(getImagesAction({"images": images}));
+            }
+        };
+        imageRestore();
+    }, [dispatch]);
+
+    if (!images || !review) return null;
+
+    images = Object.values(images)
+
+    images?.sort(
+        (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
+    );
+
+    let index = 0
+
+
+    return (
+        <>
+
+            <div className="manage-images-index-container">
+                <br></br>
+                <h2 className="manage-images-index-title">{`Photos for ${review.business_name} from ${review.owner_first_name} ${review.owner_last_name[0]}.`}</h2>
+                <br></br>
+                <ColoredLine />
+                <br></br>
+                <div className="manage-images-index-grid">
+                    {
+                        images.map((image) => {
+                            index++
+                            return (
+                                <ImageCard
+                                    image={image}
+                                    key={image.id}
+                                    index={index}
+                                />
+                            );
+                        })}
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default ReviewImagesIndex;
