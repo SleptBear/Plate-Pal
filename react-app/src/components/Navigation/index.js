@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import logo from "../../assets/platepal.png";
+import { useHistory } from "react-router-dom";
 
 import SearchBar from "../SearchBar";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-
+  const history = useHistory()
   return (
     <nav className="navbar">
       <ul className="navbar-content">
@@ -38,9 +39,11 @@ function Navigation({ isLoaded }) {
           </div>
         ) : (
           <>
+
             <Link to="/login">
-              <button>Log In</button>
+            <button>Log in</button>
             </Link>
+
 
             <Link to="/signup">
               <button>Sign Up</button>

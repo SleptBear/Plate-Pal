@@ -138,5 +138,12 @@
 
 .image-modal-information-related-image-active{
     filter: brightness(100%);
-    border: solid 2px black;
+    border: solid 1px black;
+}
+
+.image-modal-delete-button {
+    text-decoration: underline;
+    color: rgba(2,122,151,1);
+    cursor: pointer;
+    width: auto;
 }

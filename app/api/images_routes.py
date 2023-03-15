@@ -57,6 +57,7 @@ def get_image_details(id):
     business = Business.query.get(image["business_id"])
 
     image["business_name"] = business.name
+    image["business_id"] = business.id
     image["user_first_name"] = user.first_name
     image["user_last_name"] = user.last_name
 
