@@ -6,6 +6,7 @@
 .profile-dropdown {
   position: absolute;
   border: 1px solid black;
+  border-radius: 5px;
   box-shadow: 1px 1px 3px black;
   text-align: left;
   padding: 10px 15px 10px 15px;
@@ -33,11 +34,54 @@
   cursor: pointer;
 }
 
+.user-drop-down-name {
+  margin-bottom: 10px;
+}
+
+.manage-user-items {
+  color: #0073bb;
+  text-decoration: none;
+}
+
+.user-drop-down-menu {
+  display: flex;
+  flex-direction: column;
+}
+
 .button-logout {
-  background-color: white;
-  color: #2d2e2f;
+  background-color: #d32323;
+  color: white;
+  font-size: 14px;
+  height: 32.5px;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
+}
+
+.login-signup-css {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-button,
+.signup-button {
+  width: 80px;
+  height: 35px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-button {
+  margin-right: 15px;
+  background-color: white;
+  border-color: gray;
+}
+
+.signup-button {
+  background-color: rgba(224, 7, 7, 1);
+  color: white;
+  margin-right: 20px;
 }
 
 /* -------- */

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import "./BusinessSearchCard.css";
-// import starCalculator from "./StarCalculator.js";
 import starCalculator from "./StarCalculator.js";
 
 const BusinessSearchCard = ({ business }) => {
