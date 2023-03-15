@@ -2,8 +2,98 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { postBusinessThunk } from "../../../store/businesses";
+import { postImageThunk } from "../../../store/images"
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete"
 import "./BusinessCreate.css";
+
+const TimePicker = ({ id, value, onChange }) => {
+  return (
+    <input
+      type="time"
+      id={id}
+      value={value}
+      onChange={onChange}
+    ></input>
+  );
+};
+
+
+
+const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
+  const [isValid, setIsValid] = useState(true);
+  const isClosed = openTime === 'Closed' && closeTime === 'Closed';
+
+  const handleOpenTimeChange = (e) => {
+    const newOpenTime = e.target.value;
+    setOpenTime(day, newOpenTime);
+    validateTimes(newOpenTime, closeTime);
+  };
+
+  const handleCloseTimeChange = (e) => {
+    const newCloseTime = e.target.value;
+    setCloseTime(day, newCloseTime);
+    validateTimes(openTime, newCloseTime);
+  };
+
+  const handleClosedChange = (e) => {
+    if (e.target.checked) {
+      setOpenTime(day, 'Closed');
+      setCloseTime(day, 'Closed');
+    } else {
+      setOpenTime(day, '');
+      setCloseTime(day, '');
+    }
+  };
+
+  const validateTimes = (newOpenTime, newCloseTime) => {
+    if (newOpenTime === 'Closed' || newCloseTime === 'Closed') {
+      setIsValid(true);
+      return;
+    }
+
+    const openTimeDate = new Date(`1970-01-01T${newOpenTime}Z`);
+    const closeTimeDate = new Date(`1970-01-01T${newCloseTime}Z`);
+
+    if (newCloseTime) {
+      setIsValid(openTimeDate < closeTimeDate);
+    }
+
+  };
+
+  return (
+    <div className="day-hours">
+      <label htmlFor={`${day}-open`} className="day-label">{day}:</label>
+      <TimePicker
+        id={`${day}-open`}
+        value={isClosed ? '' : openTime}
+        onChange={handleOpenTimeChange}
+        disabled={isClosed}
+        className="time-picker"
+      />
+      <label htmlFor={`${day}-close`} className="separator">to</label>
+      <TimePicker
+        id={`${day}-close`}
+        value={isClosed ? '' : closeTime}
+        onChange={handleCloseTimeChange}
+        disabled={isClosed}
+        className="time-picker"
+      />
+      <label htmlFor={`${day}-closed`} className="closed-label">Closed</label>
+      <input
+        type="checkbox"
+        id={`${day}-closed`}
+        checked={isClosed}
+        onChange={handleClosedChange}
+        className="closed-checkbox"
+      />
+      {!isValid && <div className="validation-message">Opening time must be before closing time.</div>}
+    </div>
+  );
+};
+
+const days = [
+  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+];
 
 const BusinessCreate = () => {
   const dispatch = useDispatch();
@@ -31,7 +121,87 @@ const BusinessCreate = () => {
   // price hover
   const [price, setPrice] = useState(0);
   const [hover, setHover] = useState(0);
+  const [imageURL, setImageURL] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
 
+  const handleImageURLChange = (e) => {
+    const url = e.target.value;
+    setImageURL(url);
+    setImagePreview(url);
+  };
+
+  const areFieldsValid = () => {
+    // Check if all fields have values
+    const requiredFields = [
+      name,
+      category,
+      address,
+      city,
+      state,
+      zipcode,
+      phone_number,
+      website,
+      lat,
+      lng,
+      price,
+      hours_of_operation
+    ];
+    const fieldsAreNotEmpty = requiredFields.every((field) => field);
+
+    // Check if hours_of_operation are valid
+    console.log(name,
+      category,
+      address,
+      city,
+      state,
+      zipcode,
+      phone_number,
+      website,
+      lat,
+      lng,
+      price,
+      formatHoursOfOperation(hours_of_operation),
+      fieldsAreNotEmpty
+    )
+
+
+    return fieldsAreNotEmpty
+  };
+
+  const formatHoursOfOperation = (hoursObj) => {
+    const formatTime = (timeStr) => {
+      const time = new Date(`1970-01-01T${timeStr}Z`);
+      const hours = time.getUTCHours();
+      const minutes = time.getUTCMinutes();
+      const period = hours >= 12 ? 'pm' : 'am';
+      const formattedHours = ((hours + 11) % 12) + 1;
+
+      return `${formattedHours}${minutes === 0 ? '' : `:${minutes}`}${period}`;
+    };
+
+    return days
+      .map((day) => {
+        const openTime = hoursObj[day]?.open;
+        const closeTime = hoursObj[day]?.close;
+
+        if (openTime === 'Closed' && closeTime === 'Closed') {
+          return `${day}: Closed`;
+        } else {
+          return `${day}: ${formatTime(openTime)}-${formatTime(closeTime)}`;
+        }
+      })
+      .join(', ');
+  };
+
+  const setOpenTime = (day, time) => {
+    setHoursOfOperation(prev => ({ ...prev, [day]: { ...prev[day], open: time } }));
+    console.log(formatHoursOfOperation(hours_of_operation))
+  };
+
+  const setCloseTime = (day, time) => {
+    setHoursOfOperation(prev => ({ ...prev, [day]: { ...prev[day], close: time } }));
+    console.log(formatHoursOfOperation(hours_of_operation))
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -47,12 +217,17 @@ const BusinessCreate = () => {
       lat: lat,
       lng: lng,
       price: price,
-      hours_of_operation: hours_of_operation,
+      hours_of_operation: formatHoursOfOperation(hours_of_operation),
     };
 
     let createdBusiness = await dispatch(postBusinessThunk(newBusiness));
-
     if (createdBusiness) {
+      if (imageURL) {
+        await dispatch(postImageThunk({
+          business_id: createdBusiness.id,
+          url: imageURL,
+        }));
+      }
       history.push(`/businesses/${createdBusiness.id}`);
     }
   };
@@ -70,6 +245,11 @@ const BusinessCreate = () => {
     console.log(latLng)
   };
 
+
+
+  const allTimesValid = days.every((day) => hours_of_operation[day]?.isValid !== false);
+
+
   return (
 
     <div className="business-create-container">
@@ -82,38 +262,38 @@ const BusinessCreate = () => {
           business will come up automatically if it is already listed.
         </span>
         <div className="business-create-form">
-      <PlacesAutocomplete
-        value={address}
-        onChange={setAddress}
-        onSelect={handleSelect}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="autocomplete-container">
-            <p>Latitude: {coordinates.lat}</p>
-            <p>Longitude: {coordinates.lng}</p>
+          <PlacesAutocomplete
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <div className="autocomplete-container">
+                <p>Latitude: {coordinates.lat}</p>
+                <p>Longitude: {coordinates.lng}</p>
 
-            <input {...getInputProps({ placeholder: "Type address" })} className="autocomplete-input"/>
+                <input {...getInputProps({ placeholder: "Type address" })} className="autocomplete-input" />
 
-            <div className="suggestion-container">
-              {loading ? <div>...loading</div> : null}
+                <div className="suggestion-container">
+                  {loading ? <div>...loading</div> : null}
 
-              {suggestions.map(suggestion => {
-                const style = {
-                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                };
+                  {suggestions.map(suggestion => {
+                    const style = {
+                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                    };
 
-                return (
-                  <div {...getSuggestionItemProps(suggestion, { style })} className="suggestion">
-                    {suggestion.description}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
+                    return (
+                      <div {...getSuggestionItemProps(suggestion, { style })} className="suggestion">
+                        {suggestion.description}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
 
-      </div>
+        </div>
         <input
           type="text"
           placeholder="Your business name"
@@ -136,8 +316,7 @@ const BusinessCreate = () => {
           className="business-form-input"
         ></input>
         <span>
-          Help customers find your product and service. You can add up to 3
-          categories that best describe what your core business is. You can
+          Help customers find your product and service. You can
           always edit and add more later.{" "}
         </span>
         <select
@@ -329,78 +508,94 @@ const BusinessCreate = () => {
         <input
           type="number"
           placeholder="zipcode"
-          value={zipcode}
+          value={zipcode !== 0 ? zipcode : ""}
           onChange={(e) => setZipCode(e.target.value)}
           className="business-form-input"
         ></input>
-<div className="business-form-price-container">
-  <span>Select your restaurant average price:</span>
-  <div className="price-radios">
-    <label>
-      <input
-        type="radio"
-        name="price"
-        value="$"
-        checked={price === 1}
-        onChange={() => setPrice(1)}
-      />
-      $
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="price"
-        value="$$"
-        checked={price === 2}
-        onChange={() => setPrice(2)}
-      />
-      $$
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="price"
-        value="$$$"
-        checked={price === 3}
-        onChange={() => setPrice(3)}
-      />
-      $$$
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="price"
-        value="$$$$"
-        checked={price === 4}
-        onChange={() => setPrice(4)}
-      />
-      $$$$
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="price"
-        value="$$$$$"
-        checked={price === 5}
-        onChange={() => setPrice(5)}
-      />
-      $$$$$
-    </label>
-  </div>
-</div>
-        <input
-          type="text"
-          placeholder="Hours of Operations"
-          value={hours_of_operation}
-          onChange={(e) => setHoursOfOperation(e.target.value)}
-        ></input>
-        <div>
-          <span>Attach Photos</span>
+        <div className="business-form-price-container">
+          <span>Select your restaurant average price:</span>
+          <div className="price-radios">
+            <label>
+              <input
+                type="radio"
+                name="price"
+                value="$"
+                checked={price === 1}
+                onChange={() => setPrice(1)}
+              />
+              $
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="price"
+                value="$$"
+                checked={price === 2}
+                onChange={() => setPrice(2)}
+              />
+              $$
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="price"
+                value="$$$"
+                checked={price === 3}
+                onChange={() => setPrice(3)}
+              />
+              $$$
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="price"
+                value="$$$$"
+                checked={price === 4}
+                onChange={() => setPrice(4)}
+              />
+              $$$$
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="price"
+                value="$$$$$"
+                checked={price === 5}
+                onChange={() => setPrice(5)}
+              />
+              $$$$$
+            </label>
+          </div>
         </div>
-        <button>Add Business</button>
+
+        <div className="days-container">
+          <h3>Hours of operation</h3>
+          {days.map(day => (
+            <DayHours
+              key={day}
+              day={day}
+              openTime={hours_of_operation[day]?.open || ''}
+              closeTime={hours_of_operation[day]?.close || ''}
+              setOpenTime={setOpenTime}
+              setCloseTime={setCloseTime}
+            />
+          ))}
+        </div>
+        <input
+  type="text"
+  placeholder="Image URL"
+  value={imageURL}
+  onChange={handleImageURLChange}
+  className="business-form-input"
+/>
+{imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" />}
+        <div>
+        </div>
+        <button type="submit" disabled={!areFieldsValid()} className="submit-button">Add Business</button>
       </form>
     </div>
   );
 };
+
 
 export default BusinessCreate;
