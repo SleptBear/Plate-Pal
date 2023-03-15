@@ -1,20 +1,30 @@
 .business-search-container {
   display: flex;
   flex-direction: row;
+  max-width: 1000px;
+  padding: 20px;
+  justify-content: space-between;
 }
 
 .business-search-filters {
+  display: flex;
+  width: 20%;
+  min-width: 200px;
 }
 
 .business-search-results {
+  width: 50%;
+  min-width: 500px;
 }
 
-.business-search-map {
+.business-search-map-container {
+  width: 30%;
+  width: 300px;
 }
 
 .business-search-clear-filter {
   font-size: 14px;
-  color: rgba(2,122,151,1);
+  color: rgba(2, 122, 151, 1);
   cursor: pointer;
 }
 
@@ -36,4 +46,36 @@
 
 .price-rating {
   font-size: 16px;
+}
+
+.search-businesses-filter-button {
+  width: 120px;
+  height: 35px;
+  background-color: rgba(224, 7, 7, 1);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.business-search-card-container {
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.business-search-card-container:hover {
+  box-shadow: 1px 1px 5px gray;
+}
+
+.business-search-name {
+  cursor: pointer;
+}
+
+.business-search-img > img {
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.search-filter-checkboxes {
+  cursor: pointer;
 }

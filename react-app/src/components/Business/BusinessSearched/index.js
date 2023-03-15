@@ -79,6 +79,15 @@ const BusinessSearched = () => {
 
     setFilteredRestaurants(allFiltersApplied);
     setCategoryFilter([]);
+    setHover(0);
+    setPriceFilter(0);
+    // unchecking boxes
+    const checkboxReset = document.getElementsByClassName(
+      "search-filter-checkboxes"
+    );
+    for (let checkbox of checkboxReset) {
+      checkbox.checked = false;
+    }
 
     // update store so google maps markers can update with filtered items
     dispatch(filteredBusinessAction(allFiltersApplied));
@@ -116,6 +125,15 @@ const BusinessSearched = () => {
     setPriceFilter(0);
     setHover(0);
     setCategoryFilter([]);
+
+    // unchecking boxes
+    const checkboxReset = document.getElementsByClassName(
+      "search-filter-checkboxes"
+    );
+    for (let checkbox of checkboxReset) {
+      checkbox.setAttribute("checked", false);
+    }
+
     // update store so google maps markers can update with filtered items
     dispatch(filteredBusinessAction(searchResult));
   };
@@ -167,6 +185,7 @@ const BusinessSearched = () => {
                     <input
                       id={i}
                       type="checkbox"
+                      className="search-filter-checkboxes"
                       value={category}
                       onChange={(e) => handleCheckBoxCategory(e, i)}
                     ></input>
@@ -180,6 +199,7 @@ const BusinessSearched = () => {
                     <input
                       id={i}
                       type="checkbox"
+                      className="search-filter-checkboxes"
                       value={category}
                       onChange={(e) => handleCheckBoxCategory(e, i)}
                     ></input>
@@ -190,7 +210,7 @@ const BusinessSearched = () => {
           <br></br>
           <hr></hr>
           <br></br>
-          <button>Filter</button>
+          <button className="search-businesses-filter-button">Filter</button>
         </form>
       </div>
 
@@ -220,7 +240,7 @@ const BusinessSearched = () => {
           })
         )}
       </div>
-      <div className="business-search-map">
+      <div className="business-search-map-container">
         <MapPage searchString={searchString} />
       </div>
     </div>
