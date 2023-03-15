@@ -120,6 +120,11 @@
   justify-content: center;
   align-items: center;
   height: 100px;
+
+}
+
+.image-modal-information-related-image{
+    cursor: pointer;
 }
 
 .image-modal-information-related-images-grid {
@@ -136,7 +141,7 @@
 
 .image-modal-information-related-image-inactive {
   filter: opacity(30%);
-  
+
 }
 
 .image-modal-information-related-image-active{
