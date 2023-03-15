@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getImagesThunk } from "../../../store/images";
 import ImageCard from "../ImageCard";
+import ColoredLine from "../../ColoredLine";
 
 import "./ManageImagesIndex.css";
 
@@ -29,18 +30,26 @@ const ManageImagesIndex = () => {
 
     return (
         <>
+
             <div className="manage-images-index-container">
-                {
-                images.map((image) => {
-                    index++
-                    return (
-                        <ImageCard
-                            image={image}
-                            key={image.id}
-                            index={index}
-                        />
-                    );
-                })}
+                <br></br>
+                <h2 className="manage-images-index-title">{`Photos for ${user.first_name} ${user.last_name[0]}.`}</h2>
+                <br></br>
+                <ColoredLine />
+                <br></br>
+                <div className="manage-images-index-grid">
+                    {
+                        images.map((image) => {
+                            index++
+                            return (
+                                <ImageCard
+                                    image={image}
+                                    key={image.id}
+                                    index={index}
+                                />
+                            );
+                        })}
+                </div>
             </div>
         </>
     );

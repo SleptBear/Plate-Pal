@@ -1,22 +1,47 @@
 // frontend/src/components/deleteFormModal/index.js
 import React from "react";
-import { useDispatch } from "react-redux";
-import { Redirect, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory} from 'react-router-dom';
 import "./ImageDelete.css";
 import { deleteImageThunk } from "../../../store/images";
 import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { getSingleImageThunk } from "../../../store/images";
 
 function ImageDelete() {
   const dispatch = useDispatch();
   const { imageId } = useParams()
   const history = useHistory();
+  const user = useSelector(state => state.session.user)
+  const [storeImage, setStoreImage] = useState(null)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     await dispatch(deleteImageThunk(imageId))
-    history.push(`/images/current`);
-    <Redirect to={`/images/current`} />
+    history.goBack()
   };
 
+
+
+  useEffect(() => {
+
+    const imageRestore = async () => {
+        const confirmStoreImage = await dispatch(getSingleImageThunk(imageId))
+        if(confirmStoreImage.owner_id !== user.id){
+            history.goBack()
+        }
+        else{
+            setStoreImage(confirmStoreImage)
+        }
+    }
+    imageRestore()
+
+}, [dispatch])
+
+
+  if(!storeImage){
+    return null
+  }
   return (
     <>
       <div className="delete-form-container">
