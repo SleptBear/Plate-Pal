@@ -120,7 +120,7 @@ export const postBusinessThunk = (newBusiness) => async (dispatch) => {
     const data = await res.json();
     return data;
   } else {
-    return ["An error occurred. Please try again."];
+    return {"errors": "A server error occurred. Please try again."};
   }
 };
 
@@ -143,7 +143,7 @@ export const editBusinessThunk =
         return data;
       }
     } else {
-      return ["An error occurred. Please try again."];
+      return {"errors": "A server error occurred. Please try again."};
     }
   };
 
