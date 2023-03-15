@@ -7,7 +7,7 @@
 }
 
 .image-modal-information-container {
-    width: 30%;
+    width: 350px;
     background-color: white;
     border-radius: 0px 10px 10px 0px;
     padding: 24px 24px 24px;
@@ -21,17 +21,82 @@
 }
 
 .image-modal-image-container {
-    width: 70%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0);
+    justify-content: space-around;
+    height: 70%;
+    background-size: cover;
+}
 
+.image-modal-information-title-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.image-modal-information-title {
+    width: 200px;
+}
+
+.image-modal-close-button {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-image: url("close.png");
+    background-color: rgba(255, 255, 255, 0);
+    background-size: cover;
+}
+
+.image-modal-close-button-outer-circle {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.image-modal-close-button-outer-circle:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.image-modal-image-wrapper {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+}
+
+.image-modal-image-container-arrow-left{
+    background-color: rgba(255, 255, 255, 0.801);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-image: url("left-arrow.png");
+    background-size: cover;
+}
+
+.image-modal-image-container-arrow-right{
+    background-color: rgba(255, 255, 255, 0.801);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-image: url("right-arrow.png");
+    background-size: cover;
+}
+
+.image-modal-image-container-arrow-placeholder{
+    background-color: rgba(0, 0, 0, 0);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
 }
 
 .image-modal-image-singleImage {
-    max-height:80%;
-    max-width:80%;
+    width: 70%;
 }
 
 .image-modal-image-container h2 {
@@ -44,7 +109,15 @@
 
 .image-modal-information-related-images-container {
     height: 50%;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.image-modal-information-related-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+
 }
 
 .image-modal-information-related-images-grid {
@@ -54,13 +127,16 @@
 }
 
 .image-modal-information-related-images-grid img {
-    height: 50px;
+    height: 70px;
+    width: 100px;
+    border-radius: 5px;
 }
 
 .image-modal-information-related-image-inactive{
-    filter: brightness(0%);
+    filter: opacity(30%);
 }
 
 .image-modal-information-related-image-active{
     filter: brightness(100%);
+    border: solid 2px black;
 }

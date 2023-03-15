@@ -16,9 +16,9 @@ function ImageModal({ imageId, index }) {
     useEffect(() => {
 
         const imageRestore = async () => {
-            let storeImage =  await dispatch(getSingleImageThunk(modalImageId))
-            let copiedStoreImage = {...storeImage}
-            const imagesIds = Object.values(images).map((image)=> {
+            let storeImage = await dispatch(getSingleImageThunk(modalImageId))
+            let copiedStoreImage = { ...storeImage }
+            const imagesIds = Object.values(images).map((image) => {
                 return image.id
             })
             const mappedIndex = imagesIds.indexOf(copiedStoreImage.id)
@@ -58,31 +58,116 @@ function ImageModal({ imageId, index }) {
     date = new Date(image.created_at)
     formattedDate = new Intl.DateTimeFormat("en-US", options).format(date)
 
+    const captionChecker = () => {
+        if (image.caption) {
+            return (
+                <>
+                    <br></br>
+                    <br></br>
+                    <p>{image.caption || 'caption'}</p>
+                    <br></br>
+                    <br></br>
+                </>
+            )
+        }
+
+        return (
+            <>
+                <br></br>
+                <br></br>
+            </>
+        )
+
+    }
+
+    const leftIndexChecker = () => {
+        if (relatedIndex === 1) {
+            return (
+                <div className="image-modal-image-container-arrow-placeholder">
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="image-modal-image-container-arrow-left"
+                    onClick={handleLeftArrowClick}></div>
+            )
+        }
+    }
+
+    const handleRightArrowClick = () => {
+        setRelatedIndex(relatedIndex + 1)
+        const imagesIds = Object.values(images).map((image) => {
+            return image.id
+        })
+        console.log(relatedIndex)
+        console.log(imagesIds[relatedIndex - 1])
+        setModalImageId(imagesIds[relatedIndex])
+    }
+
+    const handleLeftArrowClick = () => {
+        setRelatedIndex(relatedIndex - 1)
+        const imagesIds = Object.values(images).map((image) => {
+            return image.id
+        })
+        console.log(relatedIndex)
+        console.log(imagesIds[relatedIndex + 1])
+        setModalImageId(imagesIds[relatedIndex - 2])
+    }
+
+    const rightIndexChecker = () => {
+        if (relatedIndex === images.length) {
+            return (
+                <div className="image-modal-image-container-arrow-placeholder">
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="image-modal-image-container-arrow-right"
+                    onClick={handleRightArrowClick}></div>
+            )
+        }
+    }
+
+    const handleClose = () => {
+        closeModal()
+    }
+
     return (
         <div className="image-modal-container">
-            <div className="image-modal-image-container">
-                <img className="image-modal-image-singleImage" src={image.url} />
+            <div className="image-modal-image-wrapper">
+                <div className="image-modal-image-container" style={{ "background-image": `url(${image.url})` }}>
+                    {leftIndexChecker()}
+                    <div className="image-modal-image-singleImage" ></div>
+                    {rightIndexChecker()}
+                </div>
             </div>
             <div className="image-modal-information-container">
-                <h2>{`Photos for ${image.business_name}`}</h2>
+                <div className="image-modal-information-title-container">
+                    <h2 className="image-modal-information-title">{`Photos for ${image.business_name}`}</h2>
+                    <div className="image-modal-close-button-outer-circle" onClick={handleClose}>
+                        <div className="image-modal-close-button"></div>
+                    </div>
+                </div>
                 <br></br>
                 <br></br>
                 <p>{relatedIndex} of {images.length}</p>
                 <br></br>
                 <br></br>
                 <ColoredLine />
-                <br></br>
-                <br></br>
-                <p>{image.caption || 'caption'}</p>
-                <br></br>
-                <br></br>
+                {captionChecker()}
                 <p>{`by ${image.user_first_name} ${image.user_last_name[0]}. on ${formattedDate.split(", ")[1]}, ${formattedDate.split(", ")[2].split(" at")[0]}`}</p>
                 <br></br>
                 <br></br>
                 <div className="image-modal-information-related-images-container">
                     <div className="image-modal-information-related-images-grid">
                         {images.map((relatedImage) => {
-                            return <img key={relatedImage.id} className={"image-modal-information-related-image image-modal-information-related-image-inactive"} src={relatedImage.url} onClick={() => { handleClick(relatedImage.id, images.indexOf(relatedImage)) }} />;
+                            return (
+                                <div key={relatedImage.id} className={"image-modal-information-related-image-container"}>
+                                    <img className={"image-modal-information-related-image image-modal-information-related-image-inactive"} src={relatedImage.url} onClick={() => { handleClick(relatedImage.id, images.indexOf(relatedImage)) }} />
+                                </div>
+                            )
                         })}
                     </div>
                 </div>
