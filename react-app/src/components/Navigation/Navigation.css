@@ -127,7 +127,8 @@ ul {
   color: white;
   background-color: lightslategray;
   border-radius: 5px;
-  /* padding: 5px; */
+  height: 20px;
+  padding: 3px 0px;
 }
 
 /* resize logo to be slightly smaller than full parent size */
