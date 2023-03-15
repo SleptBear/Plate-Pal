@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Business, Review, Image
+from app.models import db, Business, Review, Image, User
 from .auth_routes import validation_errors_to_error_messages
 from flask_login import current_user, login_required
 from app.forms.images_form import ImageForm
@@ -34,10 +34,15 @@ def get_review_details(id):
             "errors": "Review couldn't be found",
             "status_code": 404
         }, 404
+    business = Business.query.get(review["business_id"]).to_dict()
+    owner = User.query.get(review["owner_id"]).to_dict()
 
     images_query = db.session.query(Image).filter(Image.review_id == id)
     images = images_query.all()
     review['images'] = [image.to_dict() for image in images]
+    review['business_name'] = business["name"]
+    review['owner_first_name'] = owner["first_name"]
+    review['owner_last_name'] = owner["last_name"]
 
     return jsonify(review)
 
