@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import "./BusinessSearchCard.css";
-import starCalculator from "./StarCalculator.js";
+import StarCalculator from "./StarCalculator.js";
 
 const BusinessSearchCard = ({ business }) => {
   if (!business) return null;
+
 
   // handle hours of operations closed vs open
   // conditionally render it onto the card
@@ -23,7 +24,7 @@ const BusinessSearchCard = ({ business }) => {
           </Link>
           {business.number_of_reviews ? (
             <span>
-              {starCalculator(business.avg_rating)}
+              {StarCalculator(business.avg_rating)}
               {` ${business.number_of_reviews} reviews`}
             </span>
           ) : (

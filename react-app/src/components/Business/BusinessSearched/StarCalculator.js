@@ -1,8 +1,8 @@
 // handle stars display
-const starCalculator = (averageRating) => {
+const StarCalculator = (rating) => {
   if (
-    (Math.round(averageRating * 2) / 2).toFixed(1) === "1.0" ||
-    averageRating === null
+    (Math.round(rating * 2) / 2).toFixed(1) === "1.0" ||
+    rating === null
   ) {
     return (
       <span>
@@ -14,7 +14,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "1.5") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "1.5") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -25,7 +25,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "2.0") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "2.0") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -36,7 +36,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "2.5") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "2.5") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -47,7 +47,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "3.0") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "3.0") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -58,7 +58,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "3.5") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "3.5") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -69,7 +69,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "4.0") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "4.0") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -80,7 +80,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "4.5") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "4.5") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -91,7 +91,7 @@ const starCalculator = (averageRating) => {
       </span>
     );
   }
-  if ((Math.round(averageRating * 2) / 2).toFixed(1) === "5.0") {
+  if ((Math.round(rating * 2) / 2).toFixed(1) === "5.0") {
     return (
       <span>
         <i className="fas fa-star"></i>
@@ -104,4 +104,4 @@ const starCalculator = (averageRating) => {
   }
 };
 
-export default starCalculator;
+export default StarCalculator;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./ReviewCard.css";
-import starCalculator from "../../Business/BusinessSearched/StarCalculator";
+import StarCalculator from "../../Business/BusinessSearched/StarCalculator";
 
 const ReviewCard = ({ item }) => {
   return (
@@ -11,7 +11,7 @@ const ReviewCard = ({ item }) => {
       <Link to={`/businesses/${item.business_id}`}>
         <span>{item.business_name}</span>
       </Link>
-      <span>{starCalculator(item.stars)}</span>
+      <span>{StarCalculator(item.stars)}</span>
       <span className="review-card-text">
         {item.review.length < 76
           ? item.review
