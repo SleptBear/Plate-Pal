@@ -5,12 +5,16 @@ import { useSelector } from "react-redux";
 import "./ImageModal.css";
 import { getSingleImageThunk } from "../../../store/images";
 import ColoredLine from "../../ColoredLine";
+import { Link, NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function ImageModal({ imageId, index }) {
+    const history = useHistory()
     const dispatch = useDispatch();
     const [modalImageId, setModalImageId] = useState(imageId)
     const image = useSelector(state => state.images.singleImage)
     let images = useSelector(state => state.images.images)
+    const user = useSelector((state) => state.session.user);
     const [relatedIndex, setRelatedIndex] = useState(index)
     const { closeModal } = useModal();
     useEffect(() => {
@@ -131,7 +135,34 @@ function ImageModal({ imageId, index }) {
     }
 
     const handleClose = () => {
+        console.log(`images/${image.id}/delete`)
+        console.log(`${image.id}/delete`)
         closeModal()
+    }
+
+    const handleRedirect = () => {
+        history.push(`/images/${image.id}/delete`)
+        closeModal()
+    }
+
+    const renderDeleteChecker = () => {
+        if (image.owner_id === user.id) {
+            return (
+                <>
+                    <br></br>
+                    <div><span className={"image-modal-delete-button"} onClick={handleRedirect}>Delete Photo</span></div>
+                    <br></br>
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <br></br>
+                    <br></br>
+                </>
+            )
+        }
     }
 
     return (
@@ -145,7 +176,7 @@ function ImageModal({ imageId, index }) {
             </div>
             <div className="image-modal-information-container">
                 <div className="image-modal-information-title-container">
-                    <h2 className="image-modal-information-title">{`Photos for ${image.business_name}`}</h2>
+                    <h2 className="image-modal-information-title">Photos for <Link to={`/businesses/${image.business_id}`} onClick={handleClose}>{`${image.business_name}`}</Link></h2>
                     <div className="image-modal-close-button-outer-circle" onClick={handleClose}>
                         <div className="image-modal-close-button"></div>
                     </div>
@@ -158,8 +189,7 @@ function ImageModal({ imageId, index }) {
                 <ColoredLine />
                 {captionChecker()}
                 <p>{`by ${image.user_first_name} ${image.user_last_name[0]}. on ${formattedDate.split(", ")[1]}, ${formattedDate.split(", ")[2].split(" at")[0]}`}</p>
-                <br></br>
-                <br></br>
+                {renderDeleteChecker()}
                 <div className="image-modal-information-related-images-container">
                     <div className="image-modal-information-related-images-grid">
                         {images.map((relatedImage) => {

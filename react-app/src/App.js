@@ -10,7 +10,6 @@ import BusinessDetail from "./components/Business/BusinessDetails";
 import ManageBusinessesIndex from "./components/Business/ManageBusinessesIndex";
 import ManageReviewsIndex from "./components/Review/ManageReviewsIndex";
 import ManageImagesIndex from "./components/Images/ManageImagesIndex";
-import ImageDetail from "./components/Images/ImageDetails";
 import ReviewCreate from "./components/Review/ReviewCreate";
 import BusinessCreate from "./components/Business/BusinessCreate";
 import ReviewDelete from "./components/Review/ReviewDelete";
@@ -42,7 +41,9 @@ function App() {
             <BusinessAll />
           </Route>
           <Route exact path="/businesses/current">
-            <ManageBusinessesIndex />
+            <ProtectedRoute>
+              <ManageBusinessesIndex />
+            </ProtectedRoute>
           </Route>
           <Route exact path="/businesses/search/:searchString">
             <BusinessSearched />
@@ -56,7 +57,9 @@ function App() {
             <BusinessDetail />
           </Route>
           <Route exact path="/businesses/:businessId/delete">
-            <BusinessDelete />
+            <ProtectedRoute>
+              <BusinessDelete />
+            </ProtectedRoute>
           </Route>
           <Route path="/login">
             <LoginFormPage />
@@ -73,29 +76,35 @@ function App() {
             <ImageCreate />
           </Route>
           <Route path="/businesses/:businessId/edit">
-            <BusinessEdit />
+            <ProtectedRoute>
+              <BusinessEdit />
+            </ProtectedRoute>
           </Route>
           <Route path="/reviews/current">
-            <ManageReviewsIndex />
+            <ProtectedRoute>
+              <ManageReviewsIndex />
+            </ProtectedRoute>
           </Route>
           <Route path="/reviews/:reviewId/edit">
-            <ReviewEdit />
+            <ProtectedRoute>
+              <ReviewEdit />
+            </ProtectedRoute>
           </Route>
           <Route path="/reviews/:reviewId/delete">
-            <ReviewDelete />
+            <ProtectedRoute>
+              <ReviewDelete />
+            </ProtectedRoute>
           </Route>
           <Route path="/images/current">
-            <ManageImagesIndex />
+            <ProtectedRoute>
+              <ManageImagesIndex />
+            </ProtectedRoute>
           </Route>
           <Route path="/images/:imageId/delete">
-            <ImageDelete />
+            <ProtectedRoute>
+              <ImageDelete />
+            </ProtectedRoute>
           </Route>
-          <Route path="/images/:imageId">
-            <ImageDetail />
-          </Route>
-          {/* <Route path="/map">
-            <MapPage />
-          </Route> */}
         </Switch>
       )}
     </>
