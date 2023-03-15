@@ -7,7 +7,7 @@
 }
 
 .image-modal-information-container {
-    width: 30%;
+    width: 350px;
     background-color: white;
     border-radius: 0px 10px 10px 0px;
     padding: 24px 24px 24px;
@@ -25,8 +25,42 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 50%;
+    height: 70%;
     background-size: cover;
+}
+
+.image-modal-information-title-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.image-modal-information-title {
+    width: 200px;
+}
+
+.image-modal-close-button {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-image: url("close.png");
+    background-color: rgba(255, 255, 255, 0);
+    background-size: cover;
+}
+
+.image-modal-close-button-outer-circle {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.image-modal-close-button-outer-circle:hover {
+    background-color: rgb(241, 241, 241);
 }
 
 .image-modal-image-wrapper {
