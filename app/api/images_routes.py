@@ -25,7 +25,7 @@ def images_delete(id):
     image = Image.query.get(id)
     if not image:
         return {
-            "message": "Image couldn't be found",
+            "errors": "Image couldn't be found",
             "status_code": 404
         }, 404
 
@@ -38,7 +38,7 @@ def images_delete(id):
         }
     else:
         return {
-            "message": "Forbidden",
+            "errors": "Forbidden",
             "status_code": 403
         }, 403
 
@@ -49,7 +49,7 @@ def get_image_details(id):
     image = Image.query.get(id).to_dict()
     if not image:
         return {
-            "message": "Image couldn't be found",
+            "errors": "Image couldn't be found",
             "status_code": 404
         }, 404
 

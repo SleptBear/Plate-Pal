@@ -50,10 +50,10 @@ const BusinessCreate = () => {
       hours_of_operation: hours_of_operation,
     };
 
-    let createdBusiness = await dispatch(postBusinessThunk(newBusiness));
+    let response = await dispatch(postBusinessThunk(newBusiness));
 
-    if (createdBusiness) {
-      history.push(`/businesses/${createdBusiness.id}`);
+    if (!response.errors) {
+      history.push(`/businesses/${response.id}`);
     }
   };
 
