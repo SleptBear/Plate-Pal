@@ -144,34 +144,22 @@ const BusinessCreate = () => {
       lat,
       lng,
       price,
-      hours_of_operation
+      hours_of_operation,
+      imageURL
     ];
     const fieldsAreNotEmpty = requiredFields.every((field) => field);
 
-    // Check if hours_of_operation are valid
-    // console.log(name,
-    //   category,
-    //   address,
-    //   city,
-    //   state,
-    //   zipcode,
-    //   phone_number,
-    //   website,
-    //   lat,
-    //   lng,
-    //   price,
-    //   formatHoursOfOperation(hours_of_operation),
-    //   fieldsAreNotEmpty
-    // )
+    // Check if all days have data for hours of operation
+    const allDaysHaveData = days.every((day) => hours_of_operation[day]?.open && hours_of_operation[day]?.close);
 
-    if(fieldsAreNotEmpty && allTimesValid){
-      return fieldsAreNotEmpty
-    }else{
-      console.log('fields not valid yet')
+    if (fieldsAreNotEmpty && allTimesValid && allDaysHaveData) {
+      return true;
+    } else {
+      console.log('fields not valid yet');
+      return false;
     }
-
-
   };
+
 
   const formatHoursOfOperation = (hoursObj) => {
     const formatTime = (timeStr) => {
@@ -230,8 +218,9 @@ const BusinessCreate = () => {
     if (createdBusiness) {
       if (imageURL) {
         await dispatch(postImageThunk({
-          business_id: createdBusiness.id,
+          businessId: createdBusiness.id,
           url: imageURL,
+          caption: ''
         }, createdBusiness.id));
       }
 
@@ -596,7 +585,11 @@ const BusinessCreate = () => {
   onChange={handleImageURLChange}
   className="business-form-input"
 />
-{imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" />}
+{imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" style={{
+      width: "320px",
+      height: "180px",
+      objectFit: "cover",
+    }}/>}
         <div>
         </div>
         <button type="submit" disabled={!areFieldsValid()} className="submit-button">Add Business</button>
