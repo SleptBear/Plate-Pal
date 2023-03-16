@@ -27,7 +27,7 @@ const ManageBusinessesIndex = () => {
 
     return (
         <>
-            <div>
+            <div className="manage-businesses-container">
                 {businesses.map((business) => {
                     return (
                         <BusinessCard

@@ -194,8 +194,10 @@ const BusinessEdit = () => {
     const valErrors = [];
 
     if (name.length < 1) valErrors.push("Business name is required");
+    if (name.length > 40) valErrors.push("Maximum characters for a business name is 40")
     if (category.length < 1) valErrors.push("Category is required");
     if (address.length < 1) valErrors.push("Address is required");
+    if (address.length > 64) valErrors.push("Maximum characters for an address is 64 characters")
     if (city.length < 1) valErrors.push("City is required");
     if (state.length < 1) valErrors.push("State is required");
     if (zipcode.toString().length < 1) valErrors.push("Zip Code is required");
