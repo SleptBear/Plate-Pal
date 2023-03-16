@@ -105,31 +105,6 @@ const days = [
   "Sunday",
 ];
 
-const formatHoursOfOperation = (hoursObj) => {
-  const formatTime = (timeStr) => {
-    const time = new Date(`1970-01-01T${timeStr}Z`);
-    const hours = time.getUTCHours();
-    const minutes = time.getUTCMinutes();
-    const period = hours >= 12 ? "pm" : "am";
-    const formattedHours = ((hours + 11) % 12) + 1;
-
-    return `${formattedHours}${minutes === 0 ? "" : `:${minutes}`}${period}`;
-  };
-
-  return days
-    .map((day) => {
-      const openTime = hoursObj[day]?.open;
-      const closeTime = hoursObj[day]?.close;
-
-      if (openTime === "Closed" && closeTime === "Closed") {
-        return `${day}: Closed`;
-      } else {
-        return `${day}: ${formatTime(openTime)}-${formatTime(closeTime)}`;
-      }
-    })
-    .join(", ");
-};
-
 /* --------------------------------------------------------------------------------  */
 
 const BusinessEdit = () => {
@@ -151,8 +126,6 @@ const BusinessEdit = () => {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [hours_of_operation, setHoursOfOperation] = useState("");
-
-  // price hover
   const [price, setPrice] = useState(0);
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -171,6 +144,31 @@ const BusinessEdit = () => {
       ...prev,
       [day]: { ...prev[day], close: time },
     }));
+  };
+
+  const formatHoursOfOperation = (hoursObj) => {
+    const formatTime = (timeStr) => {
+      const time = new Date(`1970-01-01T${timeStr}Z`);
+      const hours = time.getUTCHours();
+      const minutes = time.getUTCMinutes();
+      const period = hours >= 12 ? "pm" : "am";
+      const formattedHours = ((hours + 11) % 12) + 1;
+
+      return `${formattedHours}${minutes === 0 ? "" : `:${minutes}`}${period}`;
+    };
+
+    return days
+      .map((day) => {
+        const openTime = hoursObj[day]?.open;
+        const closeTime = hoursObj[day]?.close;
+
+        if (openTime === "Closed" && closeTime === "Closed") {
+          return `${day}: Closed`;
+        } else {
+          return `${day}: ${formatTime(openTime)}-${formatTime(closeTime)}`;
+        }
+      })
+      .join(", ");
   };
 
   // repopulating input fields
@@ -232,7 +230,7 @@ const BusinessEdit = () => {
 
     setHasSubmitted(true);
 
-    if (Object.values(errors).length > 0) return;
+    if (errors.length) return;
 
     const businessContent = {
       name: name,
@@ -246,22 +244,24 @@ const BusinessEdit = () => {
       lat: lat,
       lng: lng,
       price: price,
-      hours_of_operation: hours_of_operation,
+      hours_of_operation: formatHoursOfOperation(hours_of_operation),
     };
 
     let response = await dispatch(
       editBusinessThunk(businessContent, businessId)
     );
 
-    if (Array.isArray(response.errors)) setErrors(response.errors);
-
-    console.log("RESPONSERESPONSERESPONSERESPONSERESPONSE", response)
-    console.log("RES ERRORS RES ERRORS RES ERRORS RES ERRORS ", response.errors)
+    if (Array.isArray(response)) setErrors(response);
 
     if (!Array.isArray(response)) {
       history.push(`/businesses/${response.id}`);
     }
   };
+
+  // checks for start before or after time, sets valid / invalid
+  const allTimesValid = days.every(
+    (day) => hours_of_operation[day]?.isValid !== false
+  );
 
   return (
     <div>
@@ -489,7 +489,6 @@ const BusinessEdit = () => {
           value={zipcode}
           onChange={(e) => setZipCode(e.target.value)}
         ></input>
-
         <div className="business-form-price-container">
           <span>Select your restaurant average price:</span>
           <div className="price-radios">
@@ -545,8 +544,7 @@ const BusinessEdit = () => {
             </label>
           </div>
         </div>
-
-        <h3>Hours of operation</h3>
+        <h3>Hours of Operation</h3>
         {days.map((day) => (
           <DayHours
             key={day}
@@ -557,7 +555,6 @@ const BusinessEdit = () => {
             setCloseTime={setCloseTime}
           />
         ))}
-
         <button>Update Business</button>
       </form>
     </div>
