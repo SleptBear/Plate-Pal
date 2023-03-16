@@ -42,14 +42,14 @@ const BusinessDetail = () => {
         <span>{business.name}</span>
         {/* new business open */}
         <span>New Business Open</span>
-        <img src={business.images[0]?.url} />
+        <img src={business.images ? business.images[0]?.url : ""} />
         {/* city, state */}
         <span>{`${business.city}, ${business.state}`}</span>
         <Link to={`/businesses/${business.id}/images/new`}>
-          <button>Add Photo</button>
+          <button>Add Image</button>
         </Link>
         <Link to={`/businesses/${business.id}/images`} >
-        <button>{`See all ${business.images.length} photos`}</button>
+        <button>{`See all ${business.images ? business.images.length : ""} images`}</button>
         </Link>
         <Link to={`/businesses/${business.id}/reviews/new`}>
         <button>Write a Review</button>

@@ -17,8 +17,6 @@ const TimePicker = ({ id, value, onChange }) => {
   );
 };
 
-
-
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   const [isValid, setIsValid] = useState(true);
   const isClosed = openTime === 'Closed' && closeTime === 'Closed';
@@ -107,7 +105,7 @@ const BusinessCreate = () => {
 
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zipcode, setZipCode] = useState(0);
+  const [zipcode, setZipCode] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
   const [website, setWebsite] = useState("");
   const [lat, setLat] = useState(0);
@@ -268,7 +266,7 @@ const BusinessCreate = () => {
         <ul className="errors">{/* map errors */}</ul>
         <h2 className="form-title">Hello! Let's begin adding your business</h2>
         <span>
-          We'll use this information to help you claim your Yelp page. Your
+          We'll use this information to help you claim your Plate Pal page. Your
           business will come up automatically if it is already listed.
         </span>
         <div className="business-create-form">
@@ -517,8 +515,8 @@ const BusinessCreate = () => {
         ></input>
         <input
           type="number"
-          placeholder="zipcode"
-          value={zipcode !== 0 ? zipcode : ""}
+          placeholder="Zip Code"
+          value={zipcode}
           onChange={(e) => setZipCode(e.target.value)}
           className="business-form-input"
         ></input>

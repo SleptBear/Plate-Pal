@@ -43,14 +43,123 @@ const ReviewCard = ({ review }) => {
   }
 
   const deleteRender = () => {
-    console.log(user.id === review.owner_id)
-    console.log(user)
     if (user.id === review.owner_id) {
       return (
         <div className="image-modal-delete-button-container">
           <img src={trash.default}></img>
           <div><span className={"image-modal-delete-button"} onClick={handleRedirect}> Delete Review</span></div>
         </div>
+      )
+    }
+  }
+
+  const imagesLinkRender = () => {
+    if (review.images_length > 1) {
+      return (
+        <div className="review-card-images-link-container">
+          <img src={camera.default}></img>
+          <div className="review-card-images-link-text">{review.images_length} images</div>
+        </div>
+      )
+    }
+
+    else if (review.images_length === 1) {
+      return (
+        <Link to={`/reviews/${review.id}/images`}>
+          <div className="review-card-images-link-container">
+            <img src={camera.default}></img>
+            <div className="review-card-images-link-text">{review.images_length} image</div>
+          </div>
+        </Link>
+      )
+    }
+  }
+  let gridColumns
+  let imageHeight
+  if (review.images[0]) {
+    gridColumns = "1fr 1fr"
+    imageHeight="400px"
+  }
+  if (review.images[1]) {
+    gridColumns = "1fr 1fr"
+    imageHeight="400px"
+  }
+  if (review.images[2]) {
+    gridColumns = "1fr 1fr 1fr 1fr"
+    imageHeight="200px"
+  }
+
+  if (review.images[3]) {
+    gridColumns = "1fr 1fr 1fr 1fr"
+    imageHeight="200px"
+  }
+
+  const imageOneRender = () => {
+    if (review.images[0]) {
+      return (
+        <Link to={`/reviews/${review.id}/images`}>
+          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[0].url}")`}}></div>
+        </Link>
+      )
+    }
+    return (
+      <div></div>
+    )
+  }
+
+
+  const imageTwoRender = () => {
+    if (review.images[1]) {
+      return (
+        <Link to={`/reviews/${review.id}/images`}>
+          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[1].url}")`}}></div>
+        </Link>
+      )
+    }
+    return (
+      <div></div>
+    )
+  }
+
+  const imageThreeRender = () => {
+    if (review.images[2]) {
+      return (
+        <Link to={`/reviews/${review.id}/images`}>
+          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[2].url}")`}}></div>
+        </Link>
+      )
+    }
+    return (
+      <div></div>
+    )
+  }
+
+  const imageFourRender = () => {
+    if (review.images[3]) {
+      return (
+        <Link to={`/reviews/${review.id}/images`}>
+          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[3].url}")`}}></div>
+        </Link>
+      )
+    }
+    return (
+      <div></div>
+    )
+  }
+
+
+  const imagesRender = () => {
+    if (review.images.length > 0) {
+      return (
+        <>
+          <div className="review-card-images-container" style={{"grid-template-columns": `${gridColumns}`}} >
+            {imageOneRender()}
+            {imageTwoRender()}
+            {imageThreeRender()}
+            {imageFourRender()}
+            <br></br>
+          </div>
+        </>
       )
     }
   }
@@ -81,30 +190,12 @@ const ReviewCard = ({ review }) => {
 
       <br></br>
 
-      <div className="review-card-photos-link-container">
-        <img src={camera.default}></img>
-        <div className="review-card-photos-link-text">{review.images_length} photos</div>
-      </div>
-
+      {imagesLinkRender()}
 
       <br></br>
-      <div className="review-card-photos-review">{review.review}</div>
+      <div className="review-card-images-review">{review.review}</div>
       <br></br>
-      <div className="review-card-photos-container">
-        <Link to={`/reviews/${review.id}/images`}>
-          <img src={review.images[0]?.url}></img>
-        </Link>
-        <Link to={`/reviews/${review.id}/images`}>
-          <img src={review.images[1]?.url}></img>
-        </Link>
-        <Link to={`/reviews/${review.id}/images`}>
-          <img src={review.images[2]?.url}></img>
-        </Link>
-        <Link to={`/reviews/${review.id}/images`}>
-          <img src={review.images[3]?.url}></img>
-        </Link>
-      </div>
-      <br></br>
+      {imagesRender()}
     </div>
   );
 };

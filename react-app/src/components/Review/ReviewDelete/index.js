@@ -19,6 +19,8 @@ function ReviewDelete() {
 
   return (
     <>
+      <br></br>
+      <br></br>
       <div className="delete-form-container">
         <form className={"delete-form"} onSubmit={handleSubmit}>
           <h2 className="delete-form-title">Confirm Delete</h2>

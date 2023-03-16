@@ -1,11 +1,9 @@
 .review-card {
-    width: 50%;
+    width: 800px;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    background-color: #f5f5f5;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 .review-card h2 {
@@ -34,7 +32,7 @@
     left: 10px;
 }
 
-.review-card-photos-container img{
+.review-card-images-container img{
     height: 200px;
 }
 
@@ -58,16 +56,30 @@
     color: rgba(110,112,114,1);
 }
 
-.review-card-photos-link-container{
+/* .review-card-rating{
+
+} */
+
+.review-card-images-link-container{
     display: flex;
     align-items: center;
 }
 
-.review-card-photos-link-container img{
+.review-card-images-link-container img{
     height: 18px;
 }
 
-.review-card-photos-link-text{
+.review-card-images-link-text{
     position: relative;
     left: 10px;
+}
+
+.review-card-images-container div{
+    border-radius: 10px;
+    background-size: cover;
+}
+
+.review-card-images-container {
+    display: grid;
+    gap: 10px;
 }

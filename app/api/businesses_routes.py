@@ -209,7 +209,7 @@ def update_business(id):
     business = Business.query.get(id)
     if not business:
         return {
-            "errors": "Business couldn't be found",
+            "errors": ["Business couldn't be found"],
             "status_code": 404
         }, 404
 
@@ -234,7 +234,7 @@ def update_business(id):
 
     else:
         {
-            "errors": "Forbidden",
+            "errors": ["Forbidden"],
             "status_code": 403
         }, 403
 

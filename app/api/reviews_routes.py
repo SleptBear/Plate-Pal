@@ -17,10 +17,17 @@ def reviews_current():
     reviews = [review.to_dict() for review in review_query.all()]
 
     for review in reviews:
+        owner = User.query.get(review["owner_id"])
+        images_count=len(owner.images)
+        owner=owner.to_dict()
         images_query = db.session.query(Image).filter(
-            Image.review_id == review["id"])
+            Image.review_id == review['id'])
         images = images_query.all()
-        review["images"] = [image.to_dict() for image in images]
+        review["images_length"] = len(images)
+        review['images'] = [image.to_dict() for image in images]
+        review['owner_first_name'] = owner["first_name"]
+        review['owner_last_name'] = owner["last_name"]
+        review["owner_images_count"] = images_count
 
     return {'userReviews': {review["id"]: review for review in reviews}}
 
