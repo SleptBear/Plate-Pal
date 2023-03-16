@@ -83,3 +83,46 @@
     display: grid;
     gap: 10px;
 }
+
+.review-card-manage-buttons-container{
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.review-card-delete-button {
+    text-decoration: underline;
+    color: rgba(2, 122, 151, 1);
+    cursor: pointer;
+    width: auto;
+}
+
+.review-card-delete-button-container {
+    display: flex;
+    align-items: center;
+}
+
+
+.review-card-edit-button {
+    text-decoration: underline;
+    color: rgba(2, 122, 151, 1);
+    cursor: pointer;
+    width: auto;
+}
+
+.review-card-edit-button-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.review-card-edit-button-container i {
+    font-size: 18px;
+    color: rgba(2, 122, 151, 1);
+}
+
+.review-card-delete-button-container i {
+    font-size: 18px;
+    color: rgba(2, 122, 151, 1);
+}
