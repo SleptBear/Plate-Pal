@@ -8,25 +8,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x yellow"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x yellow"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
       </span>
@@ -36,25 +36,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x yellow"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x yellow"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x yellow-gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x yellow-gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
       </span>
@@ -64,25 +64,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gold"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gold"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gold"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gold"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gold"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gold"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
       </span>
@@ -92,25 +92,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gold"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gold"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gold"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gold"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gold-gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gold-gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
       </span>
@@ -120,25 +120,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x orange"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x orange"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x orange"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x orange"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x orange"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x orange"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
       </span>
@@ -148,25 +148,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x orange"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x orange"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x orange"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x orange"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x orange"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x orange"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x orange-gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x orange-gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
       </span>
@@ -175,25 +175,25 @@ const StarCalculator = (rating) => {
   if ((Math.round(rating * 2) / 2).toFixed(1) === "4.0") {
     return (
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
     );
@@ -202,25 +202,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
       <span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse "></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse "></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x amber-gray"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x amber-gray"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
       </span>
@@ -230,25 +230,25 @@ const StarCalculator = (rating) => {
     return (
       <span>
         <div></div>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x red"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x red"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x red"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x red"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x red"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x red"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x red"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x red"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
-        <span class="fa-stack">
-          <i class="fas fa-square fa-stack-2x red"></i>
-          <i class="fas fa-star fa-stack-1x fa-inverse"></i>
+        <span className="fa-stack">
+          <i className="fas fa-square fa-stack-2x red"></i>
+          <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
       </span>
     );
