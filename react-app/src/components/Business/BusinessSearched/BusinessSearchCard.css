@@ -57,7 +57,7 @@
   cursor: "pointer"!important;
 }
 
-.active {
+.highlight {
   border: 2px solid lightblue;
   position: relative;
   right: 2px;
