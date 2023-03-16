@@ -56,10 +56,6 @@
     color: rgba(110,112,114,1);
 }
 
-/* .review-card-rating{
-
-} */
-
 .review-card-images-link-container{
     display: flex;
     align-items: center;
@@ -125,4 +121,32 @@
 .review-card-delete-button-container i {
     font-size: 18px;
     color: rgba(2, 122, 151, 1);
+}
+
+.review-card-add-photo-button{
+    width: 80px;
+    padding: 5px;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #666;
+    background: #fff;
+    border: 1px solid #ccc;
+    transition: all 0.6s;
+    transition-property: background-color, color, background-position, background-size, border-color, color;
+}
+
+.review-card-add-photo-button:hover{
+    cursor: pointer;
+    color: rgba(2, 122, 151, 1);
+    border: 1px solid rgba(2, 122, 151, 1);
+}
+
+.review-card-photos-buttons-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 180px;
 }

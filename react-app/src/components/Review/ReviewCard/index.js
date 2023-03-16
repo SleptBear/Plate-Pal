@@ -46,6 +46,10 @@ const ReviewCard = ({ review }) => {
     history.push(`/reviews/${review.id}/edit`)
   }
 
+  const handleAddImageRedirect = () => {
+    history.push(`/reviews/${review.id}/images/new`)
+  }
+
 
   const deleteRender = () => {
     if (user.id === review.owner_id) {
@@ -65,6 +69,19 @@ const ReviewCard = ({ review }) => {
           <i className="fa-solid fa-pen-to-square"></i>
           &nbsp; <div><span className={"review-card-edit-button"} onClick={handleEditRedirect}> Edit Review</span></div>
         </div>
+      )
+    }
+  }
+
+
+
+  const addPhotoRender = () => {
+    if (user.id === review.owner_id) {
+      return (
+        <button className="review-card-add-photo-button">
+          <i className="fa-solid fa-plus"></i>
+          &nbsp; <div><span onClick={handleAddImageRedirect}> image</span></div>
+        </button>
       )
     }
   }
@@ -213,7 +230,10 @@ const ReviewCard = ({ review }) => {
 
       <br></br>
 
-      {imagesLinkRender()}
+      <div className="review-card-photos-buttons-container">
+        {imagesLinkRender()}
+        {addPhotoRender()}
+      </div>
 
       <br></br>
       <div className="review-card-images-review">{review.review}</div>
