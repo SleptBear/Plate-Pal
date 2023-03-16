@@ -1,11 +1,23 @@
 import { Link } from "react-router-dom";
 import "./BusinessSearchCard.css";
 import StarCalculator from "./StarCalculator.js";
+import { useState } from "react";
 
-const BusinessSearchCard = ({ business }) => {
+const BusinessSearchCard = ({ selected, business, className}) => {
+  console.log(selected)
+  const [selectedClass, setSelectedClass] = useState("")
+  let active = ""
   if (!business) return null;
-
-
+  if(selected) {
+    if(selected.id === business.id) {
+      active += "active"
+    }
+  }
+  // if (business.id = selected.id) {
+  //   setSelectedClass("selected")
+  // } else{
+  //   setSelectedClass("")
+  // }
   // handle hours of operations closed vs open
   // conditionally render it onto the card
   // const today = new Date()
@@ -13,7 +25,7 @@ const BusinessSearchCard = ({ business }) => {
   // console.log("HOURS OF OPS", business.hours_of_operation)
 
   return (
-    <div className="business-search-card-container">
+    <div id={className} className={`business-search-card-container ${active}`}>
       <div className="business-search-img">
         <img src={business.images[0]?.url}></img>
       </div>

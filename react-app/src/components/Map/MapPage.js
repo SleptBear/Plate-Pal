@@ -11,6 +11,8 @@ export const MapPage = (props) => {
         google={props.google}
         apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         searchString={props.searchString}
+        selected={props.selected}
+        setSelected={props.setSelected}
       />
     </div>
   );

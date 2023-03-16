@@ -16,7 +16,7 @@ const BusinessSearched = () => {
   // frontend filtering states
   const [userFiltered, setUserFiltered] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState([]);
-
+  const [selected, setSelected] = useState(null);
   // price hover effect
   const [priceFilter, setPriceFilter] = useState(0);
   const [hover, setHover] = useState(0);
@@ -42,7 +42,7 @@ const BusinessSearched = () => {
   // handle user submitting filters
   const onSubmit = (e) => {
     e.preventDefault();
-
+    setSelected(null)
     setUserFiltered(true);
 
     // price filtering
@@ -124,6 +124,7 @@ const BusinessSearched = () => {
     setUserFiltered(false);
     setPriceFilter(0);
     setHover(0);
+    setSelected(null)
     setCategoryFilter([]);
 
     // unchecking boxes
@@ -163,7 +164,10 @@ const BusinessSearched = () => {
                   type="button"
                   key={index}
                   className={index <= (hover || priceFilter) ? "on" : "off"}
-                  onClick={() => setPriceFilter(index)}
+                  onClick={() => {
+                    setSelected(null)
+                    setPriceFilter(index)}
+                  }
                   onMouseEnter={() => setHover(index)}
                   onMouseLeave={() => setHover(priceFilter)}
                 >
@@ -180,33 +184,33 @@ const BusinessSearched = () => {
           {/* convert to filteredBUsinesses */}
           {userFiltered
             ? filteredCategories.map((category, i) => (
-                <div>
-                  <label>
-                    <input
-                      id={i}
-                      type="checkbox"
-                      className="search-filter-checkboxes"
-                      value={category}
-                      onChange={(e) => handleCheckBoxCategory(e, i)}
-                    ></input>
-                    <span>{category}</span>
-                  </label>
-                </div>
-              ))
+              <div>
+                <label>
+                  <input
+                    id={i}
+                    type="checkbox"
+                    className="search-filter-checkboxes"
+                    value={category}
+                    onChange={(e) => handleCheckBoxCategory(e, i)}
+                  ></input>
+                  <span>{category}</span>
+                </label>
+              </div>
+            ))
             : initialCategories.map((category, i) => (
-                <div>
-                  <label>
-                    <input
-                      id={i}
-                      type="checkbox"
-                      className="search-filter-checkboxes"
-                      value={category}
-                      onChange={(e) => handleCheckBoxCategory(e, i)}
-                    ></input>
-                    <span>{category}</span>
-                  </label>
-                </div>
-              ))}
+              <div>
+                <label>
+                  <input
+                    id={i}
+                    type="checkbox"
+                    className="search-filter-checkboxes"
+                    value={category}
+                    onChange={(e) => handleCheckBoxCategory(e, i)}
+                  ></input>
+                  <span>{category}</span>
+                </label>
+              </div>
+            ))}
           <br></br>
           <hr></hr>
           <br></br>
@@ -236,12 +240,19 @@ const BusinessSearched = () => {
           </div>
         ) : (
           searchResult.map((business) => {
-            return <BusinessSearchCard business={business} key={business.id} />;
+            return (<>
+              <div onClick={()=>{setSelected(business)}}>
+                <BusinessSearchCard selected={selected} business={business} key={business.id} />
+              </div>
+            </>
+
+            )
+
           })
         )}
       </div>
       <div className="business-search-map-container">
-        <MapPage searchString={searchString} />
+        <MapPage searchString={searchString} selected={selected} setSelected={setSelected} />
       </div>
     </div>
   );
