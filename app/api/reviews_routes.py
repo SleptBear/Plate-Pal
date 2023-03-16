@@ -17,6 +17,7 @@ def reviews_current():
     reviews = [review.to_dict() for review in review_query.all()]
 
     for review in reviews:
+        business = Business.query.get(review["business_id"])
         owner = User.query.get(review["owner_id"])
         images_count=len(owner.images)
         owner=owner.to_dict()
@@ -28,6 +29,7 @@ def reviews_current():
         review['owner_first_name'] = owner["first_name"]
         review['owner_last_name'] = owner["last_name"]
         review["owner_images_count"] = images_count
+        review["business_name"] = business.name
 
     return {'userReviews': {review["id"]: review for review in reviews}}
 

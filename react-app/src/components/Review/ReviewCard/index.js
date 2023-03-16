@@ -38,20 +38,37 @@ const ReviewCard = ({ review }) => {
     return null
   }
 
-  const handleRedirect = () => {
+  const handleDeleteRedirect = () => {
     history.push(`/reviews/${review.id}/delete`)
   }
+
+  const handleEditRedirect = () => {
+    history.push(`/reviews/${review.id}/edit`)
+  }
+
 
   const deleteRender = () => {
     if (user.id === review.owner_id) {
       return (
-        <div className="image-modal-delete-button-container">
-          <img src={trash.default}></img>
-          <div><span className={"image-modal-delete-button"} onClick={handleRedirect}> Delete Review</span></div>
+        <div className="review-card-delete-button-container">
+          <i className="fa-solid fa-trash"></i>
+          &nbsp;<div><span className={"review-card-delete-button"} onClick={handleDeleteRedirect}> Delete Review</span></div>
         </div>
       )
     }
   }
+
+  const editRender = () => {
+    if (user.id === review.owner_id) {
+      return (
+        <div className="review-card-edit-button-container">
+          <i className="fa-solid fa-pen-to-square"></i>
+          &nbsp; <div><span className={"review-card-edit-button"} onClick={handleEditRedirect}> Edit Review</span></div>
+        </div>
+      )
+    }
+  }
+
 
   const imagesLinkRender = () => {
     if (review.images_length > 1) {
@@ -78,27 +95,27 @@ const ReviewCard = ({ review }) => {
   let imageHeight
   if (review.images[0]) {
     gridColumns = "1fr 1fr"
-    imageHeight="400px"
+    imageHeight = "400px"
   }
   if (review.images[1]) {
     gridColumns = "1fr 1fr"
-    imageHeight="400px"
+    imageHeight = "400px"
   }
   if (review.images[2]) {
     gridColumns = "1fr 1fr 1fr 1fr"
-    imageHeight="200px"
+    imageHeight = "200px"
   }
 
   if (review.images[3]) {
     gridColumns = "1fr 1fr 1fr 1fr"
-    imageHeight="200px"
+    imageHeight = "200px"
   }
 
   const imageOneRender = () => {
     if (review.images[0]) {
       return (
         <Link to={`/reviews/${review.id}/images`}>
-          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[0].url}")`}}></div>
+          <div style={{ "height": `${imageHeight}`, "background-image": `url("${review.images[0].url}")` }}></div>
         </Link>
       )
     }
@@ -112,7 +129,7 @@ const ReviewCard = ({ review }) => {
     if (review.images[1]) {
       return (
         <Link to={`/reviews/${review.id}/images`}>
-          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[1].url}")`}}></div>
+          <div style={{ "height": `${imageHeight}`, "background-image": `url("${review.images[1].url}")` }}></div>
         </Link>
       )
     }
@@ -125,7 +142,7 @@ const ReviewCard = ({ review }) => {
     if (review.images[2]) {
       return (
         <Link to={`/reviews/${review.id}/images`}>
-          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[2].url}")`}}></div>
+          <div style={{ "height": `${imageHeight}`, "background-image": `url("${review.images[2].url}")` }}></div>
         </Link>
       )
     }
@@ -138,7 +155,7 @@ const ReviewCard = ({ review }) => {
     if (review.images[3]) {
       return (
         <Link to={`/reviews/${review.id}/images`}>
-          <div style={{"height": `${imageHeight}`,"background-image":`url("${review.images[3].url}")`}}></div>
+          <div style={{ "height": `${imageHeight}`, "background-image": `url("${review.images[3].url}")` }}></div>
         </Link>
       )
     }
@@ -152,7 +169,7 @@ const ReviewCard = ({ review }) => {
     if (review.images.length > 0) {
       return (
         <>
-          <div className="review-card-images-container" style={{"grid-template-columns": `${gridColumns}`}} >
+          <div className="review-card-images-container" style={{ "grid-template-columns": `${gridColumns}` }} >
             {imageOneRender()}
             {imageTwoRender()}
             {imageThreeRender()}
@@ -163,6 +180,8 @@ const ReviewCard = ({ review }) => {
       )
     }
   }
+
+
 
   return (
     <div className="review-card">
@@ -177,7 +196,11 @@ const ReviewCard = ({ review }) => {
             <img src={imageIcon.default}></img>
             &nbsp;<div>{review.owner_images_count}</div>
           </div>
-          {deleteRender()}
+          <div className="review-card-manage-buttons-container">
+            {deleteRender()}
+            {editRender()}
+          </div>
+
         </div>
       </div>
 
