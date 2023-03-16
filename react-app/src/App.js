@@ -77,6 +77,11 @@ function App() {
           <Route exact path="/businesses/:businessId/images">
             <BusinessImagesIndex />
           </Route>
+          <Route exact path="/reviews/:reviewId/images/new">
+            <ProtectedRoute>
+              <ImageCreate />
+            </ProtectedRoute>
+          </Route>
           <Route exact path="/businesses/:businessId/images/new">
             <ProtectedRoute>
               <ImageCreate />
@@ -87,7 +92,7 @@ function App() {
               <BusinessEdit />
             </ProtectedRoute>
           </Route>
-          <Route path="/reviews/current">
+          <Route exact path="/reviews/current">
             <ProtectedRoute>
               <ManageReviewsIndex />
             </ProtectedRoute>
@@ -105,7 +110,11 @@ function App() {
               <ReviewDelete />
             </ProtectedRoute>
           </Route>
-
+          <Route exact path="/reviews/:reviewId/images/new">
+            <ProtectedRoute>
+              <ImageCreate />
+            </ProtectedRoute>
+          </Route>
           <Route path="/images/current">
             <ProtectedRoute>
               <ManageImagesIndex />

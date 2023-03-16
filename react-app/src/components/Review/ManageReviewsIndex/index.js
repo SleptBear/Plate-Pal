@@ -26,7 +26,7 @@ const ManageReviewsIndex = () => {
         (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
     );
 
-
+        
 
     return (
         <>
@@ -40,10 +40,13 @@ const ManageReviewsIndex = () => {
                 <div>
                     {reviews.map((review) => {
                         return (
-                            <ReviewCard
-                                review={review}
-                                key={review.id}
-                            />
+                            <>
+                                <h3 className="manage-reviews-review-title">Review for {review.business_name}</h3>
+                                <ReviewCard
+                                    review={review}
+                                    key={review.id}
+                                />
+                            </>
                         );
                     })}
                 </div>
