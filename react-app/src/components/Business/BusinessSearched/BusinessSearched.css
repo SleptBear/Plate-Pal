@@ -1,22 +1,25 @@
 .business-search-container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   width: 612px;
   box-sizing: border-box;
   padding: 20px;
-  height: 100%;
+  height: calc(100vw - 110px);
+  overflow-y: hidden;
   background-color: white;
-
-  overflow-y: scroll;
 }
 
 .business-search-filters {
   display: flex;
   width: 170px;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .business-search-results {
-  width: 450px;
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
 }
 
 /* .business-search-map-container {
