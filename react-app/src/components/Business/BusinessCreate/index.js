@@ -6,16 +6,22 @@ import { postImageThunk } from "../../../store/images"
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete"
 import "./BusinessCreate.css";
 
-const TimePicker = ({ id, value, onChange }) => {
+const TimePicker = ({ id, value, onChange, isClosed }) => {
+
   return (
     <input
       type="time"
       id={id}
       value={value}
       onChange={onChange}
+      style={isClosed ? undefined : inputStyle(value)}
     ></input>
   );
 };
+
+const inputStyle = (value) => ({
+  borderColor: value ? "initial" : "red",
+});
 
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   const [isValid, setIsValid] = useState(true);
@@ -69,6 +75,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
         onChange={handleOpenTimeChange}
         disabled={isClosed}
         className="time-picker"
+        isClosed={isClosed}
       />
       <label htmlFor={`${day}-close`} className="separator">to</label>
       <TimePicker
@@ -77,6 +84,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
         onChange={handleCloseTimeChange}
         disabled={isClosed}
         className="time-picker"
+        isClosed={isClosed}
       />
       <label htmlFor={`${day}-closed`} className="closed-label">Closed</label>
       <input
@@ -99,7 +107,6 @@ const BusinessCreate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [errors, setErrors] = useState([]);
-
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
 
@@ -123,12 +130,16 @@ const BusinessCreate = () => {
   const [hover, setHover] = useState(0);
   const [imageURL, setImageURL] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [displayErrors, setDisplayErrors] = useState([]);
 
   const handleImageURLChange = (e) => {
     const url = e.target.value;
     setImageURL(url);
     setImagePreview(url);
+
+
   };
+
 
   const areFieldsValid = () => {
     // Check if all fields have values
@@ -213,9 +224,14 @@ const BusinessCreate = () => {
       hours_of_operation: formatHoursOfOperation(hours_of_operation),
     };
 
+
+
+
     let createdBusiness = await dispatch(postBusinessThunk(newBusiness));
+
     console.log(createdBusiness)
-    if (createdBusiness) {
+
+    if (createdBusiness && createdBusiness.errors.length === 0) {
       if (imageURL) {
         await dispatch(postImageThunk({
           businessId: createdBusiness.id,
@@ -226,7 +242,7 @@ const BusinessCreate = () => {
 
       history.push(`/businesses/${createdBusiness.id}`);
     }else{
-      new alert(`${createdBusiness.errors}`)
+      setDisplayErrors(createdBusiness.errors);
     }
   };
 
@@ -252,7 +268,9 @@ const BusinessCreate = () => {
     <div className="business-create-container">
 
       <form onSubmit={onSubmit} className="business-form">
-        <ul className="errors">{/* map errors */}</ul>
+        <ul className="errors">{displayErrors.map((error, index) => (
+            <li key={index}>{error}</li>
+          ))}</ul>
         <h2 className="form-title">Hello! Let's begin adding your business</h2>
         <span>
           We'll use this information to help you claim your Plate Pal page. Your
@@ -292,18 +310,21 @@ const BusinessCreate = () => {
 
         </div>
         <input
-          type="text"
-          placeholder="Your business name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="business-form-input"
-        ></input>
+  type="text"
+  placeholder="Your business name"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+  className="business-form-input"
+  style={inputStyle(name)}
+  maxLength="40" // Add maxLength attribute to limit the characters
+/>
         <input
           type="text"
           placeholder="Business phone number"
           value={phone_number}
           onChange={(e) => setPhoneNumber(e.target.value)}
           className="business-form-input"
+          style={inputStyle(phone_number)}
         ></input>
         <input
           type="text"
@@ -311,6 +332,7 @@ const BusinessCreate = () => {
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
           className="business-form-input"
+          style={inputStyle(website)}
         ></input>
         <span>
           Help customers find your product and service. You can
@@ -321,6 +343,7 @@ const BusinessCreate = () => {
           placeholder='Select a category'
           onChange={(e) => setCategory(e.target.value)}
           className="business-form-input"
+          style={inputStyle(category)}
         >
           <option value={null}>Select a Category </option>
           <option value="Afghan">Afghan</option>
@@ -487,6 +510,7 @@ const BusinessCreate = () => {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           className="business-form-input"
+          style={inputStyle(address)}
         ></input>
         <input
           type="text"
@@ -494,6 +518,7 @@ const BusinessCreate = () => {
           value={city}
           onChange={(e) => setCity(e.target.value)}
           className="business-form-input"
+          style={inputStyle(city)}
         ></input>
         <input
           type="text"
@@ -501,6 +526,7 @@ const BusinessCreate = () => {
           value={state}
           onChange={(e) => setState(e.target.value)}
           className="business-form-input"
+          style={inputStyle(state)}
         ></input>
         <input
           type="number"
@@ -508,6 +534,7 @@ const BusinessCreate = () => {
           value={zipcode}
           onChange={(e) => setZipCode(e.target.value)}
           className="business-form-input"
+          style={inputStyle(phone_number)}
         ></input>
         <div className="business-form-price-container">
           <span>Select your restaurant average price:</span>
@@ -584,6 +611,7 @@ const BusinessCreate = () => {
   value={imageURL}
   onChange={handleImageURLChange}
   className="business-form-input"
+  style={inputStyle(imageURL)}
 />
 {imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" style={{
       width: "320px",
@@ -592,7 +620,7 @@ const BusinessCreate = () => {
     }}/>}
         <div>
         </div>
-        <button type="submit" disabled={!areFieldsValid()} className="submit-button">Add Business</button>
+        <button type="submit" className="submit-button">Add Business</button>
       </form>
     </div>
   );
