@@ -104,7 +104,7 @@ def seed_images():
 
     db.session.add(Image(
         url="https://images.prismic.io/mamas-fish-house/f532d545-6ac8-4a4a-87a0-8f104e9624f2_hero_stuffedfish_topview.jpg?auto=compress,format",
-        owner_id=2,
+        owner_id=4,
         business_id=2,
         review_id=4
     ))
@@ -118,14 +118,14 @@ def seed_images():
 
     db.session.add(Image(
         url="https://images.otstatic.com/prod1/42082637/2/huge.jpg",
-        owner_id=4,
+        owner_id=1,
         business_id=4,
         review_id=10
     ))
 
     db.session.add(Image(
         url="https://www.theworlds50best.com/discovery/filestore/jpg/CommandersPalace-NewOrleans-USA-01.jpg",
-        owner_id=5,
+        owner_id=1,
         business_id=5,
         review_id=13
     ))
@@ -139,21 +139,21 @@ def seed_images():
 
     db.session.add(Image(
         url="https://images.seattletimes.com/wp-content/uploads/2022/03/03142022_canlissnacks_161527.jpg?d=780x543",
-        owner_id=2,
+        owner_id=1,
         business_id=7,
         review_id=19
     ))
 
     db.session.add(Image(
         url="https://s3-media0.fl.yelpcdn.com/bphoto/pRvaKZbCIa5I0CWMJHNMOw/l.jpg",
-        owner_id=3,
+        owner_id=1,
         business_id=8,
         review_id=22
     ))
 
     db.session.add(Image(
         url="https://www.seriouseats.com/thmb/wc-CgN0yYUBJZGzrf6Bs5ozm9iA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__08__20140826-fried-and-true-hattie-bs-hot-chicken-evan-sung-812d8599262148aaa9732285fb8d2dbe.jpg",
-        owner_id=4,
+        owner_id=1,
         business_id=9,
         review_id=25
     ))

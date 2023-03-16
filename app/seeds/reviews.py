@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_reviews():
-    
+
     db.session.add(Review(
         review="The food was excellent and the service was great. The ambiance was also very nice. I highly recommend this place for a special occasion.",
         stars=5,
@@ -191,7 +191,7 @@ def seed_reviews():
     db.session.add(Review(
         review="The Capital Grille is a top-notch steakhouse! The steak was cooked perfectly to my liking and the sides were amazing as well. The service was fantastic and the atmosphere is great. Highly recommend!",
         stars=5,
-        owner_id=1,
+        owner_id=5,
         business_id=10,
     ))
     db.session.add(Review(
@@ -231,7 +231,7 @@ def seed_reviews():
     db.session.add(Review(
         review="Blue Hill at Stone Barns is one of the most incredible dining experiences I've ever had. The farm-to-table concept is executed perfectly, and the ingredients are so fresh and delicious. The service is also impeccable. Highly recommend!",
         stars=5,
-        owner_id=1,
+        owner_id=2,
         business_id=12,
     ))
     db.session.add(Review(
@@ -250,7 +250,7 @@ def seed_reviews():
     db.session.add(Review(
         review="Bar La Grassa has some of the best Italian food I've ever had. The pasta is homemade and so delicious, and the menu has so many great options. The service is also excellent. Highly recommend!",
         stars=5,
-        owner_id=1,
+        owner_id=3,
         business_id=13,
     ))
 
@@ -271,7 +271,7 @@ def seed_reviews():
     db.session.add(Review(
         review="Coi is an incredible restaurant with amazing food and service. The flavors are so unique and delicious, and the plating is beautiful. Definitely a must-visit for any foodie!",
         stars=5,
-        owner_id=1,
+        owner_id=4,
         business_id=14,
     ))
 
@@ -292,7 +292,7 @@ def seed_reviews():
     db.session.add(Review(
         review="Osteria Mozza has some of the best Italian food in LA. The pasta dishes are all amazing, and the flavors are so authentic. The service is also great. Highly recommend!",
         stars=5,
-        owner_id=1,
+        owner_id=4,
         business_id=15,
     ))
 
