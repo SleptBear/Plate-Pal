@@ -46,10 +46,12 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   };
 
   const validateTimes = (newOpenTime, newCloseTime) => {
-    if (newOpenTime === 'Closed' || newCloseTime === 'Closed') {
+    if (newOpenTime === 'Closed' || newCloseTime === 'Closed' ) {
       setIsValid(true);
       return;
     }
+
+    // console.log(newOpenTime, newCloseTime)
 
     const openTimeDate = new Date(`1970-01-01T${newOpenTime}Z`);
     const closeTimeDate = new Date(`1970-01-01T${newCloseTime}Z`);
@@ -149,23 +151,28 @@ const BusinessCreate = () => {
     const fieldsAreNotEmpty = requiredFields.every((field) => field);
 
     // Check if hours_of_operation are valid
-    console.log(name,
-      category,
-      address,
-      city,
-      state,
-      zipcode,
-      phone_number,
-      website,
-      lat,
-      lng,
-      price,
-      formatHoursOfOperation(hours_of_operation),
-      fieldsAreNotEmpty
-    )
+    // console.log(name,
+    //   category,
+    //   address,
+    //   city,
+    //   state,
+    //   zipcode,
+    //   phone_number,
+    //   website,
+    //   lat,
+    //   lng,
+    //   price,
+    //   formatHoursOfOperation(hours_of_operation),
+    //   fieldsAreNotEmpty
+    // )
+
+    if(fieldsAreNotEmpty && allTimesValid){
+      return fieldsAreNotEmpty
+    }else{
+      console.log('fields not valid yet')
+    }
 
 
-    return fieldsAreNotEmpty
   };
 
   const formatHoursOfOperation = (hoursObj) => {
@@ -195,12 +202,12 @@ const BusinessCreate = () => {
 
   const setOpenTime = (day, time) => {
     setHoursOfOperation(prev => ({ ...prev, [day]: { ...prev[day], open: time } }));
-    console.log(formatHoursOfOperation(hours_of_operation))
+    // console.log(formatHoursOfOperation(hours_of_operation))
   };
 
   const setCloseTime = (day, time) => {
     setHoursOfOperation(prev => ({ ...prev, [day]: { ...prev[day], close: time } }));
-    console.log(formatHoursOfOperation(hours_of_operation))
+    // console.log(formatHoursOfOperation(hours_of_operation))
   };
 
   const onSubmit = async (e) => {
@@ -221,14 +228,18 @@ const BusinessCreate = () => {
     };
 
     let createdBusiness = await dispatch(postBusinessThunk(newBusiness));
+    console.log(createdBusiness)
     if (createdBusiness) {
       if (imageURL) {
         await dispatch(postImageThunk({
           business_id: createdBusiness.id,
           url: imageURL,
-        }));
+        }, createdBusiness.id));
       }
+
       history.push(`/businesses/${createdBusiness.id}`);
+    }else{
+      new alert(`${createdBusiness.errors}`)
     }
   };
 
@@ -241,8 +252,7 @@ const BusinessCreate = () => {
     setCoordinates(latLng);
     setLat(latLng.lat)
     setLng(latLng.lng)
-    console.log(value.split(', '))
-    console.log(latLng)
+
   };
 
 
