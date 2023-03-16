@@ -74,6 +74,11 @@
   color: red;
   }
 
+  .red-border {
+    border: 2px solid red;
+  }
+
+
   .validation-message{
     color:red;
     font-weight: bold;
