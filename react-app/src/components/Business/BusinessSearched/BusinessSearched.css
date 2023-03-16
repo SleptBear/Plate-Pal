@@ -84,7 +84,3 @@
 .search-filter-checkboxes {
   cursor: pointer;
 }
-
-.selected {
-  background-color: red;
-}
