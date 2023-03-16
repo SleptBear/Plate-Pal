@@ -1,9 +1,10 @@
 #modal {
   position: fixed;
-  top: 70px;
+  min-height: 40vw;
+  top: 60px;
+  bottom: 20px;
   right: 0;
   left: 0;
-  bottom: 0;
   display: flex;
   margin: 40px;
   justify-content: center;
