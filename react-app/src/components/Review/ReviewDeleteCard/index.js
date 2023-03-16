@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import { getImagesAction } from "../../../store/images";
 import StarCalculator from "../../Business/BusinessSearched/StarCalculator"
 import * as camera from "./camera.png"
-import './ReviewCard.css'
+import './ReviewDeleteCard.css'
 import * as trash from "../../Images/ImageModal/trash.png"
 import * as imageIcon from "./image.png"
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ReviewCard = ({ review }) => {
+const ReviewDeleteCard = ({ review }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const user = useSelector(state => state.session.user)
@@ -202,37 +202,10 @@ const ReviewCard = ({ review }) => {
 
   return (
     <div className="review-card">
-
-      <div className="review-card-owner-container">
-        <div className="review-card-owner-image">
-          <i className="fas fa-user-circle" />
-        </div>
-        <div className="review-card-owner-information">
-          <div className="review-card-owner-name">{`${review.owner_first_name} ${review.owner_last_name[0]}.`}</div>
-          <div className="review-card-owner-image-count">
-            <img src={imageIcon.default}></img>
-            &nbsp;<div>{review.owner_images_count}</div>
-          </div>
-          <div className="review-card-manage-buttons-container">
-            {deleteRender()}
-            {editRender()}
-          </div>
-
-        </div>
-      </div>
-
-      <br></br>
-
+      
       <div className="review-card-rating-and-date-container">
         <div className="review-card-rating">{StarCalculator(review.stars)}</div>
         <div className="review-card-date">{date}</div>
-      </div>
-
-      <br></br>
-
-      <div className="review-card-photos-buttons-container">
-        {imagesLinkRender()}
-        {addPhotoRender()}
       </div>
 
       <br></br>
@@ -243,4 +216,4 @@ const ReviewCard = ({ review }) => {
   );
 };
 
-export default ReviewCard;
+export default ReviewDeleteCard;
