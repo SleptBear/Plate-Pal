@@ -36,6 +36,12 @@ const MapContainer = ({ google, searchString }) => {
   return (
     <div className="maps-container">
       <Map
+        style={{
+          position: "relative",
+          width: "100%",
+          height: '100%',
+          maxHeight: '',
+        }}
         google={google}
         zoom={3}
         initialCenter={{

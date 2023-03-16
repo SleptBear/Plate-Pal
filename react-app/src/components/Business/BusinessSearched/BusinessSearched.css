@@ -1,26 +1,28 @@
 .business-search-container {
   display: flex;
   flex-direction: row;
-  max-width: 1000px;
+  width: 612px;
+  box-sizing: border-box;
   padding: 20px;
-  justify-content: space-between;
+  height: 100%;
+  background-color: white;
+
+  overflow-y: scroll;
 }
 
 .business-search-filters {
   display: flex;
-  width: 20%;
-  min-width: 200px;
+  width: 170px;
 }
 
 .business-search-results {
-  width: 50%;
-  min-width: 500px;
+  width: 450px;
 }
 
-.business-search-map-container {
+/* .business-search-map-container {
   width: 30%;
   width: 300px;
-}
+} */
 
 .business-search-clear-filter {
   font-size: 14px;
