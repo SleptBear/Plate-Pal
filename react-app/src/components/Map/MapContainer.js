@@ -9,16 +9,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { searchBusinessesThunk } from "../../store/businesses";
 import "./mapcontainer.css";
+import BusinessSearchCard from "../Business/BusinessSearched/BusinessSearchCard";
 
 const blueIcon = {
   url: "https://media.discordapp.net/attachments/533035859214073877/1085299587079745646/25624562456.png",
 };
 
-const MapContainer = ({ google, searchString }) => {
+const MapContainer = ({ google, searchString, selected, setSelected }) => {
   let businesses = useSelector((state) => state.businesses.filteredBusinesses);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     dispatch(searchBusinessesThunk(searchString));
@@ -92,33 +92,36 @@ const MapContainer = ({ google, searchString }) => {
           </InfoWindow>
         )} */}
         {selected && (
-          <div
-            style={{
-              position: "fixed",
-              color: "black",
-              top: "17%",
-              left: "30%",
-              zIndex: 2,
-              backgroundColor: "white",
-              padding: "10px",
-              borderRadius: "5px",
-              boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
-              cursor: "pointer",
-            }}
-            onClick={() => {
-              history.push(`/businesses/${selected.id}`);
-            }}
-          >
-            <h2>{selected.name}</h2>
+          <BusinessSearchCard business={selected} className={'map-div'}/>
+          // <div
+          //   style={{
+          //     position: "fixed",
+          //     color: "black",
+          //     top: "80px",
+          //     left: "610px",
+          //     width: "130px",
+          //     zIndex: 2,
+          //     backgroundColor: "white",
+          //     padding: "10px",
+          //     borderRadius: "5px",
+          //     boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
+          //     cursor: "pointer",
+          //   }}
+          //   position={{ lat: selected.lat, lng: selected.lng }}
+          //   onClick={() => {
+          //     history.push(`/businesses/${selected.id}`);
+          //   }}
+          // >
+          //   <h2>{selected.name}</h2>
 
-            <h4>{selected.category}</h4>
-            <br />
-            <h3>{selected.avg_rating.toFixed(2)} ⭐</h3>
-            <br />
-            <img src={selected.images[0].url} width="120" height="100" />
-            <br />
-            <br />
-          </div>
+          //   <h4>{selected.category}</h4>
+          //   <br />
+          //   <h3>{selected.avg_rating.toFixed(2)} ⭐</h3>
+          //   <br />
+          //   <img src={selected.images[0].url} width="120" height="100" />
+          //   <br />
+          //   <br />
+          // </div>
         )}
       </Map>
     </div>
