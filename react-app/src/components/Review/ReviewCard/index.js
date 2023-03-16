@@ -43,8 +43,6 @@ const ReviewCard = ({ review }) => {
   }
 
   const deleteRender = () => {
-    console.log(user.id === review.owner_id)
-    console.log(user)
     if (user.id === review.owner_id) {
       return (
         <div className="image-modal-delete-button-container">

@@ -143,7 +143,7 @@ export const editBusinessThunk =
         return data;
       }
     } else {
-      return {"errors": "A server error occurred. Please try again."};
+      return {"errors": ["A server error occurred. Please try again."]};
     }
   };
 
