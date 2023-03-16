@@ -178,7 +178,7 @@ function ImageModal({ imageId, index }) {
 
                     {leftIndexChecker()}
 
-                    <img src={`${image.url}`} className="image-modal-image-singleImage" ></img>
+                    <img src={`${image.url}`} className="image-modal-singleImage" ></img>
 
                     {rightIndexChecker()}
 
@@ -202,7 +202,7 @@ function ImageModal({ imageId, index }) {
                 <p>{`by ${image.user_first_name} ${image.user_last_name[0]}. on ${formattedDate.split(", ")[1]}, ${formattedDate.split(", ")[2].split(" at")[0]}`}</p>
                 {renderDeleteChecker()}
                 <div className="image-modal-information-related-images-container">
-                    <div className="image-modal-information-related-images-grid">
+                    <div className="image-modal-information-related-images-grid masked-overflow">
                         {images.map((relatedImage) => {
                             return (
                                 <div key={relatedImage.id} className={"image-modal-information-related-image-container"}>
