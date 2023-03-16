@@ -47,11 +47,19 @@
   top: 80px !important;
   left: 610px !important;
   padding: 10px;
-  width: calc((100% - 652px) * .5);
+  /* width: calc((100% - 652px) * .5); */
+  width: 450px;
   z-index: 3!important;
   background-color: white!important;
   padding: "10px"!important;
   border-radius: "5px"!important;
   box-shadow: "0 0 5px rgba(0, 0, 0, 0.3)"!important;
   cursor: "pointer"!important;
+}
+
+.active {
+  border: 2px solid lightblue;
+  position: relative;
+  right: 2px;
+  background-color: rgba(173, 236, 252, 0.274);
 }

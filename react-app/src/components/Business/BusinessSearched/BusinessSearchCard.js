@@ -4,10 +4,15 @@ import StarCalculator from "./StarCalculator.js";
 import { useState } from "react";
 
 const BusinessSearchCard = ({ selected, business, className}) => {
+  console.log(selected)
   const [selectedClass, setSelectedClass] = useState("")
-
+  let active = ""
   if (!business) return null;
-  
+  if(selected) {
+    if(selected.id === business.id) {
+      active += "active"
+    }
+  }
   // if (business.id = selected.id) {
   //   setSelectedClass("selected")
   // } else{
@@ -20,7 +25,7 @@ const BusinessSearchCard = ({ selected, business, className}) => {
   // console.log("HOURS OF OPS", business.hours_of_operation)
 
   return (
-    <div id={className} className={`business-search-card-container`}>
+    <div id={className} className={`business-search-card-container ${active}`}>
       <div className="business-search-img">
         <img src={business.images[0]?.url}></img>
       </div>
