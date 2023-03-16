@@ -5,10 +5,18 @@
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 }
 
 a {
-  color: rgba(2,122,151,1)
+  color: rgba(2, 122, 151, 1);
+  text-decoration: none;
 }
 
 #hr {
