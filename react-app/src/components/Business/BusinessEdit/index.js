@@ -95,15 +95,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   );
 };
 
-const days = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 /* --------------------------------------------------------------------------------  */
 
@@ -264,8 +256,8 @@ const BusinessEdit = () => {
   );
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className="edit-business-container-outer">
+      <form className="edit-business-container" onSubmit={onSubmit}>
         <h2>Edit Business</h2>
         <span>
           We'll use this information to help you update your Plate Pal page.
@@ -296,12 +288,12 @@ const BusinessEdit = () => {
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
         ></input>
+        <br></br>
         <span>
           Help customers find your product and service. You can always edit and
           add more later.
         </span>
         <select
-          // switch to do 10 options select field with set categories
           placeholder="Select a category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -465,6 +457,7 @@ const BusinessEdit = () => {
           <option value="Waffles">Waffles</option>
           <option value="Wraps">Wraps</option>
         </select>
+        <br></br>
         <input
           type="text"
           placeholder="Address"
@@ -489,9 +482,10 @@ const BusinessEdit = () => {
           value={zipcode}
           onChange={(e) => setZipCode(e.target.value)}
         ></input>
-        <div className="business-form-price-container">
+        <div className="edit-business-price-container">
+          <br></br>
           <span>Select your restaurant average price:</span>
-          <div className="price-radios">
+          <div className="edit-business-price-radios">
             <label>
               <input
                 type="radio"
@@ -502,6 +496,7 @@ const BusinessEdit = () => {
               />
               $
             </label>
+
             <label>
               <input
                 type="radio"
@@ -512,6 +507,7 @@ const BusinessEdit = () => {
               />
               $$
             </label>
+
             <label>
               <input
                 type="radio"
@@ -544,6 +540,7 @@ const BusinessEdit = () => {
             </label>
           </div>
         </div>
+        <br></br>
         <h3>Hours of Operation</h3>
         {days.map((day) => (
           <DayHours
@@ -555,7 +552,8 @@ const BusinessEdit = () => {
             setCloseTime={setCloseTime}
           />
         ))}
-        <button>Update Business</button>
+        <br></br>
+        <button className="edit-business-submit-button">Update Business</button>
       </form>
     </div>
   );
