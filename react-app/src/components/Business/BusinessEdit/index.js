@@ -199,12 +199,17 @@ const BusinessEdit = () => {
     if (address.length < 1) valErrors.push("Address is required");
     if (address.length > 64) valErrors.push("Maximum characters for an address is 64 characters")
     if (city.length < 1) valErrors.push("City is required");
+    if (city.length > 25) valErrors.push("Maximum characters for a city is 25 characters")
     if (state.length < 1) valErrors.push("State is required");
-    if (zipcode.toString().length < 1) valErrors.push("Zip Code is required");
+    if (state.length > 30) valErrors.push("Maximum characters for a city is 30 characters")
+    // if (zipcode.toString().length < 1) valErrors.push("Zip code is required");
+    if (zipcode.toString().length !== 5) valErrors.push("Zip code must be 5 digits")
     if (phone_number.length < 1) valErrors.push("Phone number is required");
     if (website.length < 1) valErrors.push("Website is required");
     // if (hours_of_operation.length < 1)
     //   valErrors.push("Hours of operations are required");
+
+    // NOTE: currently not checking for hours of operation, may return with "NaN: NaNam" for some hours
 
     setErrors(valErrors);
   }, [
