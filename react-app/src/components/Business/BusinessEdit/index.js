@@ -231,7 +231,7 @@ const BusinessEdit = () => {
         ></input>
         {hasSubmitted && errors.hours_of_operation}
         <div>
-          <span>Attach Photos</span>
+          <span>Attach Images</span>
         </div>
         <button>Add Business</button>
       </form>

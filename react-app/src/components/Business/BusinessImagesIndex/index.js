@@ -46,7 +46,7 @@ const BusinessImagesIndex = () => {
 
             <div className="business-images-index-container">
                 <br></br>
-                <h2 className="business-images-index-title">{`Photos for ${business.name}`}</h2>
+                <h2 className="business-images-index-title">{`Images for ${business.name}`}</h2>
                 <br></br>
                 <ColoredLine />
                 <br></br>

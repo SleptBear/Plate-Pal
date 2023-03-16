@@ -33,7 +33,7 @@ const ManageImagesIndex = () => {
 
             <div className="manage-images-index-container">
                 <br></br>
-                <h2 className="manage-images-index-title">{`Photos for ${user.first_name} ${user.last_name[0]}.`}</h2>
+                <h2 className="manage-images-index-title">{`Images for ${user.first_name} ${user.last_name[0]}.`}</h2>
                 <br></br>
                 <ColoredLine />
                 <br></br>
