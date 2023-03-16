@@ -1,5 +1,9 @@
 /* not functioning properly, map still overflows beyond container */
-.maps-container {
-  height: 100%;
-  width: 100%;
+.maps-container > div {
+  position: fixed !important;
+  width: 80% !important;
+  position: fixed !important;
+  top: -10px;
+  left: 600px;
+  height: 100% !important;
 }

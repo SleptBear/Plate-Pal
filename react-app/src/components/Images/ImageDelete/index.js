@@ -55,6 +55,7 @@ function ImageDelete() {
             <div className="image-delete-form-container">
                 <form className={"image-delete-form"} onSubmit={handleSubmit}>
                     <br></br>
+                    <br></br>
                     <h2 className="image-delete-form-title">Confirm Removal</h2>
                     <br></br>
                     <ColoredLine></ColoredLine>
