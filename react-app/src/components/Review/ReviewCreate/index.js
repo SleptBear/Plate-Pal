@@ -98,7 +98,7 @@ const ReviewCreate = () => {
         </div>
         <span style={{ color: "red" }}></span>
         <br></br>
-        <h4>Attach Photos</h4>
+        <h4>Attach Images</h4>
         <input
           type="text"
           className="create-review-image-url"
