@@ -15,7 +15,8 @@
 }
 
 a {
-  color: rgba(2,122,151,1)
+  color: rgba(2, 122, 151, 1);
+  text-decoration: none;
 }
 
 #hr {
