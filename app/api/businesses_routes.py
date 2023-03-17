@@ -161,7 +161,23 @@ def create_new_review(id):
 
         db.session.add(new_review)
         db.session.commit()
-        return new_review.to_dict()
+
+        new_review = new_review.to_dict()
+
+        owner = User.query.get(new_review["owner_id"])
+        images_count = len(owner.images)
+        owner = owner.to_dict()
+        images_query = db.session.query(Image).filter(
+            Image.review_id == new_review["id"])
+        images = images_query.all()
+        new_review["images_length"] = len(images)
+        new_review['images'] = [image.to_dict() for image in images]
+        new_review['owner_first_name'] = owner["first_name"]
+        new_review['owner_last_name'] = owner["last_name"]
+        new_review["owner_images_count"] = images_count
+
+        return new_review
+    
     if form.errors:
         return {
             "message": "Validation error",
