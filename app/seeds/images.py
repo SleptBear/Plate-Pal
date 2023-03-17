@@ -6,13 +6,13 @@ from datetime import datetime
 # Adds a demo user, you can add other users here if you want
 def seed_images():
     db.session.add(Image(
-        url='https://lh3.googleusercontent.com/p/AF1QipNiq_d4WYqKcBFxdeD7Bcwef9GAxooKFuy4U_xw=s680-w680-h510',
+        url='https://www.gannett-cdn.com/presto/2019/09/12/PPHX/4ffba913-0cdb-4392-ab6e-5fee33214566-uscp-772hgxx4kwp1ld5d2bxe_original.jpg',
         owner_id=1,
         business_id=1
     ))
 
     db.session.add(Image(
-        url='https://s.hdnux.com/photos/01/31/51/50/23501360/5/rawImage.jpg',
+        url='https://media.30seconds.com/tip/lg/A-meal-at-Mamas-Fish-House-in-Maui-is-an-experience-you-wo-17844-246dc34323-1549663420.jpg',
         owner_id=2,
         business_id=2
     ))
@@ -24,7 +24,7 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url='https://assets3.thrillist.com/v1/image/2994209/1200x630/flatten;crop_down;webp=auto;jpeg_quality=70',
+        url='https://www.opentable.com/blog/wp-content/uploads/sites/108/2021/07/girl-and-the-goat_122841254_708529073128116_5731424708196087464_n.png',
         owner_id=4,
         business_id=4
     ))
