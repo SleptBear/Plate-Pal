@@ -21,8 +21,8 @@ const TimePicker = ({ id, value, onChange, isClosed }) => {
 
 const inputStyle = (value) => ({
   borderColor: value ? "initial" : "red",
-  "border-radius": "5px",
-  "border-style": "solid"
+  "borderRadius": "5px",
+  "borderStyle": "solid"
 });
 
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
@@ -144,8 +144,6 @@ const BusinessCreate = () => {
     const url = e.target.value;
     setImageURL(url);
     setImagePreview(url);
-
-
   };
 
 
@@ -217,7 +215,6 @@ const BusinessCreate = () => {
 
   const onSubmit = async (e) => {
     let validationErrors = []
-
     e.preventDefault();
     const newBusiness = {
       name: name,
@@ -234,28 +231,54 @@ const BusinessCreate = () => {
       hours_of_operation: formatHoursOfOperation(hours_of_operation),
     };
 
+    console.log(newBusiness)
+
     if (!areFieldsValid()) {
       validationErrors.push("Hours of operations are required")
     }
 
+    // helper fxn check image url ending
 
-    let createdBusiness = await dispatch(postBusinessThunk(newBusiness));
+    const checkImageURL = (imageURL) => {
+      return (
+        !imageURL.endsWith(".png") &&
+        !imageURL.endsWith(".jpg") &&
+        !imageURL.endsWith(".jpeg")
+      );
+    };
 
-    console.log(createdBusiness)
 
-    if (createdBusiness && createdBusiness.errors.length === 0) {
-      if (imageURL) {
+
+
+
+    if (!imageURL) {
+      validationErrors.push("Image URL is required");
+      setDisplayErrors(validationErrors);
+    }
+    else {
+      if (checkImageURL(imageURL)) {
+        validationErrors.push("Image URL must end in .png, .jpg, or .jpeg");
+        setDisplayErrors(validationErrors);
+      }
+    }
+
+
+    console.log(displayErrors)
+    if (validationErrors.length === 0) {
+      let createdBusiness = await dispatch(postBusinessThunk(newBusiness));
+      console.log(createdBusiness)
+      if (!createdBusiness.errors) {
         await dispatch(postImageThunk({
           businessId: createdBusiness.id,
           url: imageURL,
           caption: ''
         }, createdBusiness.id));
+        history.push(`/businesses/${createdBusiness.id}`);
       }
-
-      history.push(`/businesses/${createdBusiness.id}`);
-    } else {
-      createdBusiness.errors.forEach((error) => { validationErrors.push(error) })
-      setDisplayErrors(validationErrors);
+      else {
+        createdBusiness.errors.forEach((error) => { validationErrors.push(error) })
+        setDisplayErrors(validationErrors);
+      }
     }
   };
 
@@ -329,7 +352,6 @@ const BusinessCreate = () => {
           onChange={(e) => setName(e.target.value)}
           className="business-form-input"
           style={inputStyle(name)}
-          maxLength="40" // Add maxLength attribute to limit the characters
         />
         <input
           type="text"

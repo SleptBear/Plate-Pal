@@ -76,8 +76,8 @@ def get_business_reviews(id):
 
     for review in business_reviews:
         owner = User.query.get(review["owner_id"])
-        images_count=len(owner.images)
-        owner=owner.to_dict()
+        images_count = len(owner.images)
+        owner = owner.to_dict()
         images_query = db.session.query(Image).filter(
             Image.review_id == review['id'])
         images = images_query.all()
@@ -173,6 +173,7 @@ def create_new_review(id):
 @business_routes.route('/<int:id>/images', methods=['POST'])
 @login_required
 def create_new_image(id):
+    user = User.query.get(int(current_user.get_id()))
     business = Business.query.get(id)
     if not business:
         return {
@@ -184,7 +185,6 @@ def create_new_image(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     data = request.get_json()
     if form.validate_on_submit():
-        print('HIIIIIIII')
         new_image = Image(
             owner_id=int(current_user.get_id()),
             business_id=id,
@@ -193,7 +193,12 @@ def create_new_image(id):
         )
         db.session.add(new_image)
         db.session.commit()
-        return new_image.to_dict()
+        image = new_image.to_dict()
+        image["business_name"] = business.name
+        image["business_id"] = business.id
+        image["user_first_name"] = user.first_name
+        image["user_last_name"] = user.last_name
+        return image
     if form.errors:
         return {
             "message": "Validation error",
@@ -265,6 +270,7 @@ def delete_business(id):
 
 # SEARCH FOR BUSINESSES
 
+
 @business_routes.route('/search')
 def search_businesses():
     if request.args:
@@ -281,15 +287,18 @@ def search_businesses():
             (Business.zipcode.ilike(f'%{search_query}%'))
         )
 
-        businesses = [business.to_dict() for business in businesses_query.all()]
+        businesses = [business.to_dict()
+                      for business in businesses_query.all()]
 
         for business in businesses:
-            images_query = db.session.query(Image).filter(Image.business_id == business["id"])
+            images_query = db.session.query(Image).filter(
+                Image.business_id == business["id"])
             images = images_query.all()
             business["images"] = [image.to_dict() for image in images]
 
             # Handle reviews
-            review_query = db.session.query(Review).filter(Review.business_id == business["id"])
+            review_query = db.session.query(Review).filter(
+                Review.business_id == business["id"])
             business_reviews = review_query.all()
             stars = [review.stars for review in business_reviews]
             if len(business_reviews) > 0:
