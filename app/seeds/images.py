@@ -152,7 +152,7 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url="https://www.seriouseats.com/thmb/wc-CgN0yYUBJZGzrf6Bs5ozm9iA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__08__20140826-fried-and-true-hattie-bs-hot-chicken-evan-sung-812d8599262148aaa9732285fb8d2dbe.jpg",
+        url="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?cs=srgb&dl=pexels-ash-376464.jpg&fm=jpg",
         owner_id=1,
         business_id=9,
         review_id=25
