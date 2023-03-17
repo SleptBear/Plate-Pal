@@ -41,3 +41,7 @@
   color: #0073bb;
   text-decoration: none;
 }
+
+.login-form-errors{
+  color: red;
+}
