@@ -15,6 +15,7 @@ const TimePicker = ({ id, value, onChange, isClosed }) => {
     <input
       type="time"
       id={id}
+      placeholder={"Mon"}
       value={value}
       onChange={onChange}
       style={isClosed ? undefined : inputStyle(value)}
@@ -24,6 +25,8 @@ const TimePicker = ({ id, value, onChange, isClosed }) => {
 
 const inputStyle = (value) => ({
   borderColor: value ? "initial" : "red",
+  "border-radius": "5px",
+  "border-style": "solid"
 });
 
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
@@ -67,56 +70,58 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   };
 
   return (
-    <div className="day-hours">
-      <label htmlFor={`${day}-open`} className="day-label">
-        {day}:
-      </label>
-      <TimePicker
-        id={`${day}-open`}
-        value={isClosed ? "" : openTime}
-        onChange={handleOpenTimeChange}
-        disabled={isClosed}
-        className="time-picker"
-        isClosed={isClosed}
-      />
-      <label htmlFor={`${day}-close`} className="separator">
-        to
-      </label>
-      <TimePicker
-        id={`${day}-close`}
-        value={isClosed ? "" : closeTime}
-        onChange={handleCloseTimeChange}
-        disabled={isClosed}
-        className="time-picker"
-        isClosed={isClosed}
-      />
-      <label htmlFor={`${day}-closed`} className="closed-label">
-        Closed
-      </label>
-      <input
-        type="checkbox"
-        id={`${day}-closed`}
-        checked={isClosed}
-        onChange={handleClosedChange}
-        className="closed-checkbox"
-      />
-      {!isValid && (
-        <div className="validation-message">
-          Opening time must be before closing time.
-        </div>
-      )}
+    <div className="day-hours-container">
+      <div className="day-hours">
+        <label htmlFor={`${day}-open`} className="day-label">
+          {day}
+        </label>
+        <TimePicker
+          id={`${day}-open`}
+          value={isClosed ? "" : openTime}
+          onChange={handleOpenTimeChange}
+          disabled={isClosed}
+          className="time-picker"
+          isClosed={isClosed}
+        />
+        <label htmlFor={`${day}-close`} className="separator">
+          to
+        </label>
+        <TimePicker
+          id={`${day}-close`}
+          value={isClosed ? "" : closeTime}
+          onChange={handleCloseTimeChange}
+          disabled={isClosed}
+          className="time-picker"
+          isClosed={isClosed}
+        />
+        <label htmlFor={`${day}-closed`} className="closed-label">
+          Closed
+        </label>
+        <input
+          type="checkbox"
+          id={`${day}-closed`}
+          checked={isClosed}
+          onChange={handleClosedChange}
+          className="closed-checkbox"
+        />
+        {!isValid && (
+          <div className="validation-message">
+            Opening time must be before closing time.
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 const days = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
+  "M",
+  "T ",
+  "W",
+  "R ",
+  "F ",
+  "S ",
+  "S ",
 ];
 
 /* --------------------------------------------------------------------------------  */
@@ -311,7 +316,7 @@ const BusinessEdit = () => {
         <ul>
           {hasSubmitted &&
             errors.map((error, idx) => (
-              <li style={{ color: "red" }} key={idx}>
+              <li style={{ "color": "red" }} key={idx}>
                 {error}
               </li>
             ))}
@@ -587,7 +592,8 @@ const BusinessEdit = () => {
           </div>
         </div>
         <br></br>
-        <h3>Hours of Operation</h3>
+        <h3 className="day-hours-container">Hours of Operation</h3>
+        <br></br>
         {days.map((day) => (
           <DayHours
             key={day}

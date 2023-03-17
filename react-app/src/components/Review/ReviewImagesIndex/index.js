@@ -5,6 +5,7 @@ import ColoredLine from "../../ColoredLine";
 import { useParams } from "react-router-dom";
 import { getSingleReviewThunk } from "../../../store/reviews";
 import ImageCard from "../../Images/ImageCard";
+import { Link } from "react-router-dom";
 import "./ReviewImagesIndex.css";
 
 const ReviewImagesIndex = () => {
@@ -33,7 +34,7 @@ const ReviewImagesIndex = () => {
     images = Object.values(images)
 
     images?.sort(
-        (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
+        (a, b) => Date.parse(a.updated_at) - Date.parse(b.updated_at)
     );
 
     let index = 0
@@ -44,7 +45,7 @@ const ReviewImagesIndex = () => {
 
             <div className="review-images-index-container">
                 <br></br>
-                <h2 className="review-images-index-title">{`Images for ${review.business_name} from ${review.owner_first_name} ${review.owner_last_name[0]}.`}</h2>
+                <h2 className="review-images-index-title">Images for Images for <Link to={`/businesses/${review.business_id}`}>{review.business_name}</Link> from {review.owner_first_name} {review.owner_last_name[0]}</h2>
                 <br></br>
                 <ColoredLine />
                 <br></br>

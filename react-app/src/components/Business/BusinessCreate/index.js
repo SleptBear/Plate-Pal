@@ -21,6 +21,8 @@ const TimePicker = ({ id, value, onChange, isClosed }) => {
 
 const inputStyle = (value) => ({
   borderColor: value ? "initial" : "red",
+  "border-radius": "5px",
+  "border-style": "solid"
 });
 
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
@@ -50,7 +52,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   };
 
   const validateTimes = (newOpenTime, newCloseTime) => {
-    if (newOpenTime === 'Closed' || newCloseTime === 'Closed' ) {
+    if (newOpenTime === 'Closed' || newCloseTime === 'Closed') {
       setIsValid(true);
       return;
     }
@@ -65,40 +67,48 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   };
 
   return (
-    <div className="day-hours">
-      <label htmlFor={`${day}-open`} className="day-label">{day}:</label>
-      <TimePicker
-        id={`${day}-open`}
-        value={isClosed ? '' : openTime}
-        onChange={handleOpenTimeChange}
-        disabled={isClosed}
-        className="time-picker"
-        isClosed={isClosed}
-      />
-      <label htmlFor={`${day}-close`} className="separator">to</label>
-      <TimePicker
-        id={`${day}-close`}
-        value={isClosed ? '' : closeTime}
-        onChange={handleCloseTimeChange}
-        disabled={isClosed}
-        className="time-picker"
-        isClosed={isClosed}
-      />
-      <label htmlFor={`${day}-closed`} className="closed-label">Closed</label>
-      <input
-        type="checkbox"
-        id={`${day}-closed`}
-        checked={isClosed}
-        onChange={handleClosedChange}
-        className="closed-checkbox"
-      />
-      {!isValid && <div className="validation-message">Opening time must be before closing time.</div>}
+    <div className="day-hours-container">
+      <div className="day-hours">
+        <label htmlFor={`${day}-open`} className="day-label">{day}:</label>
+        <TimePicker
+          id={`${day}-open`}
+          value={isClosed ? '' : openTime}
+          onChange={handleOpenTimeChange}
+          disabled={isClosed}
+          className="time-picker"
+          isClosed={isClosed}
+        />
+        <label htmlFor={`${day}-close`} className="separator">to</label>
+        <TimePicker
+          id={`${day}-close`}
+          value={isClosed ? '' : closeTime}
+          onChange={handleCloseTimeChange}
+          disabled={isClosed}
+          className="time-picker"
+          isClosed={isClosed}
+        />
+        <label htmlFor={`${day}-closed`} className="closed-label">Closed</label>
+        <input
+          type="checkbox"
+          id={`${day}-closed`}
+          checked={isClosed}
+          onChange={handleClosedChange}
+          className="closed-checkbox"
+        />
+        {!isValid && <div className="validation-message">Opening time must be before closing time.</div>}
+      </div>
     </div>
   );
 };
 
 const days = [
-  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+  "M",
+  "T ",
+  "W",
+  "R ",
+  "F ",
+  "S ",
+  "S ",
 ];
 
 const BusinessCreate = () => {
@@ -224,7 +234,7 @@ const BusinessCreate = () => {
       hours_of_operation: formatHoursOfOperation(hours_of_operation),
     };
 
-    if (!areFieldsValid()){
+    if (!areFieldsValid()) {
       validationErrors.push("Hours of operations are required")
     }
 
@@ -243,8 +253,8 @@ const BusinessCreate = () => {
       }
 
       history.push(`/businesses/${createdBusiness.id}`);
-    }else{
-      createdBusiness.errors.forEach((error) => {validationErrors.push(error)})
+    } else {
+      createdBusiness.errors.forEach((error) => { validationErrors.push(error) })
       setDisplayErrors(validationErrors);
     }
   };
@@ -272,8 +282,8 @@ const BusinessCreate = () => {
 
       <form onSubmit={onSubmit} className="business-form">
         <ul className="errors">{displayErrors.map((error, index) => (
-            <li key={index}>{error}</li>
-          ))}</ul>
+          <li key={index}>{error}</li>
+        ))}</ul>
         <h2 className="form-title">Hello! Let's begin adding your business</h2>
         <span>
           We'll use this information to help you claim your Plate Pal page. Your
@@ -313,14 +323,14 @@ const BusinessCreate = () => {
 
         </div>
         <input
-  type="text"
-  placeholder="Your business name"
-  value={name}
-  onChange={(e) => setName(e.target.value)}
-  className="business-form-input"
-  style={inputStyle(name)}
-  maxLength="40" // Add maxLength attribute to limit the characters
-/>
+          type="text"
+          placeholder="Your business name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="business-form-input"
+          style={inputStyle(name)}
+          maxLength="40" // Add maxLength attribute to limit the characters
+        />
         <input
           type="text"
           placeholder="Business phone number"
@@ -596,7 +606,8 @@ const BusinessCreate = () => {
         </div>
 
         <div className="days-container">
-          <h3>Hours of operation</h3>
+          <h3 className="day-hours-container">Hours of operation</h3>
+          <br></br>
           {days.map(day => (
             <DayHours
               key={day}
@@ -608,19 +619,20 @@ const BusinessCreate = () => {
             />
           ))}
         </div>
+        <br></br>
         <input
-  type="text"
-  placeholder="Image URL"
-  value={imageURL}
-  onChange={handleImageURLChange}
-  className="business-form-input"
-  style={inputStyle(imageURL)}
-/>
-{imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" style={{
-      width: "320px",
-      height: "180px",
-      objectFit: "cover",
-    }}/>}
+          type="text"
+          placeholder="Image URL"
+          value={imageURL}
+          onChange={handleImageURLChange}
+          className="business-form-input"
+          style={inputStyle(imageURL)}
+        />
+        {imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" style={{
+          width: "320px",
+          height: "180px",
+          objectFit: "cover",
+        }} />}
         <div>
         </div>
         <button type="submit" className="submit-button">Add Business</button>

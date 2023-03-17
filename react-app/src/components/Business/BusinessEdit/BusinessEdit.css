@@ -27,3 +27,13 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.day-hours {
+  margin: auto;
+}
+
+.day-hours-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

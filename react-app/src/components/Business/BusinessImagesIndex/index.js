@@ -4,6 +4,7 @@ import { getImagesThunk, getImagesAction } from "../../../store/images";
 import ColoredLine from "../../ColoredLine";
 import { useParams } from "react-router-dom";
 import { getSingleBusinessThunk } from "../../../store/businesses";
+import { Link } from "react-router-dom";
 import ImageCard from "../../Images/ImageCard";
 import "./BusinessImagesIndex.css";
 
@@ -35,7 +36,7 @@ const BusinessImagesIndex = () => {
     images = Object.values(images)
 
     images?.sort(
-        (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
+        (a, b) => Date.parse(a.updated_at) - Date.parse(b.updated_at)
     );
 
     let index = 0
@@ -46,7 +47,7 @@ const BusinessImagesIndex = () => {
 
             <div className="business-images-index-container">
                 <br></br>
-                <h2 className="business-images-index-title">{`Images for ${business.name}`}</h2>
+                <h2 className="business-images-index-title">Images for <Link to={`/businesses/${businessId}`}>{business.name}</Link></h2>
                 <br></br>
                 <ColoredLine />
                 <br></br>
