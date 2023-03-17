@@ -23,7 +23,7 @@ const ActivityIndex = () => {
   if (!activities) return null;
 
   activities?.sort(
-    (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
+    (a, b) => Date.parse(b.created_at) - Date.parse(a.created_at)
   );
 
   return (
