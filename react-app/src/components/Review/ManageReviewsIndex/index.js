@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserReviewsThunk } from "../../../store/reviews";
 import ReviewCard from "../ReviewCard";
 import ColoredLine from "../../ColoredLine";
+import { Link } from "react-router-dom";
 
 import "./ManageReviewsIndex.css";
 
@@ -26,7 +27,7 @@ const ManageReviewsIndex = () => {
         (a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)
     );
 
-        
+
 
     return (
         <>
@@ -41,7 +42,7 @@ const ManageReviewsIndex = () => {
                     {reviews.map((review) => {
                         return (
                             <>
-                                <h3 className="manage-reviews-review-title">Review for {review.business_name}</h3>
+                                <h3 className="manage-reviews-review-title">Review for <Link to={`/businesses/${review.business_id}`}>{review.business_name}</Link></h3>
                                 <ReviewCard
                                     review={review}
                                     key={review.id}

@@ -171,6 +171,7 @@ function ImageModal({ imageId, index }) {
     }
 
     return (
+        <div className="image-modal-container-wrapper">
         <div className="image-modal-container">
             <div className="image-modal-image-wrapper">
 
@@ -213,6 +214,7 @@ function ImageModal({ imageId, index }) {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     );

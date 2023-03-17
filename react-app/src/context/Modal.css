@@ -1,13 +1,5 @@
 #modal {
-  position: fixed;
-  min-height: 40vw;
-  top: 60px;
-  bottom: 20px;
-  right: 0;
-  left: 0;
-  display: flex;
-  margin: 40px;
-  justify-content: center;
+
 }
 
 #modal-background {
@@ -20,12 +12,6 @@
 }
 
 #modal-content {
-  height: 100%;
-  width: 100%;
-  max-width: 1300px;
-  min-width: 960px;
-  position: absolute;
-  background-color:white;
-  justify-self: center;
-  border-radius: 10px;
+display: flex;
+justify-content: center;
 }

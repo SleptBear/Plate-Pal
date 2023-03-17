@@ -16,10 +16,6 @@ const ReviewCreate = () => {
   const user = useSelector((state) => state.session.user);
   const business = useSelector((state) => state.businesses.singleBusiness);
 
-  useEffect(() => {
-    dispatch(getSingleBusinessThunk(businessId));
-  }, [dispatch]);
-
   const [review, setReview] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [imageCaption, setImageCaption] = useState("");
@@ -27,15 +23,68 @@ const ReviewCreate = () => {
   // star rating hover
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
+  const [starsColor, setStarsColor] = useState("gray");
+
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  useEffect(() => {
+    dispatch(getSingleBusinessThunk(businessId));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (stars === 1) {
+      setStarsColor("yellow");
+    }
+    if (stars === 2) {
+      setStarsColor("gold");
+    }
+    if (stars === 3) {
+      setStarsColor("orange");
+    }
+    if (stars === 4) {
+      setStarsColor("amber");
+    }
+    if (stars === 5) {
+      setStarsColor("red");
+    }
+  }, [stars]);
+
+  // frontend validations
+  useEffect(() => {
+    let valErrors = [];
+
+    if (review?.length < 1) valErrors.push("Review description is required");
+    if (stars < 1 || stars > 5)
+      valErrors.push("Star ratings must be between 1-5");
+
+    // helper fxn check image url ending
+    const checkImageURL = (imageURL) => {
+      return (
+        !imageURL.endsWith(".png") &&
+        !imageURL.endsWith(".jpg") &&
+        !imageURL.endsWith(".jpeg")
+      );
+    };
+
+    if (imageURL && checkImageURL(imageURL))
+      valErrors.push("Image URL must end in .png, .jpg, or .jpeg");
+
+    setErrors(valErrors);
+  }, [review, stars, imageURL]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    setHasSubmitted(true);
+
+    if (errors.length) return;
 
     const newReview = {
       review,
       stars,
     };
 
+    // post the review
     let response = await dispatch(postReviewThunk(newReview, businessId, user));
 
     // all error responses for this backend route return as arrays
@@ -43,8 +92,11 @@ const ReviewCreate = () => {
 
     // handle image add after business has been created
     const imageContent = { url: imageURL, caption: imageCaption };
-    if (!Array.isArray(response) && imageURL)
-      await dispatch(postReviewImageThunk(imageContent, response.id));
+    if (!Array.isArray(response) && imageURL) {
+      await dispatch(
+        postReviewImageThunk(imageContent, response.id, businessId)
+      );
+    }
 
     if (!Array.isArray(response)) {
       history.push(`/businesses/${businessId}`);
@@ -59,18 +111,19 @@ const ReviewCreate = () => {
         <br></br>
         <h3>{business.name}</h3>
         <ul>
-          {errors.map((error, idx) => (
-            <li style={{ color: "red" }} key={idx}>
-              {error}
-            </li>
-          ))}
+          {hasSubmitted &&
+            errors.map((error, idx) => (
+              <li style={{ color: "red" }} key={idx}>
+                {error}
+              </li>
+            ))}
         </ul>
         <span style={{ color: "red" }}></span>
         <br></br>
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
-          <span>{`Select your rating: `}</span>
+          <span>{`Select your rating: `}&nbsp;</span>
           {[...Array(5)].map((star, index) => {
             index += 1;
             return (
@@ -82,7 +135,10 @@ const ReviewCreate = () => {
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(stars)}
               >
-                <span className="star-rating">&#9733;</span>
+                <span className="fa-stack review-star">
+                  <i className={`fas fa-square fa-stack-2x ${starsColor}`}></i>
+                  <i className="fas fa-star fa-stack-1x fa-inverse"></i>
+                </span>
               </button>
             );
           })}

@@ -20,6 +20,7 @@ const ReviewEdit = () => {
   // star rating hover
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
+  const [starsColor, setStarsColor] = useState("")
 
   // repopulating input fields
   useEffect(() => {
@@ -40,6 +41,24 @@ const ReviewEdit = () => {
     restoreReview();
   }, [dispatch]);
 
+  useEffect(() => {
+    if(stars === 1){
+      setStarsColor("yellow")
+    }
+    if(stars === 2){
+      setStarsColor("gold")
+    }
+    if(stars === 3){
+      setStarsColor("orange")
+    }
+    if(stars === 4){
+      setStarsColor("amber")
+    }
+    if(stars === 5){
+      setStarsColor("red")
+    }
+  }, [stars])
+
   // handle submit
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +77,7 @@ const ReviewEdit = () => {
     if (Array.isArray(response)) setErrors(response);
 
     if (!Array.isArray(response)) {
-      history.push(`/businesses/${singleReview.business_id}`);
+      history.goBack();
     }
   };
 
@@ -93,7 +112,7 @@ const ReviewEdit = () => {
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
-          <span>{` Select your rating: `}</span>
+          <span>{` Select your rating: `}&nbsp;</span>
           {[...Array(5)].map((star, index) => {
             index += 1;
             return (
@@ -105,7 +124,10 @@ const ReviewEdit = () => {
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(stars)}
               >
-                <span className="star-rating">&#9733;</span>
+                <span className="fa-stack review-star">
+                  <i className={`fas fa-square fa-stack-2x ${starsColor}`}></i>
+                  <i className="fas fa-star fa-stack-1x fa-inverse"></i>
+                </span>
               </button>
             );
           })}

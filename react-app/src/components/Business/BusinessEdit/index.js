@@ -10,9 +10,24 @@ import {
 
 /* --------------------------------------------------------------------------------  */
 // date and time helper functions
-const TimePicker = ({ id, value, onChange }) => {
-  return <input type="time" id={id} value={value} onChange={onChange}></input>;
+const TimePicker = ({ id, value, onChange, isClosed }) => {
+  return (
+    <input
+      type="time"
+      id={id}
+      placeholder={"Mon"}
+      value={value}
+      onChange={onChange}
+      style={isClosed ? undefined : inputStyle(value)}
+    ></input>
+  );
 };
+
+const inputStyle = (value) => ({
+  borderColor: value ? "initial" : "red",
+  "border-radius": "5px",
+  "border-style": "solid"
+});
 
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   const [isValid, setIsValid] = useState(true);
@@ -55,47 +70,59 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   };
 
   return (
-    <div className="day-hours">
-      <label htmlFor={`${day}-open`} className="day-label">
-        {day}:
-      </label>
-      <TimePicker
-        id={`${day}-open`}
-        value={isClosed ? "" : openTime}
-        onChange={handleOpenTimeChange}
-        disabled={isClosed}
-        className="time-picker"
-      />
-      <label htmlFor={`${day}-close`} className="separator">
-        to
-      </label>
-      <TimePicker
-        id={`${day}-close`}
-        value={isClosed ? "" : closeTime}
-        onChange={handleCloseTimeChange}
-        disabled={isClosed}
-        className="time-picker"
-      />
-      <label htmlFor={`${day}-closed`} className="closed-label">
-        Closed
-      </label>
-      <input
-        type="checkbox"
-        id={`${day}-closed`}
-        checked={isClosed}
-        onChange={handleClosedChange}
-        className="closed-checkbox"
-      />
-      {!isValid && (
-        <div className="validation-message">
-          Opening time must be before closing time.
-        </div>
-      )}
+    <div className="day-hours-container">
+      <div className="day-hours">
+        <label htmlFor={`${day}-open`} className="day-label">
+          {day}
+        </label>
+        <TimePicker
+          id={`${day}-open`}
+          value={isClosed ? "" : openTime}
+          onChange={handleOpenTimeChange}
+          disabled={isClosed}
+          className="time-picker"
+          isClosed={isClosed}
+        />
+        <label htmlFor={`${day}-close`} className="separator">
+          to
+        </label>
+        <TimePicker
+          id={`${day}-close`}
+          value={isClosed ? "" : closeTime}
+          onChange={handleCloseTimeChange}
+          disabled={isClosed}
+          className="time-picker"
+          isClosed={isClosed}
+        />
+        <label htmlFor={`${day}-closed`} className="closed-label">
+          Closed
+        </label>
+        <input
+          type="checkbox"
+          id={`${day}-closed`}
+          checked={isClosed}
+          onChange={handleClosedChange}
+          className="closed-checkbox"
+        />
+        {!isValid && (
+          <div className="validation-message">
+            Opening time must be before closing time.
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const days = [
+  "M",
+  "T ",
+  "W",
+  "R ",
+  "F ",
+  "S ",
+  "S ",
+];
 
 /* --------------------------------------------------------------------------------  */
 
@@ -194,17 +221,25 @@ const BusinessEdit = () => {
     const valErrors = [];
 
     if (name.length < 1) valErrors.push("Business name is required");
-    if (name.length > 40) valErrors.push("Maximum characters for a business name is 40")
+    if (name.length > 40)
+      valErrors.push("Maximum characters for a business name is 40");
     if (category.length < 1) valErrors.push("Category is required");
     if (address.length < 1) valErrors.push("Address is required");
-    if (address.length > 64) valErrors.push("Maximum characters for an address is 64 characters")
+    if (address.length > 64)
+      valErrors.push("Maximum characters for an address is 64 characters");
     if (city.length < 1) valErrors.push("City is required");
+    if (city.length > 25)
+      valErrors.push("Maximum characters for a city is 25 characters");
     if (state.length < 1) valErrors.push("State is required");
-    if (zipcode.toString().length < 1) valErrors.push("Zip Code is required");
+    if (state.length > 30)
+      valErrors.push("Maximum characters for a city is 30 characters");
+    // if (zipcode.toString().length < 1) valErrors.push("Zip code is required");
+    if (zipcode.toString().length !== 5)
+      valErrors.push("Zip code must be 5 digits");
     if (phone_number.length < 1) valErrors.push("Phone number is required");
     if (website.length < 1) valErrors.push("Website is required");
-    // if (hours_of_operation.length < 1)
-    //   valErrors.push("Hours of operations are required");
+    if (!hoursOfOperationChecker())
+      valErrors.push("Hours of operations are required");
 
     setErrors(valErrors);
   }, [
@@ -216,7 +251,7 @@ const BusinessEdit = () => {
     zipcode,
     phone_number,
     website,
-    // hours_of_operation,
+    hours_of_operation,
   ]);
 
   const onSubmit = async (e) => {
@@ -257,6 +292,20 @@ const BusinessEdit = () => {
     (day) => hours_of_operation[day]?.isValid !== false
   );
 
+  // hours of operations required checker
+  const hoursOfOperationChecker = () => {
+    // Check if all days have data for hours of operation
+    const allDaysHaveData = days.every(
+      (day) => hours_of_operation[day]?.open && hours_of_operation[day]?.close
+    );
+
+    if (allTimesValid && allDaysHaveData) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="edit-business-container-outer">
       <form className="edit-business-container" onSubmit={onSubmit}>
@@ -267,7 +316,7 @@ const BusinessEdit = () => {
         <ul>
           {hasSubmitted &&
             errors.map((error, idx) => (
-              <li style={{ color: "red" }} key={idx}>
+              <li style={{ "color": "red" }} key={idx}>
                 {error}
               </li>
             ))}
@@ -543,7 +592,8 @@ const BusinessEdit = () => {
           </div>
         </div>
         <br></br>
-        <h3>Hours of Operation</h3>
+        <h3 className="day-hours-container">Hours of Operation</h3>
+        <br></br>
         {days.map((day) => (
           <DayHours
             key={day}
