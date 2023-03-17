@@ -1,3 +1,5 @@
+import { getBusinessReviewsThunk } from "./reviews";
+
 /* ----- CONSTANTS ----- */
 const GET_SINGLE_BUSINESS = "businesses/GET_SINGLE_BUSINESS";
 const GET_CURRENT_BUSINESSES = "businesses/GET_CURRENT_BUSINESSES";
@@ -123,6 +125,27 @@ export const postBusinessThunk = (newBusiness) => async (dispatch) => {
     return {"errors": ["A server error occurred. Please try again."]};
   }
 };
+
+
+// Add an image to a business
+export const postBusinessImageThunk = (imageContent, businessId) => async (dispatch) => {
+  console.log(imageContent)
+  console.log("what the")
+  const res = await fetch(`/api/businesses/${businessId}/images`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(imageContent)
+  })
+  if (res.ok) {
+    await dispatch (getSingleBusinessThunk(businessId))
+    await dispatch(getBusinessReviewsThunk(businessId))
+  } else if (res.status < 500) {
+    const data = await res.json();
+    return data;
+  } else {
+    return {"errors": ["A server error occurred. Please try again."]};
+  }
+}
 
 // Edit a business by id
 export const editBusinessThunk =

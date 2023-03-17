@@ -6,6 +6,26 @@
     background-color: black;
 }
 
+.image-modal-container-wrapper {
+    position: fixed;
+    min-height: 40vw;
+    top: 60px;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    height: 80%;
+    width: 100%;
+    max-width: 1300px;
+    min-width: 960px;
+    position: absolute;
+    background-color:white;
+    justify-self: center;
+    border-radius: 10px;
+}
+
 .image-modal-information-container {
     width: 350px;
     background-color: white;
@@ -101,7 +121,7 @@
 
 .image-modal-singleImage {
     width: 100%;
-    max-height: 30vw;
+    max-height: 100%;
 
 }
 

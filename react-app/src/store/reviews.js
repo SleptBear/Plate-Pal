@@ -108,7 +108,7 @@ export const postReviewThunk = (newReview, businessId) => async (dispatch) => {
             return data.errors;
         }
     } else {
-        return {"errors": ["A server error occurred. Please try again."]};
+        return { "errors": ["A server error occurred. Please try again."] };
     }
 };
 
@@ -141,17 +141,26 @@ export const editReviewThunk =
                 return data.errors;
             }
         } else {
-            return {"errors": ["A server error occurred. Please try again."]};
+            return { "errors": ["A server error occurred. Please try again."] };
         }
     };
 
-export const postReviewImageThunk = (imageContent, reviewId) => async (dispatch) => {
+// Add an image to a review
+export const postReviewImageThunk = (imageContent, reviewId, businessId) => async (dispatch) => {
     const res = await fetch(`/api/reviews/${reviewId}/images`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(imageContent)
     })
-    // no need for res.ok, image is associated to image backend, state will update after user creates review + adds image to it
+    if (res.ok) {
+        await dispatch(getBusinessReviewsThunk(businessId))
+        await dispatch(getUserReviewsThunk())
+    } else if (res.status < 500) {
+        const data = await res.json();
+        return data;
+    } else {
+        return { "errors": ["A server error occurred. Please try again."] };
+    }
 }
 
 /* ----- INITIAL STATE ----- */
