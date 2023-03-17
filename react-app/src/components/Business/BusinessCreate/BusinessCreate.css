@@ -188,10 +188,13 @@
   }
 
   .day-hours {
+    margin: auto;
+  }
+
+  .day-hours-container {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 10px;
+    justify-content: center;
   }
 
   .day-label,
