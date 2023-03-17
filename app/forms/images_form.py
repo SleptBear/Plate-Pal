@@ -5,9 +5,8 @@ from app.models import User
 
 
 def extension_check(form, field):
-    # Checking if user exists
     url = field.data
-    if not url.endswith('.jpeg'):
+    if not url.endswith(('.jpeg', '.png', '.jpg')):
         raise ValidationError('URL does not end in a valid extension')
 
 class ImageForm(FlaskForm):
