@@ -48,3 +48,7 @@
     text-decoration: underline;
     color: rgba(2,122,151,1);
 }
+
+.image-delete-form-error {
+    color: red;
+}
