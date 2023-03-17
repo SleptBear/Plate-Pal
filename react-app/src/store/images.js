@@ -56,7 +56,6 @@ export const postImageThunk =
             return createdImage;
         } else if (res.status < 500) {
             const data = await res.json();
-            console.log(data)
             return data
         } else {
             return {"errors": "A server error occurred. Please try again."};
@@ -70,6 +69,11 @@ export const deleteImageThunk = (imageId) => async (dispatch) => {
     });
     if (res.ok) {
         dispatch(deleteImageAction(imageId));
+    } else if (res.status < 500) {
+        const data = await res.json();
+        return data
+    } else {
+        return {"errors": "A server error occurred. Please try again."};
     }
 };
 

@@ -26,7 +26,7 @@ const TimePicker = ({ id, value, onChange, isClosed }) => {
 const inputStyle = (value) => ({
   borderColor: value ? "initial" : "red",
   "border-radius": "5px",
-  "border-style": "solid"
+  "border-style": "solid",
 });
 
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
@@ -114,15 +114,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   );
 };
 
-const days = [
-  "M",
-  "T ",
-  "W",
-  "R ",
-  "F ",
-  "S ",
-  "S ",
-];
+const days = ["M", "T ", "W", "R ", "F ", "S ", "S  "];
 
 /* --------------------------------------------------------------------------------  */
 
@@ -231,13 +223,15 @@ const BusinessEdit = () => {
     if (city.length > 25)
       valErrors.push("Maximum characters for a city is 25 characters");
     if (state.length < 1) valErrors.push("State is required");
-    if (state.length > 30)
-      valErrors.push("Maximum characters for a city is 30 characters");
-    // if (zipcode.toString().length < 1) valErrors.push("Zip code is required");
+    if (state.length !== 2)
+      valErrors.push("State needs to be abbreviated (2 characters)");
     if (zipcode.toString().length !== 5)
-      valErrors.push("Zip code must be 5 digits");
+      valErrors.push("Zipcode must be 5 digits");
     if (phone_number.length < 1) valErrors.push("Phone number is required");
+    if (phone_number.length > 15)
+      valErrors.push("Please format phone number as ###-###-####");
     if (website.length < 1) valErrors.push("Website is required");
+    // may need the regex validations that wtform uses for URL()
     if (!hoursOfOperationChecker())
       valErrors.push("Hours of operations are required");
 
@@ -316,7 +310,7 @@ const BusinessEdit = () => {
         <ul>
           {hasSubmitted &&
             errors.map((error, idx) => (
-              <li style={{ "color": "red" }} key={idx}>
+              <li style={{ color: "red" }} key={idx}>
                 {error}
               </li>
             ))}
@@ -529,7 +523,7 @@ const BusinessEdit = () => {
         ></input>
         <input
           type="number"
-          placeholder="Zip Code"
+          placeholder="Zipcode"
           value={zipcode}
           onChange={(e) => setZipCode(e.target.value)}
         ></input>

@@ -47,11 +47,9 @@ export const login = (email, password) => async (dispatch) => {
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();
-		if (data.errors) {
-			return data.errors;
-		}
+		return data
 	} else {
-		return {"errors": "A server error occurred. Please try again."};
+		return {"errors": ["A server error occurred. Please try again."]};
 	}
 };
 
@@ -88,11 +86,9 @@ export const signUp = (firstName, lastName, email, zipcode, password) => async (
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();
-		if (data.errors) {
-			return data.errors;
-		}
+		return data
 	} else {
-		return {"errors": "A server error occurred. Please try again."};
+		return {"errors": ["A server error occurred. Please try again."]};
 	}
 };
 

@@ -2,50 +2,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  min-height: calc(100vh - 60px); /* Adjust this value according to the height of your nav bar */
   gap: 32px;
-  margin-top: 10px; /* Adjust this value according to the height of your nav bar */
-  margin-bottom: 50px;
+  padding-top: 30px; /* Adjust this value according to the height of your nav bar */
 }
-#root .business-create-container form{
-  transform:translatex(-839px) translatey(-351px);
- }
 
- /* Business card */
- #root .business-card{
-  transform:translatex(-122px) translatey(-298px);
-  background-color:#ffffff;
-  width:207px;
-  padding-bottom:18px;
-  padding-top:22px;
-  min-height:169px;
+.errors {
+  color: red;
+}
+
+/* Business card */
+.business-card {
+  background-color: #ffffff;
+  width: 207px;
+  padding-bottom: 18px;
+  padding-top: 22px;
+  min-height: 169px;
   border-radius: 0%;
- }
+}
 
 .business-form {
   background-color: #fff;
   width: 600px;
-  position: absolute;
-  top: 13%;
-  left: 13%;
   display: grid;
   grid-template-columns: 1fr;
   place-items: center;
   line-height: 1.5;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.185);
   padding: 24px 31px 17px 27px;
-
+  margin-bottom: 20px;
 }
-
-#root .business-create-container form{
-  min-height:1395px;
-  margin-bottom:20px;
-  margin-top:26px;
-  padding-bottom:20px;
- }
 
 .business-form h2 {
   font-size: 1.2rem;
@@ -97,7 +83,7 @@
   font-size: 12px;
 }
 
-.business-form .price-radios label{
-  display:inline-block;
-  width:60px;
- }
+.business-form .price-radios label {
+  display: inline-block;
+  width: 60px;
+}

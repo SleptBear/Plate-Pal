@@ -10,5 +10,5 @@ def extension_check(form, field):
         raise ValidationError('URL does not end in a valid extension')
 
 class ImageForm(FlaskForm):
-    url = StringField('url', validators=[DataRequired(), URL(), extension_check])
+    url = StringField('url', validators=[DataRequired()])
     caption = StringField('caption')

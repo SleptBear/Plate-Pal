@@ -76,6 +76,7 @@ const ActivityIndex = () => {
                 item={item}
                 key={item.id.toString() + item.zipcode.toString()}
               />
+              
             );
           }
         })}

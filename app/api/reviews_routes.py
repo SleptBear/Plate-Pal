@@ -19,8 +19,8 @@ def reviews_current():
     for review in reviews:
         business = Business.query.get(review["business_id"])
         owner = User.query.get(review["owner_id"])
-        images_count=len(owner.images)
-        owner=owner.to_dict()
+        images_count = len(owner.images)
+        owner = owner.to_dict()
         images_query = db.session.query(Image).filter(
             Image.review_id == review['id'])
         images = images_query.all()
@@ -60,7 +60,10 @@ def get_review_details(id):
 @review_routes.route('/<int:id>/images', methods=['POST'])
 @login_required
 def create_new_image(id):
+    user = User.query.get(int(current_user.get_id()))
     review = Review.query.get(id)
+    business = Business.query.get(review.business_id)
+    
     if not review:
         return {
             "errors": "Review couldn't be found",
@@ -86,7 +89,12 @@ def create_new_image(id):
         )
         db.session.add(new_image)
         db.session.commit()
-        return new_image.to_dict()
+        image = new_image.to_dict()
+        image["business_name"] = business.name
+        image["business_id"] = business.id
+        image["user_first_name"] = user.first_name
+        image["user_last_name"] = user.last_name
+        return image
     if form.errors:
         return {
             "message": "Validation error",

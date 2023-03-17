@@ -15,7 +15,6 @@ import BusinessCreate from "./components/Business/BusinessCreate";
 import ReviewDelete from "./components/Review/ReviewDelete";
 import BusinessDelete from "./components/Business/BusinessDelete";
 import ImageDelete from "./components/Images/ImageDelete";
-import ImageCreate from "./components/Images/ImageCreate";
 import ReviewEdit from "./components/Review/ReviewEdit";
 import BusinessEdit from "./components/Business/BusinessEdit";
 import BusinessAll from "./components/Business/BusinessAll";
@@ -77,16 +76,6 @@ function App() {
           <Route exact path="/businesses/:businessId/images">
             <BusinessImagesIndex />
           </Route>
-          <Route exact path="/reviews/:reviewId/images/new">
-            <ProtectedRoute>
-              <ImageCreate />
-            </ProtectedRoute>
-          </Route>
-          <Route exact path="/businesses/:businessId/images/new">
-            <ProtectedRoute>
-              <ImageCreate />
-            </ProtectedRoute>
-          </Route>
           <Route path="/businesses/:businessId/edit">
             <ProtectedRoute>
               <BusinessEdit />
@@ -108,11 +97,6 @@ function App() {
           <Route path="/reviews/:reviewId/delete">
             <ProtectedRoute>
               <ReviewDelete />
-            </ProtectedRoute>
-          </Route>
-          <Route exact path="/reviews/:reviewId/images/new">
-            <ProtectedRoute>
-              <ImageCreate />
             </ProtectedRoute>
           </Route>
           <Route path="/images/current">
