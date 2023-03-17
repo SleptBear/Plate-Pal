@@ -10,9 +10,21 @@ import {
 
 /* --------------------------------------------------------------------------------  */
 // date and time helper functions
-const TimePicker = ({ id, value, onChange }) => {
-  return <input type="time" id={id} value={value} onChange={onChange}></input>;
+const TimePicker = ({ id, value, onChange, isClosed }) => {
+  return (
+    <input
+      type="time"
+      id={id}
+      value={value}
+      onChange={onChange}
+      style={isClosed ? undefined : inputStyle(value)}
+    ></input>
+  );
 };
+
+const inputStyle = (value) => ({
+  borderColor: value ? "initial" : "red",
+});
 
 const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   const [isValid, setIsValid] = useState(true);
@@ -65,6 +77,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
         onChange={handleOpenTimeChange}
         disabled={isClosed}
         className="time-picker"
+        isClosed={isClosed}
       />
       <label htmlFor={`${day}-close`} className="separator">
         to
@@ -75,6 +88,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
         onChange={handleCloseTimeChange}
         disabled={isClosed}
         className="time-picker"
+        isClosed={isClosed}
       />
       <label htmlFor={`${day}-closed`} className="closed-label">
         Closed
@@ -95,7 +109,15 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   );
 };
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
 
 /* --------------------------------------------------------------------------------  */
 
@@ -194,22 +216,25 @@ const BusinessEdit = () => {
     const valErrors = [];
 
     if (name.length < 1) valErrors.push("Business name is required");
-    if (name.length > 40) valErrors.push("Maximum characters for a business name is 40")
+    if (name.length > 40)
+      valErrors.push("Maximum characters for a business name is 40");
     if (category.length < 1) valErrors.push("Category is required");
     if (address.length < 1) valErrors.push("Address is required");
-    if (address.length > 64) valErrors.push("Maximum characters for an address is 64 characters")
+    if (address.length > 64)
+      valErrors.push("Maximum characters for an address is 64 characters");
     if (city.length < 1) valErrors.push("City is required");
-    if (city.length > 25) valErrors.push("Maximum characters for a city is 25 characters")
+    if (city.length > 25)
+      valErrors.push("Maximum characters for a city is 25 characters");
     if (state.length < 1) valErrors.push("State is required");
-    if (state.length > 30) valErrors.push("Maximum characters for a city is 30 characters")
+    if (state.length > 30)
+      valErrors.push("Maximum characters for a city is 30 characters");
     // if (zipcode.toString().length < 1) valErrors.push("Zip code is required");
-    if (zipcode.toString().length !== 5) valErrors.push("Zip code must be 5 digits")
+    if (zipcode.toString().length !== 5)
+      valErrors.push("Zip code must be 5 digits");
     if (phone_number.length < 1) valErrors.push("Phone number is required");
     if (website.length < 1) valErrors.push("Website is required");
-    // if (hours_of_operation.length < 1)
-    //   valErrors.push("Hours of operations are required");
-
-    // NOTE: currently not checking for hours of operation, may return with "NaN: NaNam" for some hours
+    if (!hoursOfOperationChecker())
+      valErrors.push("Hours of operations are required");
 
     setErrors(valErrors);
   }, [
@@ -221,7 +246,7 @@ const BusinessEdit = () => {
     zipcode,
     phone_number,
     website,
-    // hours_of_operation,
+    hours_of_operation,
   ]);
 
   const onSubmit = async (e) => {
@@ -261,6 +286,20 @@ const BusinessEdit = () => {
   const allTimesValid = days.every(
     (day) => hours_of_operation[day]?.isValid !== false
   );
+
+  // hours of operations required checker
+  const hoursOfOperationChecker = () => {
+    // Check if all days have data for hours of operation
+    const allDaysHaveData = days.every(
+      (day) => hours_of_operation[day]?.open && hours_of_operation[day]?.close
+    );
+
+    if (allTimesValid && allDaysHaveData) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <div className="edit-business-container-outer">
