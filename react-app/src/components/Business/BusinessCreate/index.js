@@ -231,7 +231,7 @@ const BusinessCreate = () => {
 
     console.log(createdBusiness)
 
-    if (createdBusiness && createdBusiness.errors.length === 0) {
+    if (createdBusiness && createdBusiness.errors.length === 0 && areFieldsValid) {
       if (imageURL) {
         await dispatch(postImageThunk({
           businessId: createdBusiness.id,
