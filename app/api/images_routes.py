@@ -29,6 +29,21 @@ def images_delete(id):
             "status_code": 404
         }, 404
 
+    business = Business.query.get(image.business_id)
+
+    image_query = db.session.query(
+        Image).filter(Image.business_id == image.business_id)
+
+    images = image_query.all()
+
+
+    if len(images) == 1:
+        return {
+            "errors": ["Can't delete last image of a business"],
+            "status_code": 403
+        }, 403
+
+
     if int(current_user.get_id()) == image.owner_id:
         db.session.delete(image)
         db.session.commit()
@@ -43,6 +58,7 @@ def images_delete(id):
         }, 403
 
 # GET IMAGE BY CURRENT ID
+
 
 @image_routes.route('/<int:id>')
 def get_image_details(id):

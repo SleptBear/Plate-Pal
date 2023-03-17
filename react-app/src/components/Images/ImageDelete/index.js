@@ -15,12 +15,19 @@ function ImageDelete() {
     const history = useHistory();
     const user = useSelector(state => state.session.user)
     const [image, setImage] = useState(null)
+    const [errors, setErrors] = useState("");
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await dispatch(deleteImageThunk(imageId))
-        history.goBack()
+        setErrors("")
+        const errors = await dispatch(deleteImageThunk(imageId))
+        if (!errors) {
+            history.goBack()
+        } else {
+            console.log(errors)
+            setErrors(errors.errors[0])
+        }
     };
 
     const handleCancel = async (e) => {
@@ -67,6 +74,16 @@ function ImageDelete() {
                     <img className="image-delete-form-image" src={image.url}></img>
                     <br></br>
                     <br></br>
+                    {errors ? (
+                        <>
+                            <div className="image-delete-form-error">
+                                {errors}
+                            </div>
+                            <br></br>
+                        </>
+                    )  : (
+                    <></>
+                    )}
                     <div className="image-delete-form-button-container">
                         <button type="submit" onClick={handleSubmit} className="image-delete-form-delete-button">Remove</button>
                         <div type="submit" onClick={handleCancel} className="image-delete-form-cancel-button">Cancel</div>
