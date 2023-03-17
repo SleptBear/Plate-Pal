@@ -24,7 +24,7 @@ function SignupFormPage() {
         signUp(firstName, lastName, email, zipcode, password)
       );
       if (data) {
-        setErrors(data);
+        setErrors(data.errors);
       }
     } else {
       setErrors([
@@ -41,8 +41,8 @@ function SignupFormPage() {
         <br></br>
         <h3>Sign Up for Plate Pal</h3>
         <br></br>
-        <ul>
-          {errors.map((error, idx) => (
+        <ul className="signup-form-errors">
+          {errors?.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
@@ -71,7 +71,7 @@ function SignupFormPage() {
         />
 
         <input
-          type="text"
+          type="number"
           placeholder="Zipcode"
           value={zipcode}
           onChange={(e) => setZipcode(e.target.value)}
