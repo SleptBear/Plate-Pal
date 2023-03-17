@@ -223,7 +223,7 @@ const BusinessEdit = () => {
     if (city.length > 25)
       valErrors.push("Maximum characters for a city is 25 characters");
     if (state.length < 1) valErrors.push("State is required");
-    if (state.length > 2)
+    if (state.length !== 2)
       valErrors.push("State needs to be abbreviated (2 characters)");
     if (zipcode.toString().length !== 5)
       valErrors.push("Zipcode must be 5 digits");
