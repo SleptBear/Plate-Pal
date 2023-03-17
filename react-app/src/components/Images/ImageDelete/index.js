@@ -1,7 +1,7 @@
 // frontend/src/components/deleteFormModal/index.js
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import "./ImageDelete.css";
 import { deleteImageThunk } from "../../../store/images";
 import { useParams } from "react-router-dom"
