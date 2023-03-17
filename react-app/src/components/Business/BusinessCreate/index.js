@@ -108,7 +108,7 @@ const days = [
   "R ",
   "F ",
   "S ",
-  "S ",
+  "S  ",
 ];
 
 const BusinessCreate = () => {
