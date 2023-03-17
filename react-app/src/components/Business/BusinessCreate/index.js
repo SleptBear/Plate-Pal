@@ -69,7 +69,7 @@ const DayHours = ({ day, openTime, closeTime, setOpenTime, setCloseTime }) => {
   return (
     <div className="day-hours-container">
       <div className="day-hours">
-        <label htmlFor={`${day}-open`} className="day-label">{day}:</label>
+        <label htmlFor={`${day}-open`} className="day-label">{day}</label>
         <TimePicker
           id={`${day}-open`}
           value={isClosed ? '' : openTime}
