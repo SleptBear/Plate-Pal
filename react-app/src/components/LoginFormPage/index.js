@@ -17,7 +17,7 @@ function LoginFormPage() {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      setErrors(data.errors);
     }
   };
 
@@ -35,7 +35,7 @@ function LoginFormPage() {
         <br></br>
         <h3>Log in to Plate Pal</h3>
         <br></br>
-        <ul>
+        <ul className="login-form-errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
