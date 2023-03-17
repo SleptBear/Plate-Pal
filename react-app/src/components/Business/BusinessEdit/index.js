@@ -529,7 +529,7 @@ const BusinessEdit = () => {
         ></input>
         <input
           type="number"
-          placeholder="Zip Code"
+          placeholder="Zipcode"
           value={zipcode}
           onChange={(e) => setZipCode(e.target.value)}
         ></input>

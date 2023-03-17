@@ -565,7 +565,7 @@ const BusinessCreate = () => {
         ></input>
         <input
           type="number"
-          placeholder="Zip Code"
+          placeholder="Zipcode"
           value={zipcode}
           onChange={(e) => setZipCode(e.target.value)}
           className="business-form-input"
