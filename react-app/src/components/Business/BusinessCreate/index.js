@@ -277,7 +277,7 @@ const BusinessCreate = () => {
 
 
   return (
-
+<div className="main-container">
     <div className="business-create-container">
 
       <form onSubmit={onSubmit} className="business-form">
@@ -329,16 +329,18 @@ const BusinessCreate = () => {
           onChange={(e) => setName(e.target.value)}
           className="business-form-input"
           style={inputStyle(name)}
-          maxLength="40" // Add maxLength attribute to limit the characters
+          maxLength={40} // Add maxLength attribute to limit the characters
         />
-        <input
-          type="text"
-          placeholder="Business phone number"
-          value={phone_number}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          className="business-form-input"
-          style={inputStyle(phone_number)}
-        ></input>
+<input
+  type="text"
+  placeholder="Business phone number"
+  value={phone_number}
+  onChange={(e) => setPhoneNumber(e.target.value)}
+  className="business-form-input"
+  style={inputStyle(phone_number)}
+  pattern="\d{3}-\d{3}-\d{4}"
+  title="Phone number format: xxx-xxx-xxxx"
+></input>
         <input
           type="text"
           placeholder="Website"
@@ -637,7 +639,30 @@ const BusinessCreate = () => {
         </div>
         <button type="submit" className="submit-button">Add Business</button>
       </form>
+
+      <div className="business-card">
+      <h3>Preview:</h3>
+      {/* business name */}
+        <h2 placeholder="Business name">{name}</h2>
+      <img src={imageURL} />
+      {/* city, state */}
+      <p placeholder="city, state">{`${city}, ${state}`}</p>
+      {/* category */}
+      <p value={category}>{category}</p>
+      <div>
+        <i className="fa-solid fa-pen-to-square"></i>
+        <span className="manage-business-text">Edit Business</span>
+      </div>
+      <div>
+        <div>
+          <i className="fa-solid fa-trash"></i>
+          <span className="manage-business-text">Delete Business</span>
+        </div>
+      </div>
     </div>
+
+    </div>
+</div>
   );
 };
 
