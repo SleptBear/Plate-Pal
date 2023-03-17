@@ -9,7 +9,7 @@ class Business(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     category = db.Column(db.String(100), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(50), nullable=False)
