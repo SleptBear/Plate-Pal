@@ -283,8 +283,7 @@ def search_businesses():
             (Business.category.ilike(f'%{search_query}%')) |
             (Business.address.ilike(f'%{search_query}%')) |
             (Business.city.ilike(f'%{search_query}%')) |
-            (Business.state.ilike(f'%{search_query}%')) |
-            (Business.zipcode.ilike(f'%{search_query}%'))
+            (Business.state.ilike(f'%{search_query}%'))
         )
 
         businesses = [business.to_dict()
