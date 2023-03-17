@@ -15,8 +15,6 @@ const ImageCreate = () => {
     // likely need to separate hours of ops M-Sun + inputs for hours
     // then format input data as string for hours of operations
 
-    // price hover
-
     const onSubmit = async (e) => {
         e.preventDefault();
         const newImage = {

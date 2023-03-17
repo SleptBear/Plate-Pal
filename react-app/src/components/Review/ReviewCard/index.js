@@ -10,6 +10,8 @@ import * as trash from "../../Images/ImageModal/trash.png"
 import * as imageIcon from "./image.png"
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import OpenImageModalButton from "../../OpenImageModalButton";
+import CreateImageFormModal from "../../CreateImageFormModal";
 
 const ReviewCard = ({ review }) => {
   const dispatch = useDispatch()
@@ -52,37 +54,43 @@ const ReviewCard = ({ review }) => {
 
 
   const deleteRender = () => {
-    if (user.id === review.owner_id) {
-      return (
-        <div className="review-card-delete-button-container">
-          <i className="fa-solid fa-trash"></i>
-          &nbsp;<div><span className={"review-card-delete-button"} onClick={handleDeleteRedirect}> Delete Review</span></div>
-        </div>
-      )
+    if (user) {
+      if (user.id === review.owner_id) {
+        return (
+          <div className="review-card-delete-button-container">
+            <i className="fa-solid fa-trash"></i>
+            &nbsp;<div><span className={"review-card-delete-button"} onClick={handleDeleteRedirect}> Delete Review</span></div>
+          </div>
+        )
+      }
     }
   }
 
   const editRender = () => {
-    if (user.id === review.owner_id) {
-      return (
-        <div className="review-card-edit-button-container">
-          <i className="fa-solid fa-pen-to-square"></i>
-          &nbsp; <div><span className={"review-card-edit-button"} onClick={handleEditRedirect}> Edit Review</span></div>
-        </div>
-      )
+    if (user) {
+      if (user.id === review.owner_id) {
+        return (
+          <div className="review-card-edit-button-container">
+            <i className="fa-solid fa-pen-to-square"></i>
+            &nbsp; <div><span className={"review-card-edit-button"} onClick={handleEditRedirect}> Edit Review</span></div>
+          </div>
+        )
+      }
     }
   }
 
 
 
   const addPhotoRender = () => {
-    if (user.id === review.owner_id) {
-      return (
-        <button className="review-card-add-photo-button">
-          <i className="fa-solid fa-plus"></i>
-          &nbsp; <div><span onClick={handleAddImageRedirect}> image</span></div>
-        </button>
-      )
+    if (user) {
+      if (user.id === review.owner_id) {
+        return (
+          <OpenImageModalButton
+            buttonText={"image"}
+            modalComponent={<CreateImageFormModal review_id={review.id} />}
+          ></OpenImageModalButton>
+        )
+      }
     }
   }
 
@@ -132,7 +140,7 @@ const ReviewCard = ({ review }) => {
     if (review.images[0]) {
       return (
         <Link to={`/reviews/${review.id}/images`}>
-          <div style={{ "height": `${imageHeight}`, "background-image": `url("${review.images[0].url}")` }}></div>
+          <div style={{ "height": `${imageHeight}`, "backgroundImage": `url("${review.images[0].url}")` }}></div>
         </Link>
       )
     }
@@ -186,7 +194,7 @@ const ReviewCard = ({ review }) => {
     if (review.images.length > 0) {
       return (
         <>
-          <div className="review-card-images-container" style={{ "grid-template-columns": `${gridColumns}` }} >
+          <div className="review-card-images-container" style={{ "gridTemplateColumns": `${gridColumns}` }} >
             {imageOneRender()}
             {imageTwoRender()}
             {imageThreeRender()}

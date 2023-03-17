@@ -73,7 +73,7 @@ const StarCalculator = (rating) => {
           <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
         <span className="fa-stack">
-          <i className="fas fa-square fa-stack-2x gold"></i>
+          <i className="fas fa-square fa-stack-2x gray"></i>
           <i className="fas fa-star fa-stack-1x fa-inverse"></i>
         </span>
         <span className="fa-stack">

@@ -284,7 +284,6 @@ def search_businesses():
         businesses = [business.to_dict() for business in businesses_query.all()]
 
         for business in businesses:
-            print("???????", business)
             images_query = db.session.query(Image).filter(Image.business_id == business["id"])
             images = images_query.all()
             business["images"] = [image.to_dict() for image in images]

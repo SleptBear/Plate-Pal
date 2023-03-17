@@ -58,7 +58,7 @@ const ReviewEdit = () => {
     if (Array.isArray(response)) setErrors(response);
 
     if (!Array.isArray(response)) {
-      history.push(`/businesses/${singleReview.business_id}`);
+      history.goBack();
     }
   };
 
