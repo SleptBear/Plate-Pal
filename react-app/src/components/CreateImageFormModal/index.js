@@ -127,7 +127,7 @@ function CreateImageFormModal({ review_id, business_id }) {
                         <br></br>
                         <input
                             type="text"
-                            placeholder="caption"
+                            placeholder="Caption (Optional)"
                             value={caption}
                             onChange={(e) => { setCaption(e.target.value) }}
                             className="business-form-input"
@@ -185,7 +185,7 @@ function CreateImageFormModal({ review_id, business_id }) {
                         <br></br>
                         <input
                             type="text"
-                            placeholder="caption"
+                            placeholder="Caption (Optional)"
                             value={caption}
                             onChange={(e) => { setCaption(e.target.value) }}
                             className="business-form-input"
