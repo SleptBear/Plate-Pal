@@ -16,10 +16,6 @@ const ReviewCreate = () => {
   const user = useSelector((state) => state.session.user);
   const business = useSelector((state) => state.businesses.singleBusiness);
 
-  useEffect(() => {
-    dispatch(getSingleBusinessThunk(businessId));
-  }, [dispatch]);
-
   const [review, setReview] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [imageCaption, setImageCaption] = useState("");
@@ -27,6 +23,31 @@ const ReviewCreate = () => {
   // star rating hover
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
+  const [starsColor, setStarsColor] = useState("gray")
+
+  useEffect(() => {
+    dispatch(getSingleBusinessThunk(businessId));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if(stars === 1){
+      setStarsColor("yellow")
+    }
+    if(stars === 2){
+      setStarsColor("gold")
+    }
+    if(stars === 3){
+      setStarsColor("orange")
+    }
+    if(stars === 4){
+      setStarsColor("amber")
+    }
+    if(stars === 5){
+      setStarsColor("red")
+    }
+  }, [stars])
+
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +91,7 @@ const ReviewCreate = () => {
         <div className="review-form-stars-container">
           {/* Each star value 1-5
             On hover/click, set stars value to appropriate number */}
-          <span>{`Select your rating: `}</span>
+          <span>{`Select your rating: `}&nbsp;</span>
           {[...Array(5)].map((star, index) => {
             index += 1;
             return (
@@ -82,7 +103,10 @@ const ReviewCreate = () => {
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(stars)}
               >
-                <span className="star-rating">&#9733;</span>
+                <span className="fa-stack review-star">
+                  <i className={`fas fa-square fa-stack-2x ${starsColor}`}></i>
+                  <i className="fas fa-star fa-stack-1x fa-inverse"></i>
+                </span>
               </button>
             );
           })}
