@@ -6,13 +6,13 @@ from datetime import datetime
 # Adds a demo user, you can add other users here if you want
 def seed_images():
     db.session.add(Image(
-        url='https://lh3.googleusercontent.com/p/AF1QipNiq_d4WYqKcBFxdeD7Bcwef9GAxooKFuy4U_xw=s680-w680-h510',
+        url='https://www.gannett-cdn.com/presto/2019/09/12/PPHX/4ffba913-0cdb-4392-ab6e-5fee33214566-uscp-772hgxx4kwp1ld5d2bxe_original.jpg',
         owner_id=1,
         business_id=1
     ))
 
     db.session.add(Image(
-        url='https://s.hdnux.com/photos/01/31/51/50/23501360/5/rawImage.jpg',
+        url='https://media.30seconds.com/tip/lg/A-meal-at-Mamas-Fish-House-in-Maui-is-an-experience-you-wo-17844-246dc34323-1549663420.jpg',
         owner_id=2,
         business_id=2
     ))
@@ -24,7 +24,7 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url='https://assets3.thrillist.com/v1/image/2994209/1200x630/flatten;crop_down;webp=auto;jpeg_quality=70',
+        url='https://www.opentable.com/blog/wp-content/uploads/sites/108/2021/07/girl-and-the-goat_122841254_708529073128116_5731424708196087464_n.png',
         owner_id=4,
         business_id=4
     ))
@@ -72,25 +72,25 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url='https://images.squarespace-cdn.com/content/v1/6179d6754688ca3b03aec8ba/1635374727535-172DRD3TMH93CQQ6BLJU/BLG_PRIVATE-DINING-ROOM.jpg?format=1000w',
+        url='https://cdn.vox-cdn.com/thumbor/rw99g-7eq_Tqs_O-ogmHYSdhyl0=/0x182:2545x1514/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/13063503/stonebarns_exterior.0.0.1504233507.jpg',
         owner_id=2,
         business_id=12
     ))
 
     db.session.add(Image(
-        url='https://www.theworlds50best.com/discovery/filestore/jpg/Coi-SanFrancisco-USA-01.jpg',
+        url='https://cdn.vox-cdn.com/thumbor/0kqfADvlg6vaobVA4UhRBLIj7h8=/0x17:380x302/1200x800/filters:focal(0x17:380x302)/cdn.vox-cdn.com/uploads/chorus_image/image/38941530/bar_20la_20grassa.0.jpg',
         owner_id=3,
         business_id=13,
     ))
 
     db.session.add(Image(
-        url='https://www.theworlds50best.com/discovery/filestore/jpg/OsteriaMozza-LosAngeles-USA-03.jpg',
+        url='https://www.theworlds50best.com/discovery/filestore/jpg/Coi-SanFrancisco-USA-01.jpg',
         owner_id=4,
         business_id=14,
     ))
 
     db.session.add(Image(
-        url='https://pyxis.nymag.com/v1/imgs/d3a/f6d/0fb2880fb715ea70e2735832258a563773-26-blue-hill-at-stone-barns.jpg',
+        url='https://cdn2.lamag.com/wp-content/uploads/sites/6/2011/03/osteriamozza.jpg',
         owner_id=5,
         business_id=15,
     ))
@@ -103,7 +103,7 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url="https://images.prismic.io/mamas-fish-house/f532d545-6ac8-4a4a-87a0-8f104e9624f2_hero_stuffedfish_topview.jpg?auto=compress,format",
+        url="https://images.otstatic.com/prod/23763100/1/huge.jpg",
         owner_id=4,
         business_id=2,
         review_id=4
@@ -131,14 +131,14 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url="https://www.thomaskeller.com/sites/default/files/styles/2_3_screen/public/media/franchises/food_drink_images/tk.com_perse_menu-main3.new_.jpg?itok=3PEHyCiX",
+        url="https://www.travoodie.com/wp-content/uploads/2019/09/fullsizeoutput_12e4-e1567665918951-1140x641.jpeg",
         owner_id=1,
         business_id=6,
         review_id=16
     ))
 
     db.session.add(Image(
-        url="https://images.seattletimes.com/wp-content/uploads/2022/03/03142022_canlissnacks_161527.jpg?d=780x543",
+        url="https://canlis.com/uploads/menu_1.jpg",
         owner_id=1,
         business_id=7,
         review_id=19
@@ -152,14 +152,14 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?cs=srgb&dl=pexels-ash-376464.jpg&fm=jpg",
+        url="https://cdn2.atlantamagazine.com/wp-content/uploads/sites/4/2018/11/1218_HattieBs_CoriCarter_oneuseonly.jpg",
         owner_id=1,
         business_id=9,
         review_id=25
     ))
 
     db.session.add(Image(
-        url="https://media-cdn.tripadvisor.com/media/photo-s/16/78/ee/a0/photo0jpg.jpg",
+        url="https://www.mvnews.org/wp-content/uploads/2021/01/IMG_1994-e1611290526672-900x675.jpeg",
         owner_id=5,
         business_id=10,
         review_id=28
@@ -173,32 +173,34 @@ def seed_images():
     ))
 
     db.session.add(Image(
-        url="https://images.squarespace-cdn.com/content/v1/6179d6754688ca3b03aec8ba/1635374727535-172DRD3TMH93CQQ6BLJU/BLG_PRIVATE-DINING-ROOM.jpg?format=1000w",
+        url="https://pyxis.nymag.com/v1/imgs/d3a/f6d/0fb2880fb715ea70e2735832258a563773-26-blue-hill-at-stone-barns.jpg",
         owner_id=2,
         business_id=12,
         review_id=34
     ))
 
     db.session.add(Image(
-        url="https://www.theworlds50best.com/discovery/filestore/jpg/Coi-SanFrancisco-USA-01.jpg",
+        url="https://cdn.vox-cdn.com/thumbor/0kqfADvlg6vaobVA4UhRBLIj7h8=/0x17:380x302/1200x800/filters:focal(0x17:380x302)/cdn.vox-cdn.com/uploads/chorus_image/image/38941530/bar_20la_20grassa.0.jpg",
         owner_id=3,
         business_id=13,
         review_id=37
     ))
 
     db.session.add(Image(
-        url="https://www.theworlds50best.com/discovery/filestore/jpg/OsteriaMozza-LosAngeles-USA-03.jpg",
+        url="https://www.theworlds50best.com/discovery/filestore/jpg/Coi-SanFrancisco-USA-01.jpg",
         owner_id=4,
         business_id=14,
         review_id=40
     ))
 
     db.session.add(Image(
-        url="https://pyxis.nymag.com/v1/imgs/d3a/f6d/0fb2880fb715ea70e2735832258a563773-26-blue-hill-at-stone-barns.jpg",
+        url="https://www.theworlds50best.com/discovery/filestore/jpg/OsteriaMozza-LosAngeles-USA-03.jpg",
         owner_id=5,
         business_id=15,
         review_id=43
     ))
+
+
 
     db.session.commit()
 

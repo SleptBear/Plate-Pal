@@ -45,7 +45,7 @@ const ReviewImagesIndex = () => {
 
             <div className="review-images-index-container">
                 <br></br>
-                <h2 className="review-images-index-title">Images for Images for <Link to={`/businesses/${review.business_id}`}>{review.business_name}</Link> from {review.owner_first_name} {review.owner_last_name[0]}</h2>
+                <h2 className="review-images-index-title">Images for <Link to={`/businesses/${review.business_id}`}>{review.business_name}</Link> from {review.owner_first_name} {review.owner_last_name[0]}</h2>
                 <br></br>
                 <ColoredLine />
                 <br></br>
