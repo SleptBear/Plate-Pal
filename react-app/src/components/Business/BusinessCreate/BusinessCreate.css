@@ -1,213 +1,89 @@
-.business-create-container {
-  display: grid;
-  flex-direction: column;
+.main-container {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: 2rem;
-  margin: 10;
-  }
+  min-height: calc(100vh - 60px); /* Adjust this value according to the height of your nav bar */
+  gap: 32px;
+  padding-top: 30px; /* Adjust this value according to the height of your nav bar */
+}
 
-  .business-create-form {
-  display: grid;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-  margin: 10px;
-  }
-
-  .business-form{
-    display: grid;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-    margin: 10px;
-    padding: 10%;
-    padding-top: 2%;
-    }
-
-  .price-radios{
-    display: grid;
-    grid-template-columns: 20px;
-    }
-
-  .autocomplete-container {
-  position: relative;
-  width: 100%;
-  }
-
-  .autocomplete-input {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  }
-
-  .suggestion-container {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  z-index: 100;
-  position: absolute;
-  margin-top: 0.2rem;
-  width: 100%;
-  }
-
-  .suggestion-container p {
-  font-size: 1rem;
-  margin: 0.5rem 0;
-  }
-
-  .suggestion {
-  padding: 0.5rem;
-  cursor: pointer;
-  }
-
-  .suggestion:hover {
-  background-color: #f2f2f2;
-  }
-
-  .errors {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.errors {
   color: red;
-  }
+}
 
-  .red-border {
-    border: 2px solid red;
-  }
+/* Business card */
+.business-card {
+  background-color: #ffffff;
+  width: 207px;
+  padding-bottom: 18px;
+  padding-top: 22px;
+  min-height: 169px;
+  border-radius: 0%;
+}
 
-
-  .validation-message{
-    color:red;
-    font-weight: bold;
-    padding-inline: 15px;
-  }
-
-  .form-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  }
-
-  .business-form-input {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  }
-
-  .business-form-price-container {
+.business-form {
+  background-color: #fff;
+  width: 600px;
   display: grid;
-  grid-template-columns: auto;
-  align-items: center;
-  margin-bottom: 1rem;
-  }
+  grid-template-columns: 1fr;
+  place-items: center;
+  line-height: 1.5;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.185);
+  padding: 24px 31px 17px 27px;
+  margin-bottom: 20px;
+}
 
-  .business-form-price-container span {
+.business-form h2 {
   font-size: 1.2rem;
-  margin-bottom: 1rem;
-  }
+  color: #1A2250;
+}
 
-  /* .business-form-price-container button {
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  cursor: pointer;
-  }
+.business-form p {
+  font-size: 14px;
+  color: #3B4169;
+  margin: 10px 0;
+}
 
-  .business-form-price-container button span {
-  font-size: 1rem;
-  }
-
-  .business-form-price-container button:hover {
-  background-color: #ccc;
-  }
-
-  .business-form-price-container button.on {
-  background-color: #0073bb;
-  color: #fff;
+.business-form input[type="text"],
+.business-form input[type="email"],
+.business-form button {
+  width: 100%;
   border: none;
-  }
+  padding: 14px;
+  border-radius: 3px;
+}
 
-  .business-form-price-container button.on:hover {
-  background-color: #005fa3;
-  }
+.business-form input[type="text"],
+.business-form input[type="email"] {
+  border: 2px solid #DADDEC;
+  margin: 5px 0 10px;
+  font-size: 1rem;
+  color: #656880;
+}
 
-  .business-form-price-container button.off {
-  opacity: 0.6;
-  } */
-
-  .places-autocomplete-container {
-  width: 100%;
-  }
-
-  .places-autocomplete-container input {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  }
-
-  .places-autocomplete-container div {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  z-index: 100;
-  position: absolute;
-  margin-top: 0.2rem;
-  width: 100%;
-  }
-
-  .places-autocomplete-container div ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  }
-
-  .places-autocomplete-container div li {
-  padding: 0.5rem;
+.business-form button {
+  background-image: linear-gradient(to right, #cf2222, #a50606);
+  display: block;
+  color: #fff;
+  font-size: 1rem;
   cursor: pointer;
-  }
+  box-shadow: 0 5px 20px #89caff94;
+  transition: box-shadow 0.3s ease-in-out;
+}
 
-  .places-autocomplete-container div li:hover {
-  background-color: #f2f2f2;}
+.business-form button:hover {
+  box-shadow: none;
+}
 
+.business-form span {
+  display: block;
+  text-align: center;
+  margin: 20px 0 0;
+  color: #BABDCB;
+  font-size: 12px;
+}
 
-  .days-container {
-    display: grid;
-    gap: 10px;
-  }
-
-  .day-hours {
-    margin: auto;
-  }
-
-  .day-hours-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .day-label,
-  .separator,
-  .closed-label {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  .time-picker {
-    margin-right: 10px;
-  }
-
-  .closed-checkbox {
-    margin-left: 0px;
-  }
+.business-form .price-radios label {
+  display: inline-block;
+  width: 60px;
+}

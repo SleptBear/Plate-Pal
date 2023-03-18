@@ -300,7 +300,7 @@ const BusinessCreate = () => {
 
 
   return (
-
+<div className="main-container">
     <div className="business-create-container">
 
       <form onSubmit={onSubmit} className="business-form">
@@ -353,14 +353,16 @@ const BusinessCreate = () => {
           className="business-form-input"
           style={inputStyle(name)}
         />
-        <input
-          type="text"
-          placeholder="Business phone number"
-          value={phone_number}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          className="business-form-input"
-          style={inputStyle(phone_number)}
-        ></input>
+<input
+  type="text"
+  placeholder="Business phone number"
+  value={phone_number}
+  onChange={(e) => setPhoneNumber(e.target.value)}
+  className="business-form-input"
+  style={inputStyle(phone_number)}
+  pattern="\d{3}-\d{3}-\d{4}"
+  title="Phone number format: xxx-xxx-xxxx"
+></input>
         <input
           type="text"
           placeholder="Website"
@@ -659,7 +661,9 @@ const BusinessCreate = () => {
         </div>
         <button type="submit" className="submit-button">Add Business</button>
       </form>
+
     </div>
+</div>
   );
 };
 
