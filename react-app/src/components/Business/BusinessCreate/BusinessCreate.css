@@ -24,8 +24,10 @@
 .business-form {
   background-color: #fff;
   width: 600px;
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* grid-template-columns: 1fr; */
   place-items: center;
   line-height: 1.5;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.185);
@@ -46,6 +48,9 @@
 
 .business-form input[type="text"],
 .business-form input[type="email"],
+.business-form input[type="number"],
+
+.business-form select,
 .business-form button {
   width: 100%;
   border: none;
@@ -53,12 +58,29 @@
   border-radius: 3px;
 }
 
+
+
 .business-form input[type="text"],
-.business-form input[type="email"] {
+.business-form input[type="email"],
+.business-form input[type="number"],
+.day-hours input[type="time"],
+.business-form select {
+  border-radius: 3px;
   border: 2px solid #DADDEC;
   margin: 5px 0 10px;
   font-size: 1rem;
   color: #656880;
+}
+
+/* .autocomplete-container {
+  width: 100% !important;
+  margin: auto;
+  position: relative;
+  right: 15px;
+} */
+
+.business-form select {
+  width: 631px;
 }
 
 .business-form button {
@@ -78,12 +100,29 @@
 .business-form span {
   display: block;
   text-align: center;
-  margin: 20px 0 0;
+  margin: 10px 0 10px 0;
   color: #BABDCB;
   font-size: 12px;
 }
 
 .business-form .price-radios label {
   display: inline-block;
-  width: 60px;
+
+}
+
+.image-preview {
+  border-radius: 5px;
+}
+
+.price-radios {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.business-form-price-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
