@@ -54,6 +54,7 @@ const ReviewCreate = () => {
     let valErrors = [];
 
     if (review?.length < 1) valErrors.push("Review description is required");
+    if (review?.length > 1000) valErrors.push("Review description maximum characters is 1000")
     if (stars < 1 || stars > 5)
       valErrors.push("Star ratings must be between 1-5");
 
