@@ -11,6 +11,7 @@ import { getImagesAction } from "../../../store/images";
 import StarCalculator from "../BusinessSearched/StarCalculator";
 import "./BusinessDetail.css";
 import CreateImageFormModal from "../../CreateImageFormModal";
+import ColoredLine from "../../ColoredLine";
 
 const BusinessDetail = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,6 @@ const BusinessDetail = () => {
 
     if (todaysHours.split(": ")[1] === "Closed") {
       isOpen = false
-      console.log([isOpen, "Business is not open today"])
       return [isOpen, "Business is not open today"]
     }
 
@@ -177,6 +177,27 @@ const BusinessDetail = () => {
   business.images?.length === 2 ? columns = "1fr 1fr" : columns = columns
   business.images?.length === 3 ? columns = "1fr 1fr 1fr" : columns = columns
   business.images?.length >= 4 ? columns = "1fr 1fr 1fr 1fr" : columns = columns
+
+  let mondayHours = business.hours_of_operation.split(", ")[0]
+  mondayHours = mondayHours.split(': ')[1]
+
+  let tuesdayHours = business.hours_of_operation.split(", ")[1]
+  tuesdayHours = tuesdayHours.split(': ')[1]
+
+  let wednesdayHours = business.hours_of_operation.split(", ")[2]
+  wednesdayHours = wednesdayHours.split(': ')[1]
+
+  let thursdayHours = business.hours_of_operation.split(", ")[3]
+  thursdayHours = thursdayHours.split(': ')[1]
+
+  let fridayHours = business.hours_of_operation.split(", ")[4]
+  fridayHours = fridayHours.split(': ')[1]
+
+  let saturdayHours = business.hours_of_operation.split(", ")[5]
+  saturdayHours = saturdayHours.split(': ')[1]
+
+  let sundayHours = business.hours_of_operation.split(", ")[6]
+  sundayHours = sundayHours.split(': ')[1]
   return (
     <>
       <div className="business-detail-title-background-wrapper">
@@ -230,66 +251,135 @@ const BusinessDetail = () => {
         </div>
       </div>
 
-      <div className="business-detail-title-card-wrapper">
-        <div className="business-detail-title-card">
-          <h1>{business.name}</h1>
-          <br></br>
-          <div className="business-detail-reviews-information">
-            {StarCalculator(business.avg_rating)}
-            {`${business.number_of_reviews} reviews`}
-          </div>
-          <br></br>
-          <div className="business-detail-related-information">
-            <span style={{ "color": "rgba(88,180,255,1)" }}>
-              <i className="fa-solid fa-circle-check"></i>{` Claimed`}
-            </span>
-            &nbsp;
-            &bull;
-            &nbsp;
-            {priceChecker()}
-            &nbsp;
-            &bull;
-            &nbsp;
-            {business.category}
-
-          </div>
-          <br></br>
-          <div className="business-detail-hours-images-container">
-            <div>{isOpen} &nbsp; {hours}</div>
-            <Link to={`/businesses/${business.id}/images`} >
-              <button>{`See all ${business.images ? business.images.length : ""} images`}</button>
-            </Link>
-          </div>
-          <br></br>
+      <div className="business-detail-title-card-wrapper"></div>
+      <div className="business-detail-title-card">
+        <h1>{business.name}</h1>
+        <br></br>
+        <div className="business-detail-reviews-information">
+          {StarCalculator(business.avg_rating)}
+          {`${business.number_of_reviews} reviews`}
         </div>
+        <br></br>
+        <div className="business-detail-related-information">
+          <span style={{ "color": "rgba(88,180,255,1)" }}>
+            <i className="fa-solid fa-circle-check"></i>{` Claimed`}
+          </span>
+          &nbsp;
+          &bull;
+          &nbsp;
+          {priceChecker()}
+          &nbsp;
+          &bull;
+          &nbsp;
+          {business.category}
+
+        </div>
+        <div className="business-detail-hours-images-container">
+          <div>{isOpen} &nbsp; {hours}</div>
+          <Link to={`/businesses/${business.id}/images`} >
+            <button>{`See all ${business.images ? business.images.length : ""} images`}</button>
+          </Link>
+        </div>
+
+      </div>
+
+      <div className="business-detail-info-container">
+        <div className="business-detail-links">
+          <div className="business-detail-add-buttons">
+            <Link to={`/businesses/${business.id}/reviews/new`}>
+              <button className="business-detail-review-button"><i class="fa-regular fa-star"></i>&nbsp;Write a Review</button>
+            </Link>
+            &nbsp;&nbsp;&nbsp;
+            <div className="business-detail-image-button">
+              <OpenImageModalButton
+                modalComponent={<CreateImageFormModal business_id={business.id} />}
+              >
+              </OpenImageModalButton>
+            </div>
+          </div>
+
+          <div className="business-detail-website-link">
+            <a href={business.website}>{business.website}</a>
+            &nbsp;
+            <i class="fa-solid fa-up-right-from-square"></i>
+          </div>
+
+        </div>
+        <ColoredLine />
+        <br></br>
+        <h2>Location & Hours</h2>
+        <div className="business-details-location-hours-container">
+          <div className="business-details-location-container">
+            <br></br>
+            <div> {business.address} </div>
+            <br></br>
+            <div> {`${business.city}, ${business.state} ${business.zipcode}`} </div>
+            <br></br>
+            <Link to={`/businesses/search/${business.address}`}>
+              <button>Get directions</button>
+            </Link>
+
+          </div>
+
+          <div className="business-details-hours-container">
+            <div>
+              <div>
+                Mon
+              </div>
+              <div>
+                Tue
+              </div>
+              <div>
+                Wed
+              </div>
+              <div>
+                Thu
+              </div>
+              <div>
+                Fri
+              </div>
+              <div>
+                Sat
+              </div>
+              <div>
+                Sun
+              </div>
+            </div>
+            <div>
+              <div>
+                {mondayHours}
+              </div>
+              <div>
+                {tuesdayHours}
+              </div>
+              <div>
+                {wednesdayHours}
+              </div>
+              <div>
+                {thursdayHours}
+              </div>
+              <div>
+                {fridayHours}
+              </div>
+              <div>
+                {saturdayHours}
+              </div>
+              <div>
+                {sundayHours}
+              </div>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <ColoredLine />
+        <br></br>
+        <h2>Recommended Reviews</h2>
       </div>
 
 
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
 
-      <div className="business-detail">
-        {/* business name */}
-        <span>{business.name}</span>
-        {/* new business open */}
-        <span>New Business Open</span>
-        <img src={business.images ? business.images[0]?.url : ""} />
-        {/* city, state */}
-        <span>{`${business.city}, ${business.state}`}</span>
-        <OpenImageModalButton
-          modalComponent={<CreateImageFormModal business_id={business.id} />}
-        >
-        </OpenImageModalButton>
-        <Link to={`/businesses/${business.id}/images`} >
-          <button>{`See all ${business.images ? business.images.length : ""} images`}</button>
-        </Link>
-        <Link to={`/businesses/${business.id}/reviews/new`}>
-          <button>Write a Review</button>
-        </Link>
-      </div>
+
 
       <div>
         {Object.values(reviews).map((review) => {

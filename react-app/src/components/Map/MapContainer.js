@@ -43,7 +43,7 @@ const MapContainer = ({ google, searchString, selected, setSelected }) => {
           maxHeight: '',
         }}
         google={google}
-        zoom={3}
+        zoom={10}
         initialCenter={{
           lat: businesses[0]?.lat | 0,
           lng: businesses[0]?.lng | 0,

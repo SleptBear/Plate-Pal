@@ -50,7 +50,7 @@ def seed_businesses():
         lat=32.779766,
         lng=-79.929982,
         price=3,
-        hours_of_operation="M: 11am-2:30pm, 5pm-10pm, T : 11am-2:30pm, 5pm-10pm, W: 11am-2:30pm, 5pm-10pm, R : 11am-2:30pm, 5pm-10pm, F : 11am-2:30pm, 5pm-10pm, S : 10am-2pm, 5pm-10pm, S  : 10am-2pm"
+        hours_of_operation="M: 11am-10pm, T : 11am-10pm, W: 11am--10pm, R : 11am-10pm, F : 11am-10pm, S : 10am-10pm, S  : 10am-2pm"
     )
 
     b4 = Business(
@@ -81,7 +81,7 @@ def seed_businesses():
         lat=29.927746,
         lng=-90.077614,
         price=4,
-        hours_of_operation="M: 11:30am-2pm, 5:30pm-9pm, T : 11:30am-2pm, 5:30pm-9pm, W: 11:30am-2pm, 5:30pm-9pm, R : 11:30am-2pm, 5:30pm-9pm, F : 11:30am-2pm, 5:30pm-10pm, S : 10am-1pm, 5:30pm-10pm, S  : 10am-1pm, 5:30pm-9pm"
+        hours_of_operation="M: 11:30am-9pm, T : 11:30-9pm, W: 11:30am-9pm, R : 11:30am-9pm, F : 11:30am-10pm, S : 10am-10pm, S  : 10am-9pm"
     )
 
     b6 = Business(
