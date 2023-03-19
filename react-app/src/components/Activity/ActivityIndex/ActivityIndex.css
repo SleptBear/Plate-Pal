@@ -21,13 +21,17 @@
 
 .carousel-container {
   position: relative;
-  height: 500px; /* Adjust the height to your preference */
+  height: 682px; /* Adjust the height to your preference */
   overflow: hidden;
+}
+
+.carousel-root {
+  height: 682px;
 }
 
 .carousel-container img {
   width: 1000px;
-  height: 500px;
+  height: 682px;
   object-fit: cover;
 }
 
