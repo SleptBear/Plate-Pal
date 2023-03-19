@@ -49,6 +49,9 @@ function App() {
           <Route exact path="/businesses/search/:searchString">
             <BusinessSearched />
           </Route>
+          <Route exact path="/businesses/search/:searchString/:zoom/:lat/:lng">
+            <BusinessSearched />
+          </Route>
           <Route path="/businesses/new">
             <ProtectedRoute>
               <BusinessCreate />

@@ -13,6 +13,9 @@ export const MapPage = (props) => {
         searchString={props.searchString}
         selected={props.selected}
         setSelected={props.setSelected}
+        zoom={props.zoom}
+        lat={props.lat}
+        lng={props.lng}
       />
     </div>
   );
