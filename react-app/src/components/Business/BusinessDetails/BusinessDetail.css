@@ -36,3 +36,111 @@
   .business-detail button:hover {
     background-color: #0062cc;
   }
+
+  .business-detail-title-background-wrapper {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .business-detail-title-background {
+    margin:auto;
+    background-color: red;
+    width: 1924px;
+    height: 427px;
+    overflow: hidden;
+  }
+
+  .business-detail-title-background img{
+    width: 100%;
+    overflow-y: hidden;
+    position: relative;
+  }
+
+  .business-detail-image-wrapper{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .business-detail-title-card-wrapper{
+    width: 1904px;
+    top: 70px;
+    height: 417px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .business-detail-title-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 800px;
+    height: 417px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .business-detail-title-card span > span {
+    width: 50px;
+    position: relative;
+    font-size: 25px;
+  }
+
+  .business-detail-title-card h1{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 800px;
+    height: 417px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: flex-start;
+    font-size: 48px;
+  }
+
+  .business-detail-reviews-information {
+    display: flex;
+    align-items: center;
+    width: 340px;
+    justify-content: space-between;
+  }
+
+
+  .business-detail-hours-images-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .business-detail-hours-images-container button{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.0);
+    border: solid 1px rgb(200,201,202);
+    padding: 12px 32px;
+    text-decoration-style: solid;
+    box-sizing: border-box;
+    height: 48px;
+    font-size: 16px;
+    border-radius: 4px;
+    transition-property: background-color;
+    transition-duration: 0.8s;
+  }
+
+  .business-detail-hours-images-container button:hover{
+    background-color: rgba(255,255,255,0.3);
+  }

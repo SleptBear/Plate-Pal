@@ -577,7 +577,7 @@ const BusinessCreate = () => {
                   checked={price === 1}
                   onChange={() => setPrice(1)}
                 />
-                $(1-10)
+                &nbsp;$(1-10)
               </label>
               <label>
                 <input
@@ -587,7 +587,7 @@ const BusinessCreate = () => {
                   checked={price === 2}
                   onChange={() => setPrice(2)}
                 />
-                $$(11-20)
+                &nbsp;$$(11-20)
               </label>
               <label>
                 <input
@@ -597,7 +597,7 @@ const BusinessCreate = () => {
                   checked={price === 3}
                   onChange={() => setPrice(3)}
                 />
-                $$$(21-30)
+                &nbsp;$$$(21-30)
               </label>
               <label>
                 <input
@@ -607,7 +607,7 @@ const BusinessCreate = () => {
                   checked={price === 4}
                   onChange={() => setPrice(4)}
                 />
-                $$$$(31-40)
+                &nbsp;$$$$(31-40)
               </label>
               <label>
                 <input
@@ -617,7 +617,7 @@ const BusinessCreate = () => {
                   checked={price === 5}
                   onChange={() => setPrice(5)}
                 />
-                $$$$$(40+)
+                &nbsp;$$$$$(40+)
               </label>
             </div>
           </div>

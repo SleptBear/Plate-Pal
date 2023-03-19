@@ -18,7 +18,7 @@ def seed_businesses():
         lat=33.491239,
         lng=-111.927899,
         price=4,
-        hours_of_operation="Monday: 5pm-10pm, Tuesday: 5pm-10pm, Wednesday: 5pm-10pm, Thursday: 5pm-10pm, Friday: 5pm-10pm, Saturday: 5pm-10pm, Sunday: Closed"
+        hours_of_operation="M: 5pm-10pm, T : 5pm-10pm, W: 5pm-10pm, R : 5pm-10pm, F : 5pm-10pm, S : 5pm-10pm, S  : Closed"
     )
 
     b2 = Business(
@@ -34,7 +34,7 @@ def seed_businesses():
         lat=20.937370,
         lng=-156.372400,
         price=4,
-        hours_of_operation="Monday: 11am-9pm, Tuesday: 11am-9pm, Wednesday: 11am-9pm, Thursday: 11am-9pm, Friday: 11am-9pm, Saturday: 11am-9pm, Sunday: 11am-9pm"
+        hours_of_operation="M: 11am-9pm, T : 11am-9pm, W: 11am-9pm, R : 11am-9pm, F : 11am-9pm, S : 11am-9pm, S  : 11am-9pm"
     )
 
     b3 = Business(
@@ -50,7 +50,7 @@ def seed_businesses():
         lat=32.779766,
         lng=-79.929982,
         price=3,
-        hours_of_operation="Monday: 11am-2:30pm, 5pm-10pm, Tuesday: 11am-2:30pm, 5pm-10pm, Wednesday: 11am-2:30pm, 5pm-10pm, Thursday: 11am-2:30pm, 5pm-10pm, Friday: 11am-2:30pm, 5pm-10pm, Saturday: 10am-2pm, 5pm-10pm, Sunday: 10am-2pm"
+        hours_of_operation="M: 11am-2:30pm, 5pm-10pm, T : 11am-2:30pm, 5pm-10pm, W: 11am-2:30pm, 5pm-10pm, R : 11am-2:30pm, 5pm-10pm, F : 11am-2:30pm, 5pm-10pm, S : 10am-2pm, 5pm-10pm, S  : 10am-2pm"
     )
 
     b4 = Business(
@@ -66,7 +66,7 @@ def seed_businesses():
         lat=41.884265,
         lng=-87.648165,
         price=3,
-        hours_of_operation="Monday: 4pm-11pm, Tuesday: 4pm-11pm, Wednesday: 4pm-11pm, Thursday: 4pm-11pm, Friday: 4pm-12am, Saturday: 4pm-12am, Sunday: 4pm-10pm"
+        hours_of_operation="M: 4pm-11pm, T : 4pm-11pm, W: 4pm-11pm, R : 4pm-11pm, F : 4pm-12am, S : 4pm-12am, S  : 4pm-10pm"
     )
 
     b5 = Business(
@@ -81,7 +81,7 @@ def seed_businesses():
         lat=29.927746,
         lng=-90.077614,
         price=4,
-        hours_of_operation="Monday: 11:30am-2pm, 5:30pm-9pm, Tuesday: 11:30am-2pm, 5:30pm-9pm, Wednesday: 11:30am-2pm, 5:30pm-9pm, Thursday: 11:30am-2pm, 5:30pm-9pm, Friday: 11:30am-2pm, 5:30pm-10pm, Saturday: 10am-1pm, 5:30pm-10pm, Sunday: 10am-1pm, 5:30pm-9pm"
+        hours_of_operation="M: 11:30am-2pm, 5:30pm-9pm, T : 11:30am-2pm, 5:30pm-9pm, W: 11:30am-2pm, 5:30pm-9pm, R : 11:30am-2pm, 5:30pm-9pm, F : 11:30am-2pm, 5:30pm-10pm, S : 10am-1pm, 5:30pm-10pm, S  : 10am-1pm, 5:30pm-9pm"
     )
 
     b6 = Business(
@@ -97,7 +97,7 @@ def seed_businesses():
         lat=40.768026,
         lng=-73.983013,
         price=4,
-        hours_of_operation="Monday: Closed, Tuesday: Closed, Wednesday: 5:30pm-9pm, Thursday: 5:30pm-9pm, Friday: 5:30pm-9:30pm, Saturday: 5:30pm-9:30pm, Sunday: 5:30pm-9pm"
+        hours_of_operation="M: Closed, T : Closed, W: 5:30pm-9pm, R : 5:30pm-9pm, F : 5:30pm-9:30pm, S : 5:30pm-9:30pm, S  : 5:30pm-9pm"
     )
 
     b7 = Business(
@@ -113,7 +113,7 @@ def seed_businesses():
         lat=47.646214,
         lng=-122.345195,
         price=4,
-        hours_of_operation="Monday: 5pm-9pm, Tuesday: 5pm-9pm, Wednesday: 5pm-9pm, Thursday: 5pm-9pm, Friday: 5pm-10pm, Saturday: 5pm-10pm, Sunday: 5pm-9pm"
+        hours_of_operation="M: 5pm-9pm, T : 5pm-9pm, W: 5pm-9pm, R : 5pm-9pm, F : 5pm-10pm, S : 5pm-10pm, S  : 5pm-9pm"
     )
 
     b8 = Business(
@@ -129,7 +129,7 @@ def seed_businesses():
         lat=37.774166,
         lng=-122.423874,
         price=3,
-        hours_of_operation="Monday: 11:30am-11pm, Tuesday: 11:30am-11pm, Wednesday: 11:30am-11pm, Thursday: 11:30am-11pm, Friday: 11:30am-11pm, Saturday: 11:30am-11pm, Sunday: 11:30am-11pm"
+        hours_of_operation="M: 11:30am-11pm, T : 11:30am-11pm, W: 11:30am-11pm, R : 11:30am-11pm, F : 11:30am-11pm, S : 11:30am-11pm, S  : 11:30am-11pm"
     )
 
     b9 = Business(
@@ -145,7 +145,7 @@ def seed_businesses():
         lat=36.144328,
         lng=-86.801197,
         price=2,
-        hours_of_operation="Monday: 11am-9pm, Tuesday: 11am-9pm, Wednesday: 11am-9pm, Thursday: 11am-9pm, Friday: 11am-10pm, Saturday: 11am-10pm, Sunday: 11am-4pm"
+        hours_of_operation="M: 11am-9pm, T : 11am-9pm, W: 11am-9pm, R : 11am-9pm, F : 11am-10pm, S : 11am-10pm, S  : 11am-4pm"
     )
 
     b10 = Business(
@@ -161,7 +161,7 @@ def seed_businesses():
         lat=25.768456,
         lng=-80.188407,
         price=3,
-        hours_of_operation="Monday: 11:30am-9pm, Tuesday: 11:30am-9pm, Wednesday: 11:30am-9pm, Thursday: 11:30am-9pm, Friday: 11:30am-10pm, Saturday: 5pm-10pm, Sunday: 5pm-9pm"
+        hours_of_operation="M: 11:30am-9pm, T : 11:30am-9pm, W: 11:30am-9pm, R : 11:30am-9pm, F : 11:30am-10pm, S : 5pm-10pm, S  : 5pm-9pm"
     )
 
     b11 = Business(
@@ -177,7 +177,7 @@ def seed_businesses():
         lat=41.913400,
         lng=-87.648465,
         price=4,
-        hours_of_operation="Monday: Closed, Tuesday: Closed, Wednesday: 5pm-9pm, Thursday: 5pm-9pm, Friday: 5pm-9pm, Saturday: 5pm-9pm, Sunday: Closed"
+        hours_of_operation="M: Closed, T : Closed, W: 5pm-9pm, R : 5pm-9pm, F : 5pm-9pm, S : 5pm-9pm, S  : Closed"
     )
 
     b12 = Business(
@@ -193,7 +193,7 @@ def seed_businesses():
         lat=41.097361,
         lng=-73.833918,
         price=4,
-        hours_of_operation="Monday: 5pm-9:30pm, Tuesday: 5pm-9:30pm, Wednesday: 5pm-9:30pm, Thursday: 5pm-9:30pm, Friday: 5pm-9:30pm, Saturday: 5pm-9:30pm, Sunday: 5pm-9:30pm"
+        hours_of_operation="M: 5pm-9:30pm, T : 5pm-9:30pm, W: 5pm-9:30pm, R : 5pm-9:30pm, F : 5pm-9:30pm, S : 5pm-9:30pm, S  : 5pm-9:30pm"
     )
 
     b13 = Business(
@@ -209,7 +209,7 @@ def seed_businesses():
         lat=44.986282,
         lng=-93.275968,
         price=2,
-        hours_of_operation="Monday: 4pm-9pm, Tuesday: 4pm-9pm, Wednesday: 4pm-9pm, Thursday: 4pm-9pm, Friday: 4pm-9pm, Saturday: 4pm-9pm, Sunday: 4pm-9pm"
+        hours_of_operation="M: 4pm-9pm, T : 4pm-9pm, W: 4pm-9pm, R : 4pm-9pm, F : 4pm-9pm, S : 4pm-9pm, S  : 4pm-9pm"
     )
 
     b14 = Business(
@@ -225,7 +225,7 @@ def seed_businesses():
         lat=37.798359,
         lng=-122.407456,
         price=4,
-        hours_of_operation="Wednesday: 5:30pm-8:30pm, Thursday: 5:30pm-8:30pm, Friday: 5:30pm-8:30pm, Saturday: 5:30pm-8:30pm, Sunday: 5:30pm-8:30pm, Monday: Closed, Tuesday: Closed"
+        hours_of_operation="W: 5:30pm-8:30pm, R : 5:30pm-8:30pm, F : 5:30pm-8:30pm, S : 5:30pm-8:30pm, S  : 5:30pm-8:30pm, M: Closed, T : Closed"
     )
 
     b15 = Business(
@@ -241,7 +241,7 @@ def seed_businesses():
         lat=34.083249,
         lng=-118.329703,
         price=3,
-        hours_of_operation="Monday: 5pm-10pm, Tuesday: 5pm-10pm, Wednesday: 5pm-10pm, Thursday: 5pm-10pm, Friday: 5pm-10pm, Saturday: 5pm-10pm, Sunday: 5pm-10pm"
+        hours_of_operation="M: 5pm-10pm, T : 5pm-10pm, W: 5pm-10pm, R : 5pm-10pm, F : 5pm-10pm, S : 5pm-10pm, S  : 5pm-10pm"
     )
 
     db.session.add(b1)
