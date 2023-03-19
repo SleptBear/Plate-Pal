@@ -19,9 +19,23 @@ const MapContainer = ({ google, searchString, selected, setSelected, zoom, lat, 
   let businesses = useSelector((state) => state.businesses.filteredBusinesses);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [mapZoom, setMapZoom] = useState(null)
+  const [mapLat, setMapLat] = useState(null)
+  const [mapLng, setMapLng] = useState(null)
 
   useEffect(() => {
-    dispatch(searchBusinessesThunk(searchString));
+    const searchBusinesses = async () => {
+      let businesses = await dispatch(searchBusinessesThunk(searchString));
+      businesses = Object.values(businesses.businesses)
+      console.log(businesses)
+      console.log(businesses[0]?.lat.toFixed(6) | 0)
+      console.log(businesses[0]?.lng.toFixed(6) | 0)
+      await setMapZoom(zoom ? Number(zoom) : 3)
+      await setMapLat(lat ? Number(lat) : businesses[0]?.lat | 0)
+      await setMapLng(lng ? Number(lng) : businesses[0]?.lng | 0)
+    }
+    searchBusinesses()
+
   }, [dispatch]);
 
   const handleMarkerClick = (businessId) => {
@@ -29,9 +43,20 @@ const MapContainer = ({ google, searchString, selected, setSelected, zoom, lat, 
   };
 
   // if (!businesses || Object.values(businesses).length < 1) return null
-  if (!businesses) return null;
+
+
+
+  if (mapZoom === null || mapLat === null || mapLng === null){
+    return null
+  }
+
+  console.log(businesses)
+  console.log(mapZoom)
+  console.log(mapLat)
+  console.log(mapLng)
 
   businesses = Object.values(businesses);
+
 
   return (
     <div className="maps-container">
@@ -43,10 +68,10 @@ const MapContainer = ({ google, searchString, selected, setSelected, zoom, lat, 
           maxHeight: '',
         }}
         google={google}
-        zoom={ zoom ? Number(zoom) : 3}
+        zoom={mapZoom}
         initialCenter={{
-          lat: lat ? Number(lat) : businesses[0]?.lat | 0,
-          lng: lng ? Number(lng) : businesses[0]?.lng | 0,
+          lat: mapLat,
+          lng: mapLng,
         }} // San Francisco coordinates
       >
         {businesses.map((business) => (
