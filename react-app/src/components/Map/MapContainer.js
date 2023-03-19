@@ -15,7 +15,7 @@ const blueIcon = {
   url: "https://media.discordapp.net/attachments/533035859214073877/1085299587079745646/25624562456.png",
 };
 
-const MapContainer = ({ google, searchString, selected, setSelected }) => {
+const MapContainer = ({ google, searchString, selected, setSelected, zoom, lat, lng }) => {
   let businesses = useSelector((state) => state.businesses.filteredBusinesses);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -43,10 +43,10 @@ const MapContainer = ({ google, searchString, selected, setSelected }) => {
           maxHeight: '',
         }}
         google={google}
-        zoom={10}
+        zoom={ zoom ? Number(zoom) : 3}
         initialCenter={{
-          lat: businesses[0]?.lat | 0,
-          lng: businesses[0]?.lng | 0,
+          lat: lat ? Number(lat) : businesses[0]?.lat | 0,
+          lng: lng ? Number(lng) : businesses[0]?.lng | 0,
         }} // San Francisco coordinates
       >
         {businesses.map((business) => (

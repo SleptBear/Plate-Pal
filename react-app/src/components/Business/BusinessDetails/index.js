@@ -315,7 +315,7 @@ const BusinessDetail = () => {
             <br></br>
             <div> {`${business.city}, ${business.state} ${business.zipcode}`} </div>
             <br></br>
-            <Link to={`/businesses/search/${business.address}`}>
+            <Link to={`/businesses/search/${business.address}/20/${business.lat}/${business.lng}`}>
               <button>Get directions</button>
             </Link>
 

@@ -11,7 +11,7 @@ import "./BusinessSearched.css";
 const BusinessSearched = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { searchString } = useParams();
+  const { searchString, zoom, lat, lng} = useParams();
 
   // frontend filtering states
   const [userFiltered, setUserFiltered] = useState(false);
@@ -252,7 +252,7 @@ const BusinessSearched = () => {
         )}
       </div>
       <div className="business-search-map-container">
-        <MapPage searchString={searchString} selected={selected} setSelected={setSelected} />
+        <MapPage searchString={searchString} zoom={zoom} lat={lat} lng={lng} selected={selected} setSelected={setSelected} />
       </div>
     </div>
   );
