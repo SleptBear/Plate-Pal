@@ -4,7 +4,6 @@ import StarCalculator from "./StarCalculator.js";
 import { useState } from "react";
 
 const BusinessSearchCard = ({ selected, business, className}) => {
-  console.log(selected)
   const [selectedClass, setSelectedClass] = useState("")
   let highlight = ""
   if (!business) return null;
