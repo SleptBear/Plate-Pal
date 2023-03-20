@@ -323,6 +323,9 @@ def search_businesses():
             business['avg_rating'] = avg_rating
             business['number_of_reviews'] = len(business_reviews)
 
+        print(businesses)
+        print(businesses)
+        print(businesses)
         return {'businesses': {business["id"]: business for business in businesses}}
 
     return {'businesses': {}}
