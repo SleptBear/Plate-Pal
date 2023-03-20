@@ -28,8 +28,8 @@ const MapContainer = ({ google, searchString, selected, setSelected, zoom, lat, 
       let businesses = await dispatch(searchBusinessesThunk(searchString));
       businesses = Object.values(businesses.businesses)
       await setMapZoom(zoom ? Number(zoom) : 3)
-      await setMapLat(lat ? parseFloat(lat) : (businesses[0] ? businesses[0].lat : 0))
-      await setMapLng(lng ? parseFloat(lng) : (businesses[0] ? businesses[0].lng : 0))
+      await setMapLat(lat ? parseFloat(lat) : (businesses[0] ? parseFloat(businesses[0].lat) : 0))
+      await setMapLng(lng ? parseFloat(lng) : (businesses[0] ? parseFloat(businesses[0].lng) : 0))
     }
     searchBusinesses()
 

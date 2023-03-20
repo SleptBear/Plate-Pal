@@ -302,10 +302,6 @@ def search_businesses():
             (Business.state.ilike(f'%{search_query}%'))
         )
 
-        print(businesses_query.all())
-        print(businesses_query.all())
-        print(businesses_query.all())
-        
         businesses = [business.to_dict()
                       for business in businesses_query.all()]
 
