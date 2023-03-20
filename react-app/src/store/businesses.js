@@ -176,6 +176,7 @@ export const searchBusinessesThunk = (searchString) => async (dispatch) => {
   if (res.ok) {
     const searchResults = await res.json();
     dispatch(searchBusinessesAction(searchResults));
+    console.log(searchResults)
     return searchResults;
   }
 };
