@@ -52,8 +52,10 @@ def upgrade():
                         length=20), nullable=False),
                     sa.Column('website', sa.String(
                         length=255), nullable=False),
-                    sa.Column('lat', sa.Numeric(precision=9), nullable=True),
-                    sa.Column('lng', sa.Numeric(precision=9), nullable=True),
+                    sa.Column('lat', sa.Float(
+                        precision=9, asdecimal=True), nullable=True),
+                    sa.Column('lng', sa.Float(
+                        precision=9, asdecimal=True), nullable=True),
                     sa.Column('price', sa.Integer(), nullable=True),
                     sa.Column('hours_of_operation', sa.String(
                         length=255), nullable=False),
