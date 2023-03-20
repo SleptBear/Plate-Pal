@@ -177,7 +177,7 @@ def create_new_review(id):
         new_review["owner_images_count"] = images_count
 
         return new_review
-    
+
     if form.errors:
         return {
             "message": "Validation error",
@@ -322,7 +322,11 @@ def search_businesses():
                 avg_rating = 0
             business['avg_rating'] = avg_rating
             business['number_of_reviews'] = len(business_reviews)
+            business['lat'] = str(business['lat'])
+            business['lng'] = str(business['lng'])
+            print(business)
 
+        print(businesses)
         return {'businesses': {business["id"]: business for business in businesses}}
 
     return {'businesses': {}}
