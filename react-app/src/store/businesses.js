@@ -174,6 +174,7 @@ export const editBusinessThunk =
 export const searchBusinessesThunk = (searchString) => async (dispatch) => {
   const res = await fetch(`/api/businesses/search?query=${searchString}`);
   if (res.ok) {
+    console.log(res)
     const searchResults = await res.json();
     dispatch(searchBusinessesAction(searchResults));
     console.log(searchResults)
