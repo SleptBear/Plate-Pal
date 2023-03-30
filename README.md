@@ -1,6 +1,6 @@
 # About Plate-Pal
 
-Plate-Pal is a web application inspired by Yelp. It allows users to search for businesses, view business pages, leave reviews and ratings. [Click here to visit YelpClone's live site](insert link here).
+Plate Pal is a web application inspired by Yelp. It allows users to search for businesses, view business pages, leave reviews and ratings. [Click here to visit Plate Pal's live site](https://plate-pal.onrender.com/).
 
 <br>
 
@@ -56,7 +56,7 @@ Business details can be accessed by anyone with additional features for logged i
 
 [business-details]:
 
-## Roadmap [example, modify later]
+## Roadmap
 
 - <input type="checkbox" checked> User Authentication
 - <input type="checkbox" checked> Businesses (CRUD)
@@ -68,33 +68,64 @@ Business details can be accessed by anyone with additional features for logged i
 
 <br>
 
-# Get Started [flush out accurate details]
+# Get Started
 
 To run this project locally, please perform the following steps:
 
 1. Clone the repository
    ```sh
-   git clone https://github.com/truham/API-project.git
+   git clone https://github.com/truham/Plate-Pal
    ```
-2. Install npm packages at the root directory, and in both frontend and backend folders
+2. Install dependencies at the root directory
    ```sh
+   pipenv install -r requirements.txt
+   ```
+3. Create a **.env** file based on the example with proper settings for your development environment
+
+4. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+
+   ```bash
+   pipenv shell
+   ```
+
+   ```bash
+   flask db upgrade
+   ```
+
+   ```bash
+   flask seed all
+   ```
+
+   ```bash
+   flask run
+   ```
+
+5. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory. Install the npm packages while inside of the `react-app` directory.
+   ```bash
    npm install
    ```
-3. Create a local database file by running the following command in the backend folder
-   ```sh
-   npm run reset-db
+
+6. Run the backend server at the root directory with pipenv run flask run
+   ```bash
+   pipenv run flask run
    ```
-4. Start both the frontend and backend servers by opening two terminals, one for each, and running the following command
-   ```sh
+   
+7. Run the frontend server inside the `react-app` with npm start
+   ```bash
    npm start
    ```
-5. The localhost:3000 port will be available to view and interact with the application to test out the features.
-
+   
 <br>
 
 # Contact
 
-Project Link: [https://github.com/truham/Yelp-Clone](https://github.com/truham/Yelp-Clone)
+Project Link: [https://github.com/truham/Plate-Pal](https://github.com/truham/Plate-Pal)
+
+Team Members:
+
+- <input type="checkbox"> [Nick Murphy](https://github.com/Murphyn5)
+- <input type="checkbox"> [Zak Beg](https://github.com/zakariya23)
+- <input type="checkbox"> [Hamilton Truong](https://github.com/truham)
 
 <!-- References and Icons -->
 
